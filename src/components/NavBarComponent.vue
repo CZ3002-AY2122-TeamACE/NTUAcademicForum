@@ -30,8 +30,8 @@
             <template #button-content>
               <em>User</em>
             </template>
-            <b-dropdown-item href="#">Sign In</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item href="#" v-if="loggedIn" @click="signOut">Sign Out</b-dropdown-item>
+            <b-dropdown-item href="#" v-else @click="signIn">Sign In</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -40,9 +40,45 @@
 </template>
 
 <script>
+import firebase from "firebase/compat/app";
+import "firebase/auth";
 export default {
   name: 'NavBarComponent',
-}
+  mounted() {
+    this.setupFirebase();
+  },
+  methods: {
+    setupFirebase() {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          // User is signed in.
+          console.log("signed in");
+          this.loggedIn = true;
+        } else {
+          // No user is signed in.
+          this.loggedIn = false;
+          console.log("signed out", this.loggedIn);
+        }
+      });
+    },
+    signOut() {
+      firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            this.$router.replace({ name: "login" });
+          });
+    },
+    signIn() {
+      this.$router.replace({ name: "login" });
+    }
+  },
+  data() {
+    return {
+      loggedIn: false
+    };
+  }
+};
 </script>
 
 
