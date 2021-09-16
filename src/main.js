@@ -1,18 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
-// import firebase from "firebase/compat/app";
+import firebase from "firebase/compat/app";
 // import firebase from 'firebase';
 import "firebase/compat/auth";
+import "firebase/compat/database";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from './router'
+import store from './Store'
 // import {initializeApp} from "firebase/firebase-app";
-
-// Browserify Setup
-var firebase = require('firebase/app');
-require('firebase/auth');
-require('firebase/database');
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -40,6 +37,7 @@ firebase.auth().onAuthStateChanged(user=> {
   if (!app) {
     app = new Vue({
       router,
+      store,
       render: h => h(App)
     }).$mount('#app')
   }
