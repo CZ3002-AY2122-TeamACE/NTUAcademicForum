@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+//import SuiVue from 'semantic-ui-vue';
 import firebase from "firebase/compat/app";
 // import firebase from 'firebase';
 import "firebase/compat/auth";
@@ -23,12 +24,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-//firebase.initializeApp(firebaseConfig);
-let app = initializeApp(firebaseConfig);
-const database = app.databaseURL
+firebase.initializeApp(firebaseConfig);
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+//Vue.use(SuiVue);
 
 Vue.config.productionTip = false
 
