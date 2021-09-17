@@ -3,8 +3,10 @@
     <side-bar-component/>
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>这是测试</div>
   </div>
 </template>
+
 
 <script>
 // @ is an alias to /src

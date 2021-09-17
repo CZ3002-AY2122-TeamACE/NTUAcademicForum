@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+//import SuiVue from 'semantic-ui-vue';
 import firebase from "firebase/compat/app";
 // import firebase from 'firebase';
 import "firebase/compat/auth";
@@ -19,7 +20,7 @@ const firebaseConfig = {
   projectId: "ntuacademicforum-f11b9",
   storageBucket: "ntuacademicforum-f11b9.appspot.com",
   messagingSenderId: "927176632912",
-  appId: "1:927176632912:web:673d21fe6ecf3735677f55"
+  appId: "1:927176632912:web:673d21fe6ecf3735677f55",
 };
 
 // Initialize Firebase
@@ -27,6 +28,7 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+//Vue.use(SuiVue);
 
 Vue.config.productionTip = false
 
