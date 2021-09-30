@@ -6,9 +6,9 @@
       </div>
       <div class="six wide column">
         <div class="horizontal right aligned link list">
-          <button class="ui button">
+          <router-link class="ui button" to="/post">
             Post Thread
-          </button>
+          </router-link>
           <button class="ui button">
             Swap Index
           </button>
@@ -63,6 +63,8 @@ name: "CourseInfo",
           'favourite':10,
         }]
     }
+  },
+  methods:{
   }
 }
 </script>

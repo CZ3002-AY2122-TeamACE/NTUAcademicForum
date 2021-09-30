@@ -6,8 +6,11 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import PostEditor from "@/components/PostEditor";
+import RichTextEditor from 'rich-text-editor-vuetify'
 
 Vue.use(VueRouter)
+Vue.use(RichTextEditor)
 
 const routes = [
   {
@@ -38,6 +41,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path:"/post",
+    name: 'Post',
+    component: PostEditor,
   }
 ]
 
