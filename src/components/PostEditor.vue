@@ -5,8 +5,16 @@
     <div id="demo1"></div>
   </div>
   -->
-  <div id="app">
-    <vue-editor v-model="content"></vue-editor>
+  <div>
+    <div>
+      <div id="app">
+        <vue-editor v-model="content"></vue-editor>
+      </div>
+    </div>
+    <br>
+    <div>
+      <button class="ui right floated button" v-on:click="savingContent">submit</button>
+    </div>
   </div>
 </template>
 
@@ -20,8 +28,14 @@ export default {
   },
   data() {
     return {
-      content: "<h1>Some initial content</h1>"
+      content: "write your post here."
     };
+  },
+  methods: {
+    savingContent: function() {
+      // You have the content to save
+      console.log(this.content);
+    }
   }
   /*
   data() {

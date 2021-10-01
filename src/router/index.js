@@ -6,8 +6,9 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import PostEditor from "@/components/PostEditor";
 import RichTextEditor from 'rich-text-editor-vuetify'
+import StartNewThread from "@/components/StartNewThread";
+import ThreadReplies from "@/components/ThreadReplies";
 
 Vue.use(VueRouter)
 Vue.use(RichTextEditor)
@@ -45,8 +46,13 @@ const routes = [
   {
     path:"/post",
     name: 'Post',
-    component: PostEditor,
-  }
+    component: StartNewThread,
+  },
+  {
+    path:"/thread",
+    name: 'thread',
+    component: ThreadReplies,
+  },
 ]
 
 const router = new VueRouter({

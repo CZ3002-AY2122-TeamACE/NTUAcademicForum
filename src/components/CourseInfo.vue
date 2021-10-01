@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ui container">
     <div class="ui stackable grid">
       <div class="nine wide column">
         <div class="title">CZ3002</div>
