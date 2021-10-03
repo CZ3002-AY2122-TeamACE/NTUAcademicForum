@@ -19,7 +19,7 @@
               </div>
               <div class="item">
                 <img :src="thread.user"  alt="" class="ui avatar image">
-                <a>Tom</a>
+                <a>Tom Lukic</a>
               </div>
             </div>
           </div>
