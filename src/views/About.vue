@@ -11,6 +11,6 @@ export default {
   name:"about",
   components:{
     CourseInfo,
-  }
+  },
 }
 </script>

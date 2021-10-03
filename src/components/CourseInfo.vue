@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="ui container">
     <div class="ui stackable grid">
       <div class="nine wide column">
         <div class="title">CZ3002</div>
       </div>
       <div class="six wide column">
         <div class="horizontal right aligned link list">
-          <button class="ui button">
+          <router-link class="ui button" to="/post">
             Post Thread
-          </button>
+          </router-link>
           <button class="ui button">
             Swap Index
           </button>
@@ -24,18 +24,13 @@
       <div class="ui black top attached label" style="font-size: large">Course Information</div>
       <p>CZ3002 is Advanced Software Engineering course </p>
     </div>
+
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
       <div class="ui middle aligned divided list">
-        <div class="item">
-          <thread/>
-        </div>
-        <div class="item">
-          <thread/>
-        </div>
-        <div class="item">
-          <thread/>
-        </div>
+          <thread v-for="thread in threads"
+                  :key="thread.title"
+                  :thread="thread"/>
       </div>
     </div>
   </div>
@@ -47,6 +42,29 @@ export default {
 name: "CourseInfo",
   components:{
     Thread,
+  },
+  data(){
+    return {
+      'threads':[{
+        'title': 'cz3002',
+        'replyCount':20,
+        'like':20,
+        'favourite':10,
+      },{
+        'title': 'cz3003',
+        'replyCount':20,
+        'like':20,
+        'favourite':10,
+      },
+        {
+          'title': 'cz3004',
+          'replyCount':20,
+          'like':20,
+          'favourite':10,
+        }]
+    }
+  },
+  methods:{
   }
 }
 </script>
