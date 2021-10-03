@@ -1,8 +1,13 @@
 <template>
   <div>
-    <div v-if="error" class="error">{{error.message}}</div>
+<!--    <div v-if="error" class="error">{{error.message}}</div>-->
     <form @submit.prevent="pressed">
       Register
+      <div class="alert alert-danger" v-if="this.errors.length > 0">
+        <ul>
+          <li v-for="(error, index) in this.errors" :key="index">{{ error }}</li>
+        </ul>
+      </div>
       <div class="email">
         <input type="email" v-model="email" placeholder="email">
       </div>
@@ -45,8 +50,8 @@ export default {
     methods: {
       async pressed()
 {
-        var self = this;
-        this.errors = [];
+  var self = this;
+  this.errors = [];
         if(this.$store.state.auth.email == "") {
           this.errors.push('Email address required');
         }
