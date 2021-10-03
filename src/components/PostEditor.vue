@@ -36,8 +36,10 @@ export default {
     savingContent: function() {
       // You have the content to save
       this.$store.commit('setPostContent', this.content);
+      this.$store.commit('setCurrUserId', this.currentUser.id);
       main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
-      // console.log(this.content);
+      this.$router.push("/about");
+      //console.log(this.content);
     }
   }
   /*
