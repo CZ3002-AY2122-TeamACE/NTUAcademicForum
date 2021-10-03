@@ -23,7 +23,7 @@ export default {
   components: {
     NavBarComponent,
     SideBarComponent
-  },
+  }
 }
 </script>
 

@@ -11,13 +11,11 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import SideBarComponent from "@/components/SideBarComponent";
 
 export default {
   name: 'Home',
   components: {
     HelloWorld,
-    SideBarComponent
   }
 }
 </script>
