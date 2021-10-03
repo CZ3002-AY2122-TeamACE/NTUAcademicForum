@@ -16,7 +16,11 @@ export default new Vuex.Store(
                 email: "",
                 uid: "",      // this is is the user authenticated object
                 status: 0   // 0=logout 1=login
-            }
+            },
+            forum: {         // this object will be used when adding and editing forum
+                title: "",
+                content: ""
+            },
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -42,6 +46,15 @@ export default new Vuex.Store(
             },
             setCurrUserStatus(state, data) {
                 state.currentUser.status = data
+            },
+            setForumTitle(state, data) {
+                state.forum.title = data
+            },
+            setForumContent(state, data) {
+                state.forum.content = data
+            },
+            setUserForums(state, data) {
+                state.userForums = data
             }
         },
         actions: {
