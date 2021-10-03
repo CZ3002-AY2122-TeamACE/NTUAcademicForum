@@ -35,9 +35,9 @@ export default {
   methods: {
     savingContent: function() {
       // You have the content to save
-      this.$store.commit('setPostContent', this.content)
-      main.addPost(this.$store.state.forum.content, this.$store.state.currentUser.id)
-      console.log(this.content);
+      this.$store.commit('setPostContent', this.content);
+      main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
+      // console.log(this.content);
     }
   }
   /*
