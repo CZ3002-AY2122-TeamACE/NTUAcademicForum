@@ -1,5 +1,6 @@
 <template>
   <div class="ui container">
+
     <div class="ui segment">
       <div class="ui middle aligned divided list">
         <reply></reply>

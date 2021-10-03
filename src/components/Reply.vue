@@ -68,6 +68,7 @@
             </a>
           </div>
         </div>
+
       </div>-->
 
       <!-- first attempt
@@ -123,11 +124,13 @@
       </div>
     </div>
     -->
+
     </div>
   </div>
 </template>
 <script>
 export default {
+
 name: "Reply",
   data(){
     return{
@@ -138,6 +141,7 @@ name: "Reply",
 </script>
 
 <style scoped>
+
 .display-reply {
   margin-top: 5px;
 }

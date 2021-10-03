@@ -6,9 +6,9 @@
       </div>
       <div class="six wide column">
         <div class="horizontal right aligned link list">
-          <button class="ui button">
+          <router-link class="ui button" to="/post">
             Post Thread
-          </button>
+          </router-link>
           <button class="ui button">
             Swap Index
           </button>
@@ -24,6 +24,7 @@
       <div class="ui black top attached label" style="font-size: large">Course Information</div>
       <p>CZ3002 is Advanced Software Engineering course </p>
     </div>
+
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
       <div class="ui container">
@@ -31,47 +32,47 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 import Thread from "@/components/Thread";
 export default {
-name: "CourseInfo",
+  name: "CourseInfo",
   components:{
     Thread,
   },
-  data () {
-  return {
-    forums: [
-      {
-        id: 1,
-        name: 'forum001',
-        description: 'empty',
-        replyCount:10,
-        like:3,
-        favourite:2
+  data(){
+    return {
+      'threads':[{
+        'title': 'cz3002',
+        'replyCount':20,
+        'like':20,
+        'favourite':10,
+        'user': require('../assets/default profile.jpeg') ,
+      },{
+        'title': 'cz3003',
+        'replyCount':20,
+        'like':20,
+        'favourite':10,
+        'user': require('../assets/default profile.jpeg') ,
       },
-      {
-        id: 2,
-        name: 'forum002',
-        description: 'empty',
-        replyCount:10,
-        like:3,
-        favourite:2
-      },
-      {
-        id: 3,
-        name: 'forum003',
-        description: 'empty',
-        replyCount:10,
-        like:3,
-        favourite:2
-      }
-    ],
+        {
+          'title': 'cz3004',
+          'replyCount':20,
+          'like':20,
+          'favourite':10,
+          'user': require('../assets/default profile.jpeg') ,
+        }, {
+          'title': 'cz3006',
+          'replyCount':20,
+          'like':20,
+          'favourite':10,
+          'user': require('../assets/spec profile.jpeg') ,
+        }]
+    }
+  },
+  methods:{
   }
-  }
-
 }
 </script>
 
