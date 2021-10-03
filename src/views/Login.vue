@@ -17,6 +17,7 @@
 <script>
 import firebase from "firebase/compat/app";
 import "firebase/auth";
+import main from "@/main";
 export default {
   data() {
     return {
@@ -33,6 +34,9 @@ export default {
           .then(data => {
             console.log(data);
             this.$router.replace({ name: "secret" });
+            console.log("trying to login");
+            this.$store.commit('setCurrUserEmail',this.email)
+            main.getUserByEmail(this.email)
           })
           .catch(error => {
             this.error = error;

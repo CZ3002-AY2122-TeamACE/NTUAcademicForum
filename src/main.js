@@ -91,12 +91,22 @@ export default {
       }
     });
   },
-  addPost(content, user_id) {
+  getUserByEmail(email) {
+    const userRef = db.ref('users/email').equalTo(email);
+    console.log(email)
+    userRef.once('value', (snapshot) => {
+      console.log("searching users...")
+      console.log(snapshot.val());
+    }, (errorObject) => {
+      console.log('The read failed: ' + errorObject.name);
+    });
+  },
+  addPost(content, email) {
     const postRef = db.ref('posts');
     const postPush = postRef.push();
     postPush.set({
       content: content,
-      user_id: user_id,
+      user_email: email,
       created_at: (new Date()).toLocaleString()
     });
   },

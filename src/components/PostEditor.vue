@@ -32,11 +32,15 @@ export default {
       content: "write your post here."
     };
   },
+  computed:{
+  },
   methods: {
     savingContent: function() {
       // You have the content to save
       this.$store.commit('setPostContent', this.content);
-      main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
+      main.addPost(this.$store.state.post.content, this.$store.state.currentUser.email);
+      console.log("user email: " + this.$store.state.currentUser.email)
+      this.$router.push({path:"/about"});
       // console.log(this.content);
     }
   }

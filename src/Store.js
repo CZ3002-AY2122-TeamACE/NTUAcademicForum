@@ -55,7 +55,7 @@ export default new Vuex.Store(
             },
             setUserPosts(state, data) {
                 state.userPosts = data
-            }
+            },
         },
         actions: {
             getCurrentUser({commit}) {
