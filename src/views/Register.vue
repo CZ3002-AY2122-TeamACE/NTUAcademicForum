@@ -16,6 +16,10 @@
       </div>
       <button type="submit">Register</button>
     </form>
+    <div v-if="errors.length > 0">
+      <div v-for="e in errors"
+           :key="e"> e </div>
+    </div>
   </div>
 </template>
 <script>
@@ -26,7 +30,7 @@ export default {
     data() {
       return {
         isLoading: false,
-        errors: []
+        errors: [],
       }
     },
     computed: {
@@ -125,7 +129,7 @@ export default {
 
 <style lang="scss" scoped>
 .error {
-  color: red;
+  color: #ff0000;
   font-size: 18px;
 }
 input {
