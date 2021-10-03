@@ -27,10 +27,8 @@
 
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
-      <div class="ui middle aligned divided list">
-        <thread v-for="thread in threads"
-                :key="thread.title"
-                :thread="thread"/>
+      <div class="ui container">
+        <thread v-for="thread in threads" :key="thread.title" :thread="thread"/>
       </div>
     </div>
   </div>
@@ -50,6 +48,7 @@ export default {
         'replyCount':20,
         'like':20,
         'favourite':10,
+        'content':'hello',
         'user': require('../assets/default profile.jpeg') ,
       },{
         'title': 'cz3003',
