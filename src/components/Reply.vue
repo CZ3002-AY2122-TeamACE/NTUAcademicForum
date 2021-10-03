@@ -4,7 +4,7 @@
       <div class="ui container">
         <div class="comment">
           <a class="avatar">
-            <img src="../assets/logo.png">
+            <img src="../assets/default profile.jpeg">
           </a>
           <div class="content">
             <a class="author">Tom Lukic</a>
