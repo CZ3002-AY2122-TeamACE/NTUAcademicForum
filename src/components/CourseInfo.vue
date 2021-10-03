@@ -50,17 +50,26 @@ export default {
         'replyCount':20,
         'like':20,
         'favourite':10,
+        'user': require('../assets/default profile.jpeg') ,
       },{
         'title': 'cz3003',
         'replyCount':20,
         'like':20,
         'favourite':10,
+        'user': require('../assets/default profile.jpeg') ,
       },
         {
           'title': 'cz3004',
           'replyCount':20,
           'like':20,
           'favourite':10,
+          'user': require('../assets/default profile.jpeg') ,
+        }, {
+          'title': 'cz3006',
+          'replyCount':20,
+          'like':20,
+          'favourite':10,
+          'user': require('../assets/spec profile.jpeg') ,
         }]
     }
   },
