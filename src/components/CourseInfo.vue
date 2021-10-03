@@ -28,17 +28,12 @@
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
       <div class="ui middle aligned divided list">
         <div class="item">
-          <thread/>
-        </div>
-        <div class="item">
-          <thread/>
-        </div>
-        <div class="item">
-          <thread/>
+          <thread v-bind:forums="forums"/>
         </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -47,7 +42,29 @@ export default {
 name: "CourseInfo",
   components:{
     Thread,
+  },
+  data () {
+  return {
+    forums: [
+      {
+        id: 1,
+        name: 'forum001',
+        description: 'empty',
+      },
+      {
+        id: 2,
+        name: 'forum002',
+        description: 'empty',
+      },
+      {
+        id: 3,
+        name: 'forum003',
+        description: 'empty',
+      }
+    ],
   }
+  }
+
 }
 </script>
 
