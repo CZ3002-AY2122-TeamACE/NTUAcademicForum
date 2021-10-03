@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ui container">
     <div class="ui stackable grid">
       <div class="nine wide column">
         <div class="title">CZ3002</div>
@@ -26,10 +26,8 @@
     </div>
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
-      <div class="ui middle aligned divided list">
-        <div class="item">
-          <thread v-bind:forums="forums"/>
-        </div>
+      <div class="ui container">
+        <thread v-bind:forums="forums"/>
       </div>
     </div>
   </div>
@@ -50,16 +48,25 @@ name: "CourseInfo",
         id: 1,
         name: 'forum001',
         description: 'empty',
+        replyCount:10,
+        like:3,
+        favourite:2
       },
       {
         id: 2,
         name: 'forum002',
         description: 'empty',
+        replyCount:10,
+        like:3,
+        favourite:2
       },
       {
         id: 3,
         name: 'forum003',
         description: 'empty',
+        replyCount:10,
+        like:3,
+        favourite:2
       }
     ],
   }
