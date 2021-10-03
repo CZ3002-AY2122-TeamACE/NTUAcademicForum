@@ -18,8 +18,8 @@
                 <i class="star outline icon"></i> {{thread.favourite}}
               </div>
               <div class="item">
-                <img src="../assets/logo.png" class="ui avatar image">
-                <a>vue</a>
+                <img :src="thread.user"  alt="" class="ui avatar image">
+                <a>Tom</a>
               </div>
             </div>
           </div>
