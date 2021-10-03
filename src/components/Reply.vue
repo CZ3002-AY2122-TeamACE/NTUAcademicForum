@@ -8,18 +8,19 @@
           </a>
           <div class="content">
             <a class="author">Tom Lukic</a>
+            <i class="calendar icon"></i>2021-2-20
             <div class="text">
               This will be great for business reports. I will definitely download this.
             </div>
             <div class="actions">
-              <a class="reply">Reply</a>
-              <a class="like">Like</a>
-              <a class="forward">Forward</a>
+              <a><i class="thumbs up outline icon"></i></a>
+              <a><i class="thumbs down outline icon"></i></a>
             </div>
           </div>
-          <div class="content display-reply">
+
+          <!--<div class="content display-reply">
             <a>show 3 replies<i class="angle down icon"></i></a>
-          </div>
+          </div>-->
         </div>
     </div>
       <!-- second attempt
