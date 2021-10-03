@@ -1,14 +1,14 @@
 <template>
-  <div class="ui container">
+  <div>
     <div class="ui stackable grid">
       <div class="nine wide column">
         <div class="title">CZ3002</div>
       </div>
       <div class="six wide column">
         <div class="horizontal right aligned link list">
-          <router-link class="ui button" to="/post">
+          <button class="ui button">
             Post Thread
-          </router-link>
+          </button>
           <button class="ui button">
             Swap Index
           </button>
@@ -24,16 +24,16 @@
       <div class="ui black top attached label" style="font-size: large">Course Information</div>
       <p>CZ3002 is Advanced Software Engineering course </p>
     </div>
-
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
       <div class="ui middle aligned divided list">
-          <thread v-for="thread in threads"
-                  :key="thread.title"
-                  :thread="thread"/>
+        <div class="item">
+          <thread v-bind:forums="forums"/>
+        </div>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -43,29 +43,28 @@ name: "CourseInfo",
   components:{
     Thread,
   },
-  data(){
-    return {
-      'threads':[{
-        'title': 'cz3002',
-        'replyCount':20,
-        'like':20,
-        'favourite':10,
-      },{
-        'title': 'cz3003',
-        'replyCount':20,
-        'like':20,
-        'favourite':10,
+  data () {
+  return {
+    forums: [
+      {
+        id: 1,
+        name: 'forum001',
+        description: 'empty',
       },
-        {
-          'title': 'cz3004',
-          'replyCount':20,
-          'like':20,
-          'favourite':10,
-        }]
-    }
-  },
-  methods:{
+      {
+        id: 2,
+        name: 'forum002',
+        description: 'empty',
+      },
+      {
+        id: 3,
+        name: 'forum003',
+        description: 'empty',
+      }
+    ],
   }
+  }
+
 }
 </script>
 
