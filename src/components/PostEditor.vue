@@ -21,6 +21,7 @@
 <script>
 //import wangEditor from 'wangeditor'
 import { VueEditor } from "vue2-editor";
+import main from "../main.js";
 export default {
   name: "PostEditor",
   components: {
@@ -34,7 +35,9 @@ export default {
   methods: {
     savingContent: function() {
       // You have the content to save
-      console.log(this.content);
+      this.$store.commit('setPostContent', this.content);
+      main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
+      // console.log(this.content);
     }
   }
   /*
