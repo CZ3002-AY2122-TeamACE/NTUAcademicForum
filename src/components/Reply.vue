@@ -12,9 +12,9 @@
               This will be great for business reports. I will definitely download this.
             </div>
             <div class="actions">
-              <a class="reply">Reply</a>
-              <a class="like">Like</a>
-              <a class="forward">Forward</a>
+              <i class="reply icon"></i><a class="reply">Reply</a>
+              <i class="heart outline icon"></i><a class="like">Like</a>
+              <i class="share icon"></i><a class="forward">Forward</a>
             </div>
           </div>
           <div class="content display-reply">
