@@ -1,6 +1,28 @@
 <template>
   <div class="item">
-    <div class="ui container">
+    <div class="ui comments">
+      <div class="ui container">
+        <div class="comment">
+          <a class="avatar">
+            <img src="../assets/logo.png">
+          </a>
+          <div class="content">
+            <a class="author">Tom Lukic</a>
+            <div class="text">
+              This will be great for business reports. I will definitely download this.
+            </div>
+            <div class="actions">
+              <a class="reply">Reply</a>
+              <a class="like">Like</a>
+              <a class="forward">Forward</a>
+            </div>
+          </div>
+          <div class="content display-reply">
+            <a>show 3 replies<i class="angle down icon"></i></a>
+          </div>
+        </div>
+    </div>
+      <!-- second attempt
       <div class="ui horizontal link list">
         <div class="item">
           <a class="ui right aligned avatar image">
@@ -46,8 +68,9 @@
             </a>
           </div>
         </div>
-      </div>
-<!--
+      </div>-->
+
+      <!-- first attempt
       <div class="ui stackable grid">
         <div class="three wide column">
           <a class="ui right aligned avatar image">
@@ -105,10 +128,17 @@
 </template>
 <script>
 export default {
-name: "Reply"
+name: "Reply",
+  data(){
+    return{
+      showReply:false,
+    }
+  }
 }
 </script>
 
 <style scoped>
-
+.display-reply {
+  margin-top: 5px;
+}
 </style>

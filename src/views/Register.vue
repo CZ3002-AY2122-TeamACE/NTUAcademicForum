@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div v-if="error" class="error">{{error.message}}</div>
     <form @submit.prevent="pressed">
       Register
       <div class="email">
@@ -11,6 +10,10 @@
       </div>
       <button type="submit">Register</button>
     </form>
+    <div v-if="errors.length > 0">
+      <div v-for="e in errors"
+           :key="e"> e </div>
+    </div>
   </div>
 </template>
 <script>
@@ -21,7 +24,7 @@ export default {
     data() {
       return {
         isLoading: false,
-        errors: []
+        errors: [],
       }
     },
     computed: {

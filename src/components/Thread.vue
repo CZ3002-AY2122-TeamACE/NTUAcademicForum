@@ -4,7 +4,7 @@
       <div class="ui vertical segment">
         <div class="ui stackable grid">
           <div class="eleven wide column">
-            {{thread.title}}
+            <router-link to="/thread">{{thread.title}}</router-link>
           </div>
           <div class="five wide column">
             <div class="ui horizontal right aligned link list">
