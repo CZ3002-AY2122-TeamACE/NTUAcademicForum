@@ -109,6 +109,8 @@ export default {
       user_email: email,
       created_at: (new Date()).toLocaleString()
     });
+    return user_id;
   },
+
 
 }
