@@ -98,7 +98,7 @@ export default {
             //   self.$store.commit('setUserForums', response);
             // });
 
-            self.$router.push('/');
+            self.$router.push('/about');
           } else {
             alert("Incomplete user info! try creating account with a different email");
           }

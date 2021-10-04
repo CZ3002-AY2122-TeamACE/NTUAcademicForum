@@ -7,12 +7,9 @@
   -->
   <div>
     <div>
-<!--      <div id="app">-->
-<!--        <vue-editor v-model="content"></vue-editor>-->
-<!--        -->
-<!--      </div>-->
-      <div class="text-center">
-        <input type="text" v-model="content" placeholder="input">
+      <div id="app">
+        <vue-editor v-model="content"></vue-editor>
+
       </div>
     </div>
     <br>
@@ -24,16 +21,17 @@
 
 <script>
 //import wangEditor from 'wangeditor'
-// import { VueEditor } from "vue2-editor";
+import { VueEditor } from "vue2-editor";
 import main from "../main.js";
 export default {
   name: "PostEditor",
   components: {
-    // VueEditor
+    VueEditor
   },
   data() {
     return {
       // content: "write your post here."
+
     };
   },
   computed: {
@@ -47,30 +45,28 @@ export default {
     }
   },
   methods: {
-    savingContent: async function() {
-      // You have the content to save
-      // this.$store.commit('setPostContent', this.content);
-      // var self = this;
+    savingContent: function() {
       main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
-      // this.$router.push('/about');
-      setTimeout(
-          () => {
-    //         // self.isLoading = false;
-    //         // self.msg = "Forum saved successfully!"
-    //         // self.$store.commit('setForumTitle', "")
-            self.$store.commit('setPostContent', "")
-    //         self.$store.dispatch('getCurrentUser')
-    //         // self.$store.dispatch('getUserForums', self.$store.state.currentUser);
-            self.$router.push('/about');
-    //
-    //
-    //   // console.log(this.content);
-    },1500)
-  },created() {
-      if(this.$store.state.currentUser.status != 1) {
-        this.$router.push('/login');
-      }
-    }
+
+      this.$router.push('/about');
+  //     setTimeout(
+  //         () => {
+  //   //         // self.isLoading = false;
+  //   //         // self.msg = "Forum saved successfully!"
+  //   //         // self.$store.commit('setForumTitle', "")
+  //           self.$store.commit('setPostContent', "")
+  //   //         self.$store.dispatch('getCurrentUser')
+  //   //         // self.$store.dispatch('getUserForums', self.$store.state.currentUser);
+  //           self.$router.push('/');
+  //   //
+  //   //
+  //   //   // console.log(this.content);
+  //   },1500)
+  // },created() {
+  //     if(this.$store.state.currentUser.status != 1) {
+  //       this.$router.push('/login');
+  //     }
+  //   }
   }
   /*
   data() {
@@ -107,7 +103,7 @@ export default {
   },
 
    */
-}
+}}
 </script>
 <style scoped>
 

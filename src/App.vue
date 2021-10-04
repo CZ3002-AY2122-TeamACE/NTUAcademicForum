@@ -17,12 +17,16 @@
 <script>
 import NavBarComponent from "@/components/NavBarComponent";
 import SideBarComponent from "@/components/SideBarComponent";
+import store from './Store.js';
 
 export default {
   name: 'App',
   components: {
     NavBarComponent,
     SideBarComponent
+  },
+  mounted: function() {
+    store.dispatch('getCurrentUser')
   }
 }
 </script>
