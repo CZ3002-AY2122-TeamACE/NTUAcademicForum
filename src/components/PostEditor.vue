@@ -21,7 +21,9 @@
 
 <script>
 //import wangEditor from 'wangeditor'
+
 import { VueEditor } from "vue2-editor";
+
 import main from "../main.js";
 export default {
   name: "PostEditor",
@@ -45,6 +47,7 @@ export default {
     }
   },
   methods: {
+
     savingContent: function() {
       main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
 
@@ -67,6 +70,7 @@ export default {
   //       this.$router.push('/login');
   //     }
   //   }
+
   }
   /*
   data() {

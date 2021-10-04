@@ -99,6 +99,8 @@ export default {
       user_id: user_id,
       created_at: (new Date()).toLocaleString()
     });
+    return user_id;
   },
+
 
 }
