@@ -7,12 +7,9 @@
   -->
   <div>
     <div>
-<!--      <div id="app">-->
-<!--        <vue-editor v-model="content"></vue-editor>-->
-<!--        -->
-<!--      </div>-->
-      <div class="text-center">
-        <input type="text" v-model="content" placeholder="input">
+      <div id="app">
+        <vue-editor v-model="content"></vue-editor>
+
       </div>
     </div>
     <br>
@@ -24,23 +21,19 @@
 
 <script>
 //import wangEditor from 'wangeditor'
-// import { VueEditor } from "vue2-editor";
-//import firebase from "firebase/compat/app";
-//const db = firebase.database();
+
+import { VueEditor } from "vue2-editor";
+
 import main from "../main.js";
 export default {
   name: "PostEditor",
   components: {
-    // VueEditor
+    VueEditor
   },
   data() {
     return {
       // content: "write your post here."
-      // newPost: {
-      //   content: "",
-      //   user_id: "",
-      //   created_at: (new Date()).toLocaleString()
-      // }
+
     };
   },
   computed: {
@@ -54,40 +47,30 @@ export default {
     }
   },
   methods: {
-    // addPost: function(content, user_id) {
-    //   const postRef = db.ref('posts');
-    //   postRef.push(this.newPost);
-    //   this.newPost.content = content;
-    //   this.newPost.user_id = user_id;
-    // },
 
     savingContent: function() {
-      // You have the content to save
-
-      // this.$store.commit('setPostContent', this.content);
-      //const self = this;
       main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
-      //this.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
+
       this.$router.push('/about');
-      //setTimeout(
-       //   () => {
-            // self.isLoading = false;
-            // self.msg = "Forum saved successfully!"
-            // self.$store.commit('setForumTitle', "")
-            //self.$store.commit('setPostContent', "")
-            // self.$store.dispatch('getCurrentUser')
-            // self.$store.dispatch('getUserForums', self.$store.state.currentUser);
-            //self.$router.push('/about');
+  //     setTimeout(
+  //         () => {
+  //   //         // self.isLoading = false;
+  //   //         // self.msg = "Forum saved successfully!"
+  //   //         // self.$store.commit('setForumTitle', "")
+  //           self.$store.commit('setPostContent', "")
+  //   //         self.$store.dispatch('getCurrentUser')
+  //   //         // self.$store.dispatch('getUserForums', self.$store.state.currentUser);
+  //           self.$router.push('/');
+  //   //
+  //   //
+  //   //   // console.log(this.content);
+  //   },1500)
+  // },created() {
+  //     if(this.$store.state.currentUser.status != 1) {
+  //       this.$router.push('/login');
+  //     }
+  //   }
 
-
-      // console.log(this.content);
-   // },1500)
-  },created() {
-      if(this.$store.state.currentUser.status != 1) {
-        this.$router.push('/login');
-      }
-
-    }
   }
   /*
   data() {
@@ -124,7 +107,7 @@ export default {
   },
 
    */
-}
+}}
 </script>
 <style scoped>
 
