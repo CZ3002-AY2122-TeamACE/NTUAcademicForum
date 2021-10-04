@@ -101,12 +101,12 @@ export default {
       console.log('The read failed: ' + errorObject.name);
     });
   },
-  addPost(content, email) {
+  addPost(content, user_id) {
     const postRef = db.ref('posts');
     const postPush = postRef.push();
     postPush.set({
       content: content,
-      user_email: email,
+      user_id: user_id,
       created_at: (new Date()).toLocaleString()
     });
     return user_id;
