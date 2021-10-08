@@ -2,7 +2,7 @@
   <div>
 
     <b-sidebar id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow bg-variant="dark" text-variant="light">
-      <div> <!--#default="{ hide }"-->
+      <template #default="{ hide }">
         <div class="p-3">
           <h4 id="sidebar-no-header-title">LearningHub@NTU</h4>
           <p>
@@ -13,7 +13,7 @@
           <nav class="mb-3">
             <b-nav vertical>
 
-              <b-nav-item active><b-button bg-variant="light" block @click="hide"><b-icon icon='book'></b-icon>
+              <b-nav-item active @click="hide"><b-button bg-variant="light" block @click="hide"><b-icon icon='book'></b-icon>
                 Courses</b-button>
               </b-nav-item>
               <b-button-group vertical>
@@ -32,9 +32,9 @@
 
             </b-nav>
           </nav>
-          <!--<b-button variant="light" block @click="hide">Close Sidebar</b-button>-->
+          <b-button variant="light" block @click="hide">Close Sidebar</b-button>
         </div>
-      </div>
+      </template>
     </b-sidebar>
   </div>
 </template>
