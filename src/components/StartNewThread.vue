@@ -45,9 +45,9 @@ export default {
   methods: {
 
     savingContent: function() {
-      main.addThread(this.$store.state.thread.title, this.$store.state.thread.content, this.$store.thread.currentUser.id);
-      this.$router.push('/about');
+      main.addThread(this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id);
 
+     this.$router.push('/about');
 
     }},
 }

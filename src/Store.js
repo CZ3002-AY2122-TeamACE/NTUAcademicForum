@@ -11,7 +11,7 @@ export default new Vuex.Store(
                 name: ""
             },
             currentUser: {
-                id: "",       // this id is the datebase key for this record
+                id: "",       // this id is the database key for this record
                 name: "",
                 email: "",
                 uid: "",      // this is is the user authenticated object
@@ -21,6 +21,7 @@ export default new Vuex.Store(
                 title: "",
                 content: ""
             },
+            courseThreads:[],
             userPosts: [],
             course: {
                 id:"",
@@ -71,8 +72,11 @@ export default new Vuex.Store(
             setCourseID(state,data){
                 state.course.id = data
             },
-            setCourseInformation(state,data){
+            setCourseInformation(state,data) {
                 state.course.information = data
+            },
+            setCourseThread(state, data) {
+                state.courseThreads = data
             }
         },
         actions: {
@@ -101,13 +105,22 @@ export default new Vuex.Store(
                 commit('setAuthPassword', '');
                 commit('setAuthName', '');
             },
-            getCourseInfo({commit}){
-                main.getCourseByID(this.state.course.id,function(snapshot){
-                    snapshot.forEach(function(course) {
-                        commit('setCourseName',course.val().name)
-                        commit('setCourseInformation',course.val().information)
+            getCourseInfo({commit}) {
+                main.getCourseByID(this.state.course.id, function (snapshot) {
+                    snapshot.forEach(function (course) {
+                        commit('setCourseName', course.val().name)
+                        commit('setCourseInformation', course.val().information)
                     })
                 })
+            },
+            getCourseThreads({commit}) {
+                main.getThreadsByCourse("CZ3002", function(response) {
+                    if(response) {
+                        commit('setCourseThread', response);
+                    } else {
+                        commit('etCourseThread', []);
+                    }
+                });
             }
         },
     }

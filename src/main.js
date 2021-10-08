@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+import SideBarComponent from './components/SideBarComponent.vue';
+Vue.component('side-bar-component', SideBarComponent);
 //import SuiVue from 'semantic-ui-vue';
 import firebase from "firebase/compat/app";
 // import firebase from 'firebase';
@@ -69,6 +71,7 @@ export default {
   //     // An error happened.
   //   });
   // },
+
   addUser(name, email, uid) {
     const usersRef = db.ref('users');
     const usersPush = usersRef.push();
@@ -91,27 +94,37 @@ export default {
       }
     });
   },
+
   getCourseByID(ID, callback) {
     const courseRef = db.ref('courses').orderByChild("id").equalTo(ID);
     courseRef.on('value', function(snapshot) {
-      if(snapshot.val() != null) {
+      if (snapshot.val() != null) {
         callback(snapshot);
       } else {
         callback(null);
       }
+    })
+  },
+    getThreadsByCourse(course, callback) {
+    const threadRef = db.ref('threads').orderByChild("course").equalTo(course);
+    threadRef.on('value', function(snapshot) {
+      callback(snapshot.val());
     });
   },
-  addThread(title, content, user_id) {
+    addThread(title, content, user_id) {
     const threadRef = db.ref('threads');
     const threadPush = threadRef.push();
     threadPush.set({
-      content: content,
       title: title,
+      course: "CZ2006",//set to CZ2006 for now to be changed later
+      content: content,
       user_id: user_id,
       created_at: (new Date()).toLocaleString()
     })
     return user_id;
-  },
+    },
+
+
 
 
 }
