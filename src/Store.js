@@ -17,7 +17,8 @@ export default new Vuex.Store(
                 uid: "",      // this is is the user authenticated object
                 status: 0   // 0=logout 1=login
             },
-            post: {         // this object will be used when adding and editing forum
+            thread: {         // this object will be used when adding and editing forum
+                title: "",
                 content: ""
             },
             userPosts: [],
@@ -50,8 +51,11 @@ export default new Vuex.Store(
             // setForumTitle(state, data) {
             //     state.forum.title = data
             // },
-            setPostContent(state, data) {
-                state.post.content = data
+            setThreadContent(state, data) {
+                state.thread.content = data
+            },
+            setThreadTitle(state, data) {
+                state.thread.title = data
             },
             setUserPosts(state, data) {
                 state.userPosts = data

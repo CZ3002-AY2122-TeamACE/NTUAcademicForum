@@ -91,21 +91,12 @@ export default {
       }
     });
   },
-  getUserByEmail(email) {
-    const userRef = db.ref('users/email').equalTo(email);
-    console.log(email)
-    userRef.once('value', (snapshot) => {
-      console.log("searching users...")
-      console.log(snapshot.val());
-    }, (errorObject) => {
-      console.log('The read failed: ' + errorObject.name);
-    });
-  },
-  addPost(content, user_id) {
-    const postRef = db.ref('posts');
-    const postPush = postRef.push();
-    postPush.set({
+  addThread(title, content, user_id) {
+    const threadRef = db.ref('threads');
+    const threadPush = threadRef.push();
+    threadPush.set({
       content: content,
+      title: title,
       user_id: user_id,
       created_at: (new Date()).toLocaleString()
     });
