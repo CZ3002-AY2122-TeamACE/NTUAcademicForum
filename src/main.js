@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
+import SideBarComponent from './components/SideBarComponent.vue';
+Vue.component('side-bar-component', SideBarComponent);
 //import SuiVue from 'semantic-ui-vue';
 import firebase from "firebase/compat/app";
 // import firebase from 'firebase';
@@ -69,6 +71,7 @@ export default {
   //     // An error happened.
   //   });
   // },
+
   addUser(name, email, uid) {
     const usersRef = db.ref('users');
     const usersPush = usersRef.push();

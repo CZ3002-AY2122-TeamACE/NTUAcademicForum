@@ -11,7 +11,7 @@ export default new Vuex.Store(
                 name: ""
             },
             currentUser: {
-                id: "",       // this id is the datebase key for this record
+                id: "",       // this id is the database key for this record
                 name: "",
                 email: "",
                 uid: "",      // this is is the user authenticated object
