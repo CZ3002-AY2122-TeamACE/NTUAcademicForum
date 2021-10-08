@@ -1,6 +1,6 @@
 <template>
   <div class="ui container">
-    <button class="ui right floated button" v-on:click="load">load course</button>
+<!--    <button class="ui right floated button" v-on:click="load">load course</button>-->
     <div class="ui stackable grid">
       <div class="nine wide column">
         <div class="title">
@@ -31,7 +31,7 @@
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
       <div class="ui container">
-        <thread v-for="thread in threads" :key="thread.title" :thread="thread"/>
+        <thread v-for="thread in threads" :key="thread.id" :thread="thread"/>
       </div>
     </div>
   </div>
@@ -39,6 +39,7 @@
 
 <script>
 import Thread from "@/components/Thread";
+import store from "../Store";
 export default {
   name: "CourseInfo",
   components:{
@@ -53,6 +54,12 @@ export default {
     },
   },
   mounted() {
+    if(store.state.currentUser.status == 1) {
+
+      store.commit('setCourseID',"CZ2006")
+      store.dispatch("getCourseInfo")
+      store.dispatch('getCourseThreads', store.state.currentUser);
+    }
   },
   // data(){
   //   return {
@@ -87,8 +94,8 @@ export default {
   // },
   methods:{
     load(){
-      this.$store.commit('setCourseID',"CZ2006")
-      this.$store.dispatch("getCourseInfo")
+      // this.$store.commit('setCourseID',"CZ2006")
+      // this.$store.dispatch("getCourseInfo")
     }
   }
 }
