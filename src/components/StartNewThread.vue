@@ -49,7 +49,6 @@ export default {
 
      this.$router.push('/about');
 
-
     }},
 }
 </script>

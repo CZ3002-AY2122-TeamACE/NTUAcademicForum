@@ -21,12 +21,13 @@ export default new Vuex.Store(
                 title: "",
                 content: ""
             },
-            course: {
-                name: "",
-                info: "",
-            },
             courseThreads:[],
             userPosts: [],
+            course: {
+                id:"",
+                name: "",
+                information:"",
+            }
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -65,6 +66,15 @@ export default new Vuex.Store(
             setUserPosts(state, data) {
                 state.userPosts = data
             },
+            setCourseName(state,data){
+                state.course.name = data
+            },
+            setCourseID(state,data){
+                state.course.id = data
+            },
+            setCourseInformation(state,data) {
+                state.course.information = data
+            },
             setCourseThread(state, data) {
                 state.courseThreads = data
             }
@@ -95,6 +105,14 @@ export default new Vuex.Store(
                 commit('setAuthPassword', '');
                 commit('setAuthName', '');
             },
+            getCourseInfo({commit}) {
+                main.getCourseByID(this.state.course.id, function (snapshot) {
+                    snapshot.forEach(function (course) {
+                        commit('setCourseName', course.val().name)
+                        commit('setCourseInformation', course.val().information)
+                    })
+                })
+            },
             getCourseThreads({commit}) {
                 main.getThreadsByCourse("CZ3002", function(response) {
                     if(response) {
@@ -104,6 +122,6 @@ export default new Vuex.Store(
                     }
                 });
             }
-        }
+        },
     }
 )

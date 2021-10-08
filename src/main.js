@@ -94,13 +94,24 @@ export default {
       }
     });
   },
-  getThreadsByCourse(course, callback) {
+
+  getCourseByID(ID, callback) {
+    const courseRef = db.ref('courses').orderByChild("id").equalTo(ID);
+    courseRef.on('value', function(snapshot) {
+      if (snapshot.val() != null) {
+        callback(snapshot);
+      } else {
+        callback(null);
+      }
+    })
+  },
+    getThreadsByCourse(course, callback) {
     const threadRef = db.ref('threads').orderByChild("course").equalTo(course);
     threadRef.on('value', function(snapshot) {
       callback(snapshot.val());
     });
   },
-  addThread(title, content, user_id) {
+    addThread(title, content, user_id) {
     const threadRef = db.ref('threads');
     const threadPush = threadRef.push();
     threadPush.set({
@@ -109,9 +120,11 @@ export default {
       content: content,
       user_id: user_id,
       created_at: (new Date()).toLocaleString()
-    });
-    // return user_id;
-  },
+    })
+    return user_id;
+    },
+
+
 
 
 }
