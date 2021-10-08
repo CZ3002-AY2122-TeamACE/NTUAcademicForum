@@ -8,6 +8,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import StartNewThread from "@/components/StartNewThread";
 import ThreadReplies from "@/components/ThreadReplies";
+import About from "@/views/About";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     name: 'thread',
     component: ThreadReplies,
   },
+  {
+    path: '/course',
+    name: 'Course',
+    component: About,
+  }
 ]
 
 const router = new VueRouter({

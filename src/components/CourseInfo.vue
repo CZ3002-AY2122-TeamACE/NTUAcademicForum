@@ -1,5 +1,6 @@
 <template>
   <div class="ui container">
+    <h1>{{$route.query.id}}</h1>
     <button class="ui right floated button" v-on:click="load">load course</button>
     <div class="ui stackable grid">
       <div class="nine wide column">
@@ -53,6 +54,7 @@ export default {
     },
   },
   mounted() {
+    //console.log(this.$route.query.id)
   },
   // data(){
   //   return {
