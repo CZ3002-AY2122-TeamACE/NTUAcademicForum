@@ -6,23 +6,23 @@
           <div class="eleven wide column">
             <router-link to="/thread">{{thread.title}}</router-link>
           </div>
-          <div class="five wide column">
-            <div class="ui horizontal right aligned link list">
-              <div class="item">
-                <i class="align justify icon"></i> {{thread.replyCount}}
-              </div>
-              <div class="item">
-                <i class="heart outline icon"></i> {{thread.like}}
-              </div>
-              <div class="item">
-                <i class="star outline icon"></i> {{thread.favourite}}
-              </div>
-              <div class="item">
-                <img :src="thread.user"  alt="" class="ui avatar image">
-                <a>Tom Lukic</a>
-              </div>
-            </div>
-          </div>
+<!--          <div class="five wide column">-->
+<!--            <div class="ui horizontal right aligned link list">-->
+<!--              <div class="item">-->
+<!--                <i class="align justify icon"></i> {{thread.replyCount}}-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <i class="heart outline icon"></i> {{thread.like}}-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <i class="star outline icon"></i> {{thread.favourite}}-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <img :src="thread.user"  alt="" class="ui avatar image">-->
+<!--                <a>Tom Lukic</a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
     </div>

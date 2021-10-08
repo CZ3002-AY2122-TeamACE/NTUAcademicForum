@@ -41,37 +41,44 @@ export default {
   components:{
     Thread,
   },
-  data(){
-    return {
-      'threads':[{
-        'title': 'cz3002',
-        'replyCount':20,
-        'like':20,
-        'favourite':10,
-        'content':'hello',
-        'user': require('../assets/default profile.jpeg') ,
-      },{
-        'title': 'cz3003',
-        'replyCount':20,
-        'like':20,
-        'favourite':10,
-        'user': require('../assets/default profile.jpeg') ,
-      },
-        {
-          'title': 'cz3004',
-          'replyCount':20,
-          'like':20,
-          'favourite':10,
-          'user': require('../assets/default profile.jpeg') ,
-        }, {
-          'title': 'cz3006',
-          'replyCount':20,
-          'like':20,
-          'favourite':10,
-          'user': require('../assets/spec profile.jpeg') ,
-        }]
-    }
+  computed: {
+    threads() {
+      return this.$store.state.courseThreads
+    },
   },
+  mounted() {
+  },
+  // data(){
+  //   return {
+  //     'threads':[{
+  //       'title': 'cz3002',
+  //       'replyCount':20,
+  //       'like':20,
+  //       'favourite':10,
+  //       'content':'hello',
+  //       'user': require('../assets/default profile.jpeg') ,
+  //     },{
+  //       'title': 'cz3003',
+  //       'replyCount':20,
+  //       'like':20,
+  //       'favourite':10,
+  //       'user': require('../assets/default profile.jpeg') ,
+  //     },
+  //       {
+  //         'title': 'cz3004',
+  //         'replyCount':20,
+  //         'like':20,
+  //         'favourite':10,
+  //         'user': require('../assets/default profile.jpeg') ,
+  //       }, {
+  //         'title': 'cz3006',
+  //         'replyCount':20,
+  //         'like':20,
+  //         'favourite':10,
+  //         'user': require('../assets/spec profile.jpeg') ,
+  //       }]
+  //   }
+  // },
   methods:{
   }
 }
