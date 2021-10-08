@@ -41,11 +41,20 @@
 <script>
 import Thread from "@/components/Thread";
 import store from "../Store";
-import main from "../main.js";
+// import main from "../main.js";
 export default {
   name: "CourseInfo",
   components:{
     Thread,
+  },
+  watch: {
+    $route: {
+      handler() {
+        store.commit('setCourseID',this.$route.query.id)
+        store.dispatch("getCourseInfo")
+        store.dispatch('getCourseThreads', store.state.currentUser);
+    }
+}
   },
   computed: {
     course() {
@@ -56,13 +65,16 @@ export default {
     },
   },
   created() {
-    if(store.state.currentUser.status == 1) {
-
-      store.commit('setCourseID',this.$route.query.id)
-      store.dispatch("getCourseInfo")
-      store.dispatch('getCourseThreads', store.state.currentUser);
-
-    }
+    setTimeout(
+        () => {
+          if(store.state.currentUser.status == 1) {
+            store.commit('setCourseID',this.$route.query.id)
+            store.dispatch("getCourseInfo")
+            store.dispatch('getCourseThreads', store.state.currentUser);
+          }
+        },
+        1500
+    )
     //console.log(this.$route.query.id)
 
   },
