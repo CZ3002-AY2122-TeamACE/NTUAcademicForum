@@ -13,9 +13,9 @@
       </div>
     </div>
     <br>
-    <div>
-      <button class="ui right floated button" v-on:click="savingContent">submit</button>
-    </div>
+<!--    <div>-->
+<!--      <button class="ui right floated button" v-on:click="savingContent">submit</button>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -24,7 +24,7 @@
 
 import { VueEditor } from "vue2-editor";
 
-import main from "../main.js";
+
 export default {
   name: "PostEditor",
   components: {
@@ -39,75 +39,15 @@ export default {
   computed: {
     content: {
       get() {
-        return this.$store.state.post.content
+        return this.$store.state.thread.content
       },
       set(value) {
-        this.$store.commit('setPostContent', value)
+        this.$store.commit('setThreadContent', value)
       }
     }
   },
-  methods: {
 
-    savingContent: function() {
-      main.addPost(this.$store.state.post.content, this.$store.state.currentUser.id);
-
-      this.$router.push('/about');
-  //     setTimeout(
-  //         () => {
-  //   //         // self.isLoading = false;
-  //   //         // self.msg = "Forum saved successfully!"
-  //   //         // self.$store.commit('setForumTitle', "")
-  //           self.$store.commit('setPostContent', "")
-  //   //         self.$store.dispatch('getCurrentUser')
-  //   //         // self.$store.dispatch('getUserForums', self.$store.state.currentUser);
-  //           self.$router.push('/');
-  //   //
-  //   //
-  //   //   // console.log(this.content);
-  //   },1500)
-  // },created() {
-  //     if(this.$store.state.currentUser.status != 1) {
-  //       this.$router.push('/login');
-  //     }
-  //   }
-
-  }
-  /*
-  data() {
-    return {
-      editor: null,
-      editorData: ''
-    }
-  },
-  mounted() {
-    const editor = new wangEditor(`#demo1`)
-    // 配置 onchange 回调函数，将数据同步到 vue 中
-    editor.config.showMenuTooltips = false
-    // 引入 i18next 插件
-    editor.i18next = window.i18next
-    editor.config.lang = 'en'
-    editor.config.onchange = (newHtml) => {
-      this.editorData = newHtml
-    }
-    // 创建编辑器
-    editor.create()
-    this.editor = editor
-  },
-  methods: {
-    getEditorData() {
-      // 通过代码获取编辑器内容
-      let data = this.editor.txt.html()
-      alert(data)
-    },
-  },
-  beforeDestroy() {
-    // 调用销毁 API 对当前编辑器实例进行销毁
-    this.editor.destroy()
-    this.editor = null
-  },
-
-   */
-}}
+}
 </script>
 <style scoped>
 

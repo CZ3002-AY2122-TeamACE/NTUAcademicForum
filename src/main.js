@@ -91,11 +91,12 @@ export default {
       }
     });
   },
-  addPost(content, user_id) {
-    const postRef = db.ref('posts');
-    const postPush = postRef.push();
-    postPush.set({
+  addThread(title, content, user_id) {
+    const threadRef = db.ref('threads');
+    const threadPush = threadRef.push();
+    threadPush.set({
       content: content,
+      title: title,
       user_id: user_id,
       created_at: (new Date()).toLocaleString()
     });

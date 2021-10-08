@@ -7,10 +7,13 @@
             <div class="ui left labeled input">
               <div class="ui label"> title
               </div>
-              <input type="text" placeholder="title of the thread" name="title">
+              <input type="text" placeholder="title of the thread" v-model="title" name="title">
             </div>
           </div>
           <post-editor></post-editor>
+          <div>
+            <button class="ui right floated button" v-on:click="savingContent">submit</button>
+          </div>
         </form>
 
       </div>
@@ -20,6 +23,7 @@
 
 <script>
 import PostEditor from "@/components/PostEditor";
+import main from "../main.js";
 export default {
   name: "StartNewThread",
   components:{
@@ -27,7 +31,26 @@ export default {
   },
   data(){
     return {};
-  }
+  },
+  computed: {
+    title: {
+      get() {
+        return this.$store.state.thread.title
+      },
+      set(value) {
+        this.$store.commit('setThreadTitle', value)
+      }
+    }
+  },
+  methods: {
+
+    savingContent: function() {
+      main.addThread(this.$store.state.thread.title, this.$store.state.post.content, this.$store.state.currentUser.id);
+
+      this.$router.push('/about');
+
+
+    }},
 }
 </script>
 
