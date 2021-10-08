@@ -32,7 +32,7 @@
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
       <div class="ui container">
-        <thread v-for="thread in threads" :key="thread.title" :thread="thread"/>
+        <thread v-for="thread in threads" :key="thread.id" :thread="thread"/>
       </div>
     </div>
   </div>
@@ -40,6 +40,8 @@
 
 <script>
 import Thread from "@/components/Thread";
+import store from "../Store";
+import main from "../main.js";
 export default {
   name: "CourseInfo",
   components:{
@@ -53,8 +55,16 @@ export default {
       return this.$store.state.courseThreads
     },
   },
-  mounted() {
+  created() {
+    if(store.state.currentUser.status == 1) {
+
+      store.commit('setCourseID',this.$route.query.id)
+      store.dispatch("getCourseInfo")
+      store.dispatch('getCourseThreads', store.state.currentUser);
+
+    }
     //console.log(this.$route.query.id)
+
   },
   // data(){
   //   return {
@@ -89,8 +99,8 @@ export default {
   // },
   methods:{
     load(){
-      this.$store.commit('setCourseID',"CZ2006")
-      this.$store.dispatch("getCourseInfo")
+      // this.$store.commit('setCourseID',"CZ2006")
+      // this.$store.dispatch("getCourseInfo")
     }
   }
 }
