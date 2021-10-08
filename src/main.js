@@ -91,6 +91,16 @@ export default {
       }
     });
   },
+  getCourseByID(ID, callback) {
+    const courseRef = db.ref('courses').orderByChild("id").equalTo(ID);
+    courseRef.on('value', function(snapshot) {
+      if(snapshot.val() != null) {
+        callback(snapshot);
+      } else {
+        callback(null);
+      }
+    });
+  },
   addThread(title, content, user_id) {
     const threadRef = db.ref('threads');
     const threadPush = threadRef.push();
@@ -99,7 +109,7 @@ export default {
       title: title,
       user_id: user_id,
       created_at: (new Date()).toLocaleString()
-    });
+    })
     return user_id;
   },
 

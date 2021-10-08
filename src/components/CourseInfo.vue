@@ -1,8 +1,11 @@
 <template>
   <div class="ui container">
+    <button class="ui right floated button" v-on:click="load">load course</button>
     <div class="ui stackable grid">
       <div class="nine wide column">
-        <div class="title">CZ3002</div>
+        <div class="title">
+          <span>{{course.name}}</span>
+        </div>
       </div>
       <div class="six wide column">
         <div class="horizontal right aligned link list">
@@ -22,7 +25,7 @@
 
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Course Information</div>
-      <p>CZ3002 is Advanced Software Engineering course </p>
+      <p>{{course.information}} </p>
     </div>
 
     <div class="ui black segment">
@@ -40,6 +43,11 @@ export default {
   name: "CourseInfo",
   components:{
     Thread,
+  },
+  computed: {
+    course() {
+      return this.$store.state.course
+    }
   },
   data(){
     return {
@@ -73,6 +81,10 @@ export default {
     }
   },
   methods:{
+    load(){
+      this.$store.commit('setCourseID',"CZ2006")
+      this.$store.dispatch("getCourseInfo")
+    }
   }
 }
 </script>

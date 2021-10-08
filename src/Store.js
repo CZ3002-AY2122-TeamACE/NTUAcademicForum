@@ -22,6 +22,11 @@ export default new Vuex.Store(
                 content: ""
             },
             userPosts: [],
+            course: {
+                id:"",
+                name: "",
+                information:"",
+            }
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -60,6 +65,15 @@ export default new Vuex.Store(
             setUserPosts(state, data) {
                 state.userPosts = data
             },
+            setCourseName(state,data){
+                state.course.name = data
+            },
+            setCourseID(state,data){
+                state.course.id = data
+            },
+            setCourseInformation(state,data){
+                state.course.information = data
+            }
         },
         actions: {
             getCurrentUser({commit}) {
@@ -86,7 +100,15 @@ export default new Vuex.Store(
                 commit('setAuthEmail', '');
                 commit('setAuthPassword', '');
                 commit('setAuthName', '');
+            },
+            getCourseInfo({commit}){
+                main.getCourseByID(this.state.course.id,function(snapshot){
+                    snapshot.forEach(function(course) {
+                        commit('setCourseName',course.val().name)
+                        commit('setCourseInformation',course.val().information)
+                    })
+                })
             }
-        }
+        },
     }
 )
