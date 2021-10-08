@@ -114,7 +114,7 @@ export default new Vuex.Store(
                 })
             },
             getCourseThreads({commit}) {
-                main.getThreadsByCourse("CZ3002", function(response) {
+                main.getThreadsByCourse(this.state.course.id, function(response) {
                     if(response) {
                         commit('setCourseThread', response);
                     } else {
