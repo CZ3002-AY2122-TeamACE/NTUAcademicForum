@@ -17,7 +17,7 @@
                 Courses</b-button>
               </b-nav-item>
               <b-button-group vertical>
-                <div class="button">
+                <div class="ui center-aligned inverted basic button">
                   <router-link :to="`/course?id=CZ2006`">CZ2006</router-link>
                 </div>
                 <b-button variant="dark" size = sm>21S1-CZ3002-10358</b-button>
