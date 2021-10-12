@@ -48,12 +48,12 @@ const routes = [
     component: StartNewThread,
   },
   {
-    path:"/thread",
+    path:"/thread/:id",
     name: 'thread',
     component: ThreadReplies,
   },
   {
-    path: '/course',
+    path: '/course/:id',
     name: 'Course',
     component: About,
   }
