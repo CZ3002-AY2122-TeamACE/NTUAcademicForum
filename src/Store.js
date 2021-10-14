@@ -114,9 +114,12 @@ export default new Vuex.Store(
             },
             getCurrentUsername({commit}){
                 console.log("id: " + this.state.currentUser.id)
-                main.getUserByID(function (user){
+                main.getUserByID(this.state.currentUser.id,function (user){
                     if(user){
-                        commit('setCurrUserName',user.name)
+                        //console.log(user.val().name)
+                        commit('setCurrUserName',user.val().name)
+                    } else {
+                        console.log("user not exist")
                     }
                 })
             },

@@ -27,6 +27,14 @@ export default {
   },
   mounted: function() {
     store.dispatch('getCurrentUser')
+    setTimeout(
+         () => {
+           if(store.state.currentUser.status == 1) {
+             store.dispatch('getCurrentUsername');
+           }
+         },
+         5000
+     )
     // if user is already login then load user forums
     // setTimeout(
     //     () => {

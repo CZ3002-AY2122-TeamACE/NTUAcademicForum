@@ -97,10 +97,10 @@ export default {
   getUserByID(ID, callback) {
     const userRef = db.ref('users').child(ID);
     userRef.once('value', function(snapshot) {
-      if(snapshot.val() != null) {
-        callback(Object.keys(snapshot.val())[0], snapshot.val());
+      if (snapshot.val() != null) {
+        callback(snapshot);
       } else {
-        callback(null, null);
+        callback(null);
       }
     });
   },
