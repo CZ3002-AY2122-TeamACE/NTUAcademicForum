@@ -8,10 +8,10 @@
             <img src="../assets/default profile.jpeg">
           </a>
           <div class="content">
-            <a class="author">Tom Lukic</a>
-            <i class="calendar icon"></i>2021-2-20
+            <a class="author">{{reply.user_id}}</a>
+            <i class="calendar icon"></i>{{reply.created_at}}
             <div class="text">
-              This will be great for business reports. I will definitely download this.
+              {{reply.content}}
             </div>
             <div class="actions">
               <a type="button" ><i class="thumbs up outline icon"></i></a>
@@ -43,6 +43,7 @@ import main from "../main";
 export default {
 
 name: "Reply",
+  props:['reply'],
   components:{
     PostEditor,
   },

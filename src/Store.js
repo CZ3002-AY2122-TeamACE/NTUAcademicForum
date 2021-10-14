@@ -87,6 +87,10 @@ export default new Vuex.Store(
             setKey(state, data) {
                 state.key = data
             },
+
+            setCurrentThreadReplies(state, data) {
+                state.currentThread.replies = data
+            },
             setReply(state, data) {
                 state.reply = data
             }
@@ -140,11 +144,11 @@ export default new Vuex.Store(
                 });
             },
             getThreadReplies({commit}){
-                main.getReplyOfThread(this.state.currentThread.id,function (response){
+                main.getReplyOfThread(this.state.key,function (response){
                     if(response) {
-                        commit('set', response);
+                        commit('setCurrentThreadReplies', response);
                     } else {
-                        commit('setCourseThread', []);
+                        commit('setCurrentThreadReplies', []);
                     }
                 })
             }
