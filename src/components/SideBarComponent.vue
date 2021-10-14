@@ -4,7 +4,7 @@
     <b-sidebar id="sidebar-no-header" aria-labelledby="sidebar-no-header-title" no-header shadow bg-variant="dark" text-variant="light">
       <template #default="{ hide }">
         <div class="p-3">
-          <h4 id="sidebar-no-header-title">LearningHub@NTU</h4>
+          <h4 id="sidebar-no-header-title">StudyHub@NTU</h4>
           <p>
           </p>
           <div class="mb-2">
