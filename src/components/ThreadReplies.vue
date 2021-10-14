@@ -20,6 +20,11 @@
       </div>
       <div class="markdown-body" v-html="thread.content">{{ thread.content }}</div>
     </div>
+    <div class="alert alert-danger" v-if="this.errors.length > 0">
+      <ul>
+        <li v-for="(error, index) in this.errors" :key="index">{{ error }}</li>
+      </ul>
+    </div>
 
     <div class="ui horizontal left aligned link list">
       <!-- Using modifiers -->
@@ -76,6 +81,7 @@ export default {
   },
   data() {
     return {
+      errors: [],
     }
   },
   watch: {
@@ -106,9 +112,13 @@ export default {
   methods: {
 
     postReply: function() {
-      main.addThread(this.$store.state.course.id, this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id);
-      const courseId = this.$store.state.course.id
-      this.$router.push({ name: 'Course', params: { id: courseId} });
+      var replyTo = null;
+      this.errors = [];
+      if(this.$store.state.thread.content== "") {
+        this.errors.push('Reply content is empty');
+      }
+
+      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
 
     }},
 }

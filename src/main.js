@@ -136,17 +136,6 @@ export default {
     })
     return key;
     },
-  addReply(content, threadKey, user_id) {
-    var replyRef = db.ref('replies');
-    var replyPush = replyRef.push();
-
-    replyPush.set({
-      content: content,
-      user_id: user_id,
-      created_at: (new Date()).toLocaleString(),
-      topic_id: threadKey
-    });
-  },
 
   getReplyOfThread(thread, callback) {
     const replyRef = db.ref('replies').orderByChild("thread").equalTo(thread);
