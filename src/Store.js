@@ -30,6 +30,7 @@ export default new Vuex.Store(
             },
             currentThread: {},
             key:"",
+            reply: "",
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -86,8 +87,12 @@ export default new Vuex.Store(
             setKey(state, data) {
                 state.key = data
             },
-            setCurrentThreadReplies(state, data){
+
+            setCurrentThreadReplies(state, data) {
                 state.currentThread.replies = data
+            },
+            setReply(state, data) {
+                state.reply = data
             }
         },
         actions: {
