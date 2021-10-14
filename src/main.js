@@ -137,7 +137,26 @@ export default {
     return key;
     },
 
+  getReplyOfThread(key, callback) {
+    const replyRef = db.ref('replies').child(key);
+    replyRef.on('value', function(snapshot) {
+      callback(snapshot.val())
+    });
+  },
 
+  addReply(thread, content, user_id, reply_to) {
+    const threadRef = db.ref('replies');
+    const threadPush = threadRef.push();
+    const key = threadPush.getKey();
+    threadPush.set({
+      thread: thread,
+      content: content,
+      user_id: user_id,
+      reply_to: reply_to,
+      created_at: (new Date()).toLocaleString()
+    })
+    return key;
+  },
 
 
 }
