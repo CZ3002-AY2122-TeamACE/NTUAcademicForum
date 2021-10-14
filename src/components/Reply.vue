@@ -1,7 +1,11 @@
 <template>
   <div class="item">
     <div class="ui comments">
-
+      <div class="alert alert-danger" v-if="this.errors.length > 0">
+        <ul>
+          <li v-for="(error, index) in this.errors" :key="index">{{ error }}</li>
+        </ul>
+      </div>
       <div class="ui container">
         <div class="comment">
           <a class="avatar">
@@ -14,7 +18,8 @@
               {{reply.content}}
             </div>
             <div class="actions">
-              <a type="button" ><i class="thumbs up outline icon"></i></a>
+              <a type="button" v-on:click.once="add"><i class="thumbs up outline icon"></i></a>
+              {{reply.like}}
               <a type="button" aria-label="Close"><i class="thumbs down outline icon"></i></a>
               <a v-b-toggle="id" type="button" aria-label="Close">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
@@ -50,7 +55,8 @@ name: "Reply",
   data(){
     return{
       showReply:false,
-      error: [],
+      errors: [],
+      // like: 0,
     }
   },
   methods: {
@@ -64,12 +70,14 @@ name: "Reply",
       if(this.errors.length > 0) {
         return false;
       }
-      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id,replyTo);
+      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
 
+    },
+    add: function () {
+      main.updateReplyLikeCount(this.id)
     }},
 }
 </script>
-
 <style scoped>
 
 .display-reply {
