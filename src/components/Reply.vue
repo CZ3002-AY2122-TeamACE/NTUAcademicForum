@@ -1,7 +1,11 @@
 <template>
   <div class="item">
     <div class="ui comments">
-
+      <div class="alert alert-danger" v-if="this.errors.length > 0">
+        <ul>
+          <li v-for="(error, index) in this.errors" :key="index">{{ error }}</li>
+        </ul>
+      </div>
       <div class="ui container">
         <div class="comment">
           <a class="avatar">
@@ -51,9 +55,14 @@ name: "Reply",
   data() {
     return{
       showReply:false,
+<<<<<<< HEAD
       error: [],
       like: 0,
       dislike: 0,
+=======
+      errors: [],
+      // like: 0,
+>>>>>>> 30f22cf302ec72cda32c6e91d33518e4c71f3aa5
     }
   },
 
@@ -68,9 +77,10 @@ name: "Reply",
       if(this.errors.length > 0) {
         return false;
       }
-      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id,replyTo);
+      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
 
     },
+<<<<<<< HEAD
     addlike: function() {
       this.like++;
     },
@@ -79,9 +89,13 @@ name: "Reply",
     }
   },
 
+=======
+    add: function () {
+      main.updateReplyLikeCount(this.id)
+    }},
+>>>>>>> 30f22cf302ec72cda32c6e91d33518e4c71f3aa5
 }
 </script>
-
 <style scoped>
 
 .display-reply {
