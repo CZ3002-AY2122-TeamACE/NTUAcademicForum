@@ -26,9 +26,7 @@
     </h4>
     <div class="ui segment">
       <div class="ui middle aligned divided list">
-        <reply></reply>
-        <reply></reply>
-        <reply></reply>
+        <reply v-for = "(value,index) in replies" :key="index" :reply="value"/>
       </div>
     </div>
   </div>
@@ -51,6 +49,7 @@ export default {
       handler() {
         store.commit('setKey',this.$route.params.id)
         store.dispatch("getThreadInfo", {route: this.$route})
+        store.dispatch("getThreadReplies")
       }
     }
   },
@@ -58,6 +57,9 @@ export default {
     thread() {
       return this.$store.state.currentThread
     },
+    replies(){
+      return this.$store.state.currentThread.replies
+    }
   },
   mounted() {
     setTimeout(
@@ -65,6 +67,7 @@ export default {
           if(store.state.currentUser.status == 1) {
             store.commit('setKey',this.$route.params.id)
             this.$store.dispatch("getThreadInfo"),{route: this.$route}
+            store.dispatch("getThreadReplies")
           }
         },
         1000
