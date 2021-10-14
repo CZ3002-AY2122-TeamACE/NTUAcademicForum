@@ -181,6 +181,12 @@ export default {
       return dislike;
     });
   },
+  getRepliesByKey(key, callback) {
+    const itemRef = db.ref('replies').child(key);
+    itemRef.on('value', function(snapshot) {
+      callback(snapshot.val())
+    });
+  },
 
 
 }

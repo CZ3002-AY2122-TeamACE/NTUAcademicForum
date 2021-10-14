@@ -14,7 +14,7 @@
           <div class="content">
             <a class="author">{{reply.user_id}}</a>
             <i class="calendar icon"></i>{{reply.created_at}}
-            <div class="markdown-body" v-html="reply.content">{{ reply.content }}</div>
+            <div class="markdown-body" v-html="content">{{content}}</div>
             <div class="actions">
               <a type="button" v-on:click.once="cLike"><i class="thumbs up outline icon"></i></a>
               {{reply.like}}
@@ -57,6 +57,23 @@ name: "Reply",
       errors: [],
       // like: 0,
     }
+  },
+  computed: {
+  content() {
+    if(this.reply.reply_to == null)
+    {return this.reply.content}
+    var upstream = main.getRepliesByKey(this.reply.reply_to, function (response) {
+      if(response){
+        console.log(response.user_id)
+        var upstream = "<p>Replying @" + response.user_id+ "</p>"
+        console.log(upstream)
+        return upstream
+      }
+    })
+    // var upstream = "<p>Replying @" + + "</p>"
+    // console.log(upstream)
+    return upstream + this.reply.content
+  },
   },
   methods: {
 
