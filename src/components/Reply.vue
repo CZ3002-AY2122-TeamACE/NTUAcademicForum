@@ -55,14 +55,9 @@ name: "Reply",
   data() {
     return{
       showReply:false,
-<<<<<<< HEAD
       error: [],
       like: 0,
       dislike: 0,
-=======
-      errors: [],
-      // like: 0,
->>>>>>> 30f22cf302ec72cda32c6e91d33518e4c71f3aa5
     }
   },
 
@@ -80,7 +75,7 @@ name: "Reply",
       main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
 
     },
-<<<<<<< HEAD
+
     addlike: function() {
       this.like++;
     },
@@ -89,11 +84,6 @@ name: "Reply",
     }
   },
 
-=======
-    add: function () {
-      main.updateReplyLikeCount(this.id)
-    }},
->>>>>>> 30f22cf302ec72cda32c6e91d33518e4c71f3aa5
 }
 </script>
 <style scoped>
