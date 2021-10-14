@@ -145,10 +145,10 @@ export default {
   },
 
   addReply(thread, content, user_id, reply_to) {
-    const threadRef = db.ref('replies');
-    const threadPush = threadRef.push();
-    const key = threadPush.getKey();
-    threadPush.set({
+    const replyRef = db.ref('replies');
+    const replyPush = replyRef.push();
+    const key = replyPush.getKey();
+    replyPush.set({
       thread: thread,
       content: content,
       user_id: user_id,
