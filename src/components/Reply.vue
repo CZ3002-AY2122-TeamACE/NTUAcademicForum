@@ -12,7 +12,7 @@
             <img src="../assets/default profile.jpeg">
           </a>
           <div class="content">
-            <a class="author">{{reply.user_id}}</a>
+            <a class="author">{{reply.username}}</a>
             <i class="calendar icon"></i>{{reply.created_at}}
             <div class="markdown-body" v-html="reply.content">{{ reply.content }}</div>
             <div class="actions">
@@ -72,7 +72,7 @@ name: "Reply",
       if(this.errors.length > 0) {
         return false;
       }
-      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
+      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id,replyTo,this.$store.state.currentUser.name);
 
     },
 

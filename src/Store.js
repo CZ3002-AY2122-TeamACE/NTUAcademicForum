@@ -112,6 +112,17 @@ export default new Vuex.Store(
                     }
                 });
             },
+            getCurrentUsername({commit}){
+                console.log("id: " + this.state.currentUser.id)
+                main.getUserByID(this.state.currentUser.id,function (user){
+                    if(user){
+                        //console.log(user.val().name)
+                        commit('setCurrUserName',user.val().name)
+                    } else {
+                        console.log("user not exist")
+                    }
+                })
+            },
             clearUserData({commit}) {
                 commit('setCurrUserId', '');
                 // commit('setCurrUserName', '');
