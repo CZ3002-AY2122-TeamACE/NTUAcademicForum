@@ -148,7 +148,26 @@ export default {
     });
   },
 
+  getReplyOfThread(thread, callback) {
+    const replyRef = db.ref('replies').orderByChild("thread").equalTo(thread);
+    replyRef.on('value', function(snapshot) {
+      callback(snapshot.val())
+    });
+  },
 
+  addReply(thread, content, user_id, reply_to) {
+    const replyRef = db.ref('replies');
+    const replyPush = replyRef.push();
+    const key = replyPush.getKey();
+    replyPush.set({
+      thread: thread,
+      content: content,
+      user_id: user_id,
+      reply_to: reply_to,
+      created_at: (new Date()).toLocaleString()
+    })
+    return key;
+  },
 
 
 }

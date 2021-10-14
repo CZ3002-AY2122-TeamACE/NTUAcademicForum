@@ -138,6 +138,15 @@ export default new Vuex.Store(
                         commit('setCourseThread', []);
                     }
                 });
+            },
+            getThreadReplies({commit}){
+                main.getReplyOfThread(this.state.currentThread.id,function (response){
+                    if(response) {
+                        commit('set', response);
+                    } else {
+                        commit('setCourseThread', []);
+                    }
+                })
             }
         },
     }
