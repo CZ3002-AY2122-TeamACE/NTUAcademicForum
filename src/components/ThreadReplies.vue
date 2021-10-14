@@ -18,9 +18,7 @@
           <i class="calendar icon"></i>2021-2-20
         </div>
       </div>
-      <div class="text">
-        {{thread.content}}
-      </div>
+      <div class="markdown-body" v-html="thread.content">{{ thread.content }}</div>
     </div>
     <h4 class="ui horizontal divider header">
       <i class="tag icon"></i>
