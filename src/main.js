@@ -120,7 +120,7 @@ export default {
     });
   },
 
-    addThread(course, title, content, user_id) {
+    addThread(course, title, content, user_id, username) {
     const threadRef = db.ref('threads');
     const threadPush = threadRef.push();
     const key = threadPush.getKey();
@@ -132,6 +132,7 @@ export default {
       like:0,
       favourite:0,
       replyCount:0,
+      username: username,
       created_at: (new Date()).toLocaleString()
     })
     return key;
@@ -144,7 +145,7 @@ export default {
     });
   },
 
-  addReply(thread, content, user_id, reply_to) {
+  addReply(thread, content, user_id, reply_to, username) {
     const replyRef = db.ref('replies');
     const replyPush = replyRef.push();
     const key = replyPush.getKey();
@@ -153,6 +154,7 @@ export default {
       content: content,
       user_id: user_id,
       reply_to: reply_to,
+      username: username,
       created_at: (new Date()).toLocaleString()
     })
     return key;

@@ -8,7 +8,7 @@
             <img src="../assets/default profile.jpeg">
           </a>
           <div class="content">
-            <a class="author">{{reply.user_id}}</a>
+            <a class="author">{{reply.username}}</a>
             <i class="calendar icon"></i>{{reply.created_at}}
             <div class="text">
               {{reply.content}}
@@ -61,7 +61,7 @@ name: "Reply",
         this.errors.push('Reply content is empty');
       }
 
-      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id,replyTo);
+      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id,replyTo,this.$store.state.currentUser.name);
 
     }},
 }

@@ -46,7 +46,7 @@ export default {
   methods: {
 
     savingContent: function() {
-      main.addThread(this.$store.state.course.id, this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id);
+      main.addThread(this.$store.state.course.id, this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id, this.$store.state.currentUser.name);
       const courseId = this.$store.state.course.id
       this.$router.push({ name: 'Course', params: { id: courseId} });
 
