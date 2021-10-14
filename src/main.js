@@ -137,8 +137,8 @@ export default {
     return key;
     },
 
-  getReplyOfThread(key, callback) {
-    const replyRef = db.ref('replies').child(key);
+  getReplyOfThread(thread, callback) {
+    const replyRef = db.ref('replies').orderByChild("thread").equalTo(thread);
     replyRef.on('value', function(snapshot) {
       callback(snapshot.val())
     });
