@@ -29,6 +29,7 @@ export default new Vuex.Store(
                 information:"",
             },
             currentThread: {},
+            currentThreadReplies: [],
             key:"",
             reply: "",
         },
@@ -89,7 +90,7 @@ export default new Vuex.Store(
             },
 
             setCurrentThreadReplies(state, data) {
-                state.currentThread.replies = data
+                state.currentThreadReplies = data
             },
             setReply(state, data) {
                 state.reply = data
