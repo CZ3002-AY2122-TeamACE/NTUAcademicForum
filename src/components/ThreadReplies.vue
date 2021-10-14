@@ -1,5 +1,8 @@
 <template>
   <div class="ui container">
+<!--    <span>-->
+<!--          {{ this.$route.params.id }}-->
+<!--      </span>-->
     <div class="ui segment">
       <h2 class="ui header">{{thread.title}}</h2>
       <div class="ui horizontal link list">
@@ -35,23 +38,53 @@
 
 <script>
 import Reply from "@/components/Reply";
+import store from "../Store";
 export default {
   name: "ThreadReplies",
   components:{
     Reply,
   },
-  data(){
+  data() {
     return {
-      'thread':{
-        'title': 'cz3002',
-        'replyCount':20,
-        'like':20,
-        'favourite':10,
-        'content':'hello',
-        'user': require('../assets/default profile.jpeg') ,
+    }
+  },
+  watch: {
+    $route: {
+      handler() {
+        store.commit('setKey',this.$route.params.id)
+        store.dispatch("getThreadInfo", {route: this.$route})
       }
     }
-  }
+  },
+  computed: {
+    thread() {
+      return this.$store.state.currentThread
+    },
+  },
+  mounted() {
+    setTimeout(
+        () => {
+          if(store.state.currentUser.status == 1) {
+            store.commit('setKey',this.$route.params.id)
+            this.$store.dispatch("getThreadInfo"),{route: this.$route}
+          }
+        },
+        1000
+    )
+
+  },
+  // data(){
+  //   return {
+  //     'thread':{
+  //       'title': 'cz3002',
+  //       'replyCount':20,
+  //       'like':20,
+  //       'favourite':10,
+  //       'content':'hello',
+  //       'user': require('../assets/default profile.jpeg') ,
+  //     }
+  //   }
+  // }
 }
 </script>
 

@@ -24,6 +24,7 @@
 <script>
 import PostEditor from "@/components/PostEditor";
 import main from "../main.js";
+// import store from "../Store";
 export default {
   name: "StartNewThread",
   components:{
@@ -45,9 +46,9 @@ export default {
   methods: {
 
     savingContent: function() {
-      main.addThread(this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id);
-
-     this.$router.push('/about');
+      main.addThread(this.$store.state.course.id, this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id);
+      const courseId = this.$store.state.course.id
+      this.$router.push({ name: 'Course', params: { id: courseId} });
 
     }},
 }
