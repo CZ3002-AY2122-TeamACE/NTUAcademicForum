@@ -153,9 +153,22 @@ export default {
       content: content,
       user_id: user_id,
       reply_to: reply_to,
+      like: 0,
+      dislike: 0,
       created_at: (new Date()).toLocaleString()
     })
     return key;
+  },
+  updateReplyLikeCount(key)
+  {
+    var topicRef = db.ref('replies').child(key).child('like');
+
+    topicRef.transaction(function(like) {
+      // if (views) {
+      like = like + 1;
+      // }
+      return like;
+    });
   },
 
 
