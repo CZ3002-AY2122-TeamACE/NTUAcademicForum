@@ -32,6 +32,7 @@ export default new Vuex.Store(
             currentThreadReplies: [],
             key:"",
             reply: "",
+            sourceUsername: "",
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -94,6 +95,9 @@ export default new Vuex.Store(
             },
             setReply(state, data) {
                 state.reply = data
+            },
+            setUpstreamUserName(state,data) {
+                state.sourceUsername = data
             }
         },
         actions: {
@@ -163,7 +167,8 @@ export default new Vuex.Store(
                         commit('setCurrentThreadReplies', []);
                     }
                 })
-            }
+            },
+
         },
     }
 )

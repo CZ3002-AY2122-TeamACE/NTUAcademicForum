@@ -14,13 +14,14 @@
           <div class="content">
             <a class="author">{{reply.username}}</a>
             <i class="calendar icon"></i>{{reply.created_at}}
-            <div class="markdown-body" v-html="reply.content">{{ reply.content }}</div>
+            <div class="markdown-body" v-html="content">{{content}}</div>
             <div class="actions">
               <div style="float:left"><a type="button" v-on:click.once="addlike" ><i class="thumbs up outline icon"></i></a>{{reply.like}}</div>
               <div style="float:left"> &nbsp; </div>
               <div style="float:left"><a type="button" v-on:click.once="adddislike"><i class="thumbs down outline icon"></i></a>{{reply.dislike}}</div>
               <div style="float:left"> &nbsp; </div>
               <div style="float:left"><a v-b-toggle="id" type="button" >
+
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
                   <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
                 </svg></a></div>
@@ -45,6 +46,7 @@
 <script>
 import PostEditor from "@/components/PostEditor";
 import main from "../main";
+import store from "../Store";
 export default {
 
 name: "Reply",
@@ -56,10 +58,25 @@ name: "Reply",
     return{
       showReply:false,
       errors: [],
-      like: 0,
-      dislike: 0,
     }
   },
+  computed: {
+    content() {
+      if(this.reply.reply_to == null)
+      {return this.reply.content}
+      main.getRepliesByKey(this.reply.reply_to, function (response) {
+        if(response){
+          store.commit('setUpstreamUserName',response.username)
+        }
+      })
+      var upstream = "Replying @" +this.$store.state.sourceUsername
+      // console.log(upstream)
+      return upstream + this.reply.content
+    },
+
+
+  },
+
 
   methods: {
 
@@ -77,13 +94,16 @@ name: "Reply",
     },
 
     addlike: function() {
-      //this.like++;
+
       main.updateReplyLikeCount(this.id)
 
     },
+
+
     adddislike: function() {
-      //this.dislike++;
+
       main.updateReplyDisLikeCount(this.id)
+
     }
   },
 
