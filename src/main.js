@@ -193,6 +193,43 @@ export default {
       return dislike;
     });
   },
+  checkFavouriteCurrentThread(user_id,callback){
+    var favouriteThreadPairRef = db.ref('threadFavourite').orderByChild('user_id').equalTo(user_id)
+    favouriteThreadPairRef.on('value', callback)
+  },
+  updateThreadFavouriteRelation(thread_key, user_id) {
+    console.log('user ' + user_id + " thread " + thread_key)
+    var favourited = false
+    var favouriteThreadPairRef = db.ref('threadFavourite').orderByChild('user_id').equalTo(user_id)
+    favouriteThreadPairRef.on('value', function (pairs) {
+      if (pairs) {
+        pairs.forEach(function (snapshot) {
+          let pair = snapshot.val()
+          console.log(pair)
+          if (pair.thread == thread_key) {
+            favourited = true
+            console.log("you have favourited the thread")
+          }
+        })
+        console.log("favourite " + favourited)
+        if (!favourited) {
+          var threadRef = db.ref('threads').child(thread_key).child('favourite');
+          threadRef.transaction(function (favourite) {
+            favourite = favourite + 1;
+            const favouritePairPush = db.ref('threadFavourite').push();
+            const key = favouritePairPush.getKey();
+            favouritePairPush.set({
+              thread: thread_key,
+              user_id: user_id,
+              created_at: (new Date()).toLocaleString()
+            })
+            return key,favourite;
+          });
+        }
+      }
+    })
+  },
+
   getRepliesByKey(key,callback) {
     const itemRef = db.ref('replies').child(key);
     itemRef.once('value', function (snapshot) {
