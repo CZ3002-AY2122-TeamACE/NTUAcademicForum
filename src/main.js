@@ -170,6 +170,17 @@ export default {
       return like;
     });
   },
+  updateReplyDislikeCount(key)
+  {
+    var topicRef = db.ref('replies').child(key).child('dislike');
+
+    topicRef.transaction(function(dislike) {
+      // if (views) {
+      dislike = dislike + 1;
+      // }
+      return dislike;
+    });
+  },
 
 
 }

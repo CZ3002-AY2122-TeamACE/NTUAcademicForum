@@ -18,9 +18,10 @@
               {{reply.content}}
             </div>
             <div class="actions">
-              <a type="button" v-on:click.once="add"><i class="thumbs up outline icon"></i></a>
+              <a type="button" v-on:click.once="cLike"><i class="thumbs up outline icon"></i></a>
               {{reply.like}}
-              <a type="button" aria-label="Close"><i class="thumbs down outline icon"></i></a>
+              <a type="button" aria-label="Close" v-on:click.once="cDislike"><i class="thumbs down outline icon"></i></a>
+              {{reply.dislike}}
               <a v-b-toggle="id" type="button" aria-label="Close">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
                   <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
@@ -73,9 +74,13 @@ name: "Reply",
       main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
 
     },
-    add: function () {
+    cLike: function () {
       main.updateReplyLikeCount(this.id)
-    }},
+    },
+    cDislike: function () {
+      main.updateReplyDislikeCount(this.id)
+    }
+  },
 }
 </script>
 <style scoped>
