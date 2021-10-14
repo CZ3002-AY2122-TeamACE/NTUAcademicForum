@@ -121,7 +121,9 @@ export default {
       if(this.$store.state.thread.content== "") {
         this.errors.push('Reply content is empty');
       }
-
+      if(this.errors.length > 0) {
+        return false;
+      }
       main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
 
     }},
