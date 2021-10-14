@@ -43,7 +43,7 @@ import main from "../main";
 export default {
 
 name: "Reply",
-  props:['reply'],
+  props:['reply','id'],
   components:{
     PostEditor,
   },
@@ -55,13 +55,13 @@ name: "Reply",
   methods: {
 
     postReply: function() {
-      var replyTo = null;
+      var replyTo = this.id;
       this.errors = [];
       if(this.$store.state.thread.content== "") {
         this.errors.push('Reply content is empty');
       }
 
-      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo);
+      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id,replyTo);
 
     }},
 }
