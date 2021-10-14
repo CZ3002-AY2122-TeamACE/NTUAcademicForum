@@ -14,9 +14,7 @@
           <div class="content">
             <a class="author">{{reply.user_id}}</a>
             <i class="calendar icon"></i>{{reply.created_at}}
-            <div class="text">
-              {{reply.content}}
-            </div>
+            <div class="markdown-body" v-html="reply.content">{{ reply.content }}</div>
             <div class="actions">
               <a type="button" v-on:click.once="cLike"><i class="thumbs up outline icon"></i></a>
               {{reply.like}}
