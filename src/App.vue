@@ -33,7 +33,7 @@ export default {
              store.dispatch('getCurrentUsername');
            }
          },
-         5000
+         3000
      )
     // if user is already login then load user forums
     // setTimeout(

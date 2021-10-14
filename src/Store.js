@@ -29,6 +29,7 @@ export default new Vuex.Store(
                 information:"",
             },
             currentThread: {},
+            favouritedCurrentThread: false,
             currentThreadReplies: [],
             key:"",
             reply: "",
@@ -94,6 +95,9 @@ export default new Vuex.Store(
             },
             setReply(state, data) {
                 state.reply = data
+            },
+            setFavouriteStateForCurrentThread(state, data){
+                state.favouritedCurrentThread = data
             }
         },
         actions: {
@@ -113,7 +117,6 @@ export default new Vuex.Store(
                 });
             },
             getCurrentUsername({commit}){
-                console.log("id: " + this.state.currentUser.id)
                 main.getUserByID(this.state.currentUser.id,function (user){
                     if(user){
                         //console.log(user.val().name)
@@ -163,6 +166,33 @@ export default new Vuex.Store(
                         commit('setCurrentThreadReplies', []);
                     }
                 })
+            },
+            getFavouriteStateForCurrentThread({commit}) {
+                let user_id = this.state.currentUser.id
+                let thread_id = this.state.key
+                let favourited = false
+                main.checkFavouriteCurrentThread(user_id,function (pairs) {
+                    if (pairs) {
+                        pairs.forEach(function (snapshot) {
+                            let pair = snapshot.val()
+                            if (pair.thread == thread_id) {
+                                favourited = true
+                                console.log("you have favourited the thread")
+                            }
+                        })
+                    }
+                    if(favourited){
+                        commit('setFavouriteStateForCurrentThread',true)
+                    }
+                })
+                /*
+                console.log(favourited)
+                if(favourited){
+                    console.log("setting status...")
+                    commit('setFavouriteStateForCurrentThread',true)
+                }
+
+                 */
             }
         },
     }
