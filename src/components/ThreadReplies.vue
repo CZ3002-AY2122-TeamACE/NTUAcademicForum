@@ -60,7 +60,8 @@
     </h4>
     <div class="ui segment">
       <div class="ui middle aligned divided list">
-        <reply v-for = "(value,index) in replies" :key="index" :reply="value"/>
+        <reply v-for = "(value,key,index) in replies" :key="index" :reply="value" :id ="key"/>
+<!--        <reply v-for = "reply in replies" :key= :reply=reply/>-->
       </div>
     </div>
   </div>
@@ -96,7 +97,7 @@ export default {
       return this.$store.state.currentThread
     },
     replies(){
-      return this.$store.state.currentThread.replies
+      return this.$store.state.currentThreadReplies
     }
   },
   mounted() {
