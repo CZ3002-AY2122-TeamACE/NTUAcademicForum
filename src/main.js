@@ -94,6 +94,16 @@ export default {
       }
     });
   },
+  getUserByID(ID, callback) {
+    const userRef = db.ref('users').child(ID);
+    userRef.once('value', function(snapshot) {
+      if(snapshot.val() != null) {
+        callback(Object.keys(snapshot.val())[0], snapshot.val());
+      } else {
+        callback(null, null);
+      }
+    });
+  },
 
   getCourseByID(ID, callback) {
     const courseRef = db.ref('courses').orderByChild("id").equalTo(ID);
