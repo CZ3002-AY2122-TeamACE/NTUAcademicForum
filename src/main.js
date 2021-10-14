@@ -180,8 +180,19 @@ export default {
       like = like + 1;
       // }
       return like;
-    });
+    },);
   },
+
+  updateReplyDisLikeCount(key) {
+    var topicRef = db.ref('replies').child(key).child('dislike');
+
+    topicRef.transaction(function (dislike) {
+      // if (views) {
+      dislike = dislike + 1;
+      // }
+      return dislike;
+    },);
+  }
 
 
 }
