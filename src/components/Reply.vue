@@ -72,7 +72,7 @@ name: "Reply",
       if(this.errors.length > 0) {
         return false;
       }
-      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id,replyTo,this.$store.state.currentUser.name);
+      main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo, this.$store.state.currentUser.name);
 
     },
 
