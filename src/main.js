@@ -94,6 +94,16 @@ export default {
       }
     });
   },
+  getUserByID(ID, callback) {
+    const userRef = db.ref('users').child(ID);
+    userRef.once('value', function(snapshot) {
+      if (snapshot.val() != null) {
+        callback(snapshot);
+      } else {
+        callback(null);
+      }
+    });
+  },
 
   getCourseByID(ID, callback) {
     const courseRef = db.ref('courses').orderByChild("id").equalTo(ID);
@@ -120,7 +130,7 @@ export default {
     });
   },
 
-    addThread(course, title, content, user_id) {
+    addThread(course, title, content, user_id, username) {
     const threadRef = db.ref('threads');
     const threadPush = threadRef.push();
     const key = threadPush.getKey();
@@ -132,6 +142,7 @@ export default {
       like:0,
       favourite:0,
       replyCount:0,
+      username: username,
       created_at: (new Date()).toLocaleString()
     })
     return key;
@@ -144,7 +155,7 @@ export default {
     });
   },
 
-  addReply(thread, content, user_id, reply_to) {
+  addReply(thread, content, user_id, reply_to, username) {
     const replyRef = db.ref('replies');
     const replyPush = replyRef.push();
     const key = replyPush.getKey();
@@ -153,6 +164,7 @@ export default {
       content: content,
       user_id: user_id,
       reply_to: reply_to,
+      username: username,
       like: 0,
       dislike: 0,
       created_at: (new Date()).toLocaleString()
@@ -181,12 +193,12 @@ export default {
       return dislike;
     });
   },
-  getRepliesByKey(key, callback) {
+  getRepliesByKey(key,callback) {
     const itemRef = db.ref('replies').child(key);
-    itemRef.on('value', function(snapshot) {
+    itemRef.once('value', function (snapshot) {
       callback(snapshot.val())
     });
-  },
+   },
 
 
 }

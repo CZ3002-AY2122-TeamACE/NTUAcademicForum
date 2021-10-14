@@ -32,6 +32,7 @@ export default new Vuex.Store(
             currentThreadReplies: [],
             key:"",
             reply: "",
+            sourceUsername: "",
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -94,6 +95,9 @@ export default new Vuex.Store(
             },
             setReply(state, data) {
                 state.reply = data
+            },
+            setUpstreamUserName(state,data) {
+                state.sourceUsername = data
             }
         },
         actions: {
@@ -111,6 +115,17 @@ export default new Vuex.Store(
                         })
                     }
                 });
+            },
+            getCurrentUsername({commit}){
+                console.log("id: " + this.state.currentUser.id)
+                main.getUserByID(this.state.currentUser.id,function (user){
+                    if(user){
+                        //console.log(user.val().name)
+                        commit('setCurrUserName',user.val().name)
+                    } else {
+                        console.log("user not exist")
+                    }
+                })
             },
             clearUserData({commit}) {
                 commit('setCurrUserId', '');
@@ -152,7 +167,8 @@ export default new Vuex.Store(
                         commit('setCurrentThreadReplies', []);
                     }
                 })
-            }
+            },
+
         },
     }
 )
