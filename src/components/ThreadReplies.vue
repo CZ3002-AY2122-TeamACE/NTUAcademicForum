@@ -53,11 +53,11 @@
         </svg>
         Favourite
       </b-button>
-      <b-button v-on:click="favouriteThread" class="m-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-        </svg> Favourited
-      </b-button>
+<!--      <b-button v-on:click="favouriteThread" class="m-1">-->
+<!--        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">-->
+<!--          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>-->
+<!--        </svg> Favourited-->
+<!--      </b-button>-->
 
 
 
@@ -95,8 +95,7 @@ export default {
   data() {
     return {
       errors: [],
-      isHeart: 0,
-      isCollect: 0
+      isHeart: "",
     }
   },
   watch: {
@@ -116,56 +115,62 @@ export default {
     replies(){
       return this.$store.state.currentThreadReplies
     },
-    enableFavourite(){
-      return !this.$store.state.favouritedCurrentThread
+    isCollect(){
+      if(this.$store.state.favouritedCurrentThread){
+        return 1
+      } else {
+        return 0
+      }
     }
   },
   mounted() {
-    setTimeout(
-        () => {
-          if(store.state.currentUser.status == 1) {
-            store.commit('setKey',this.$route.params.id)
-            this.$store.dispatch("getThreadInfo"),{route: this.$route}
-            store.dispatch("getThreadReplies")
-            store.dispatch("getFavouriteStateForCurrentThread")
-          }
-        },
-        1000
-    )
-
+    // setTimeout(() => {
+    //   if(store.state.currentUser.status == 1) {
+    //     store.commit('setKey',this.$route.params.id)
+    //     this.$store.dispatch("getThreadInfo"),{route: this.$route}
+    //     store.dispatch("getThreadReplies")
+    //     store.dispatch("getFavouriteStateForCurrentThread")
+    //   }
+    // },1000)
+    store.commit('setKey',this.$route.params.id)
+    this.$store.dispatch("getThreadInfo"),{route: this.$route}
+    store.dispatch("getThreadReplies")
+    store.dispatch("getFavouriteStateForCurrentThread")
   },
   methods: {
 
-    postReply: function() {
+    postReply: function () {
       var replyTo = null;
       this.errors = [];
-      if(this.$store.state.thread.content== "") {
+      if (this.$store.state.thread.content == "") {
         this.errors.push('Reply content is empty');
       }
-      if(this.errors.length > 0) {
+      if (this.errors.length > 0) {
         return false;
       }
       main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo, this.$store.state.currentUser.name);
     },
-  favouriteThread: function () {
-      main.updateThreadFavouriteRelation(this.$store.state.key,this.$store.state.currentUser.id)
-  }},
+    favouriteThread: function () {
+      main.updateThreadFavouriteRelation(this.$store.state.key, this.$store.state.currentUser.id)
+    },
 
-    heart: function() {
-      if(this.isHeart==0){
-        this.isHeart=1
-      }else{
-        this.isHeart=0
+    heart: function () {
+      if (this.isHeart == 0) {
+        this.isHeart = 1
+      } else {
+        this.isHeart = 0
       }
     },
 
-    collect: function() {
-      if(this.isCollect==0){
-        this.isCollect=1
-      }else{
-        this.isCollect=0
+    collect: function () {
+      console.log(this.enableFavourite)
+      if (!this.enableFavourite) {
+        this.isCollect = 0
+      } else {
+        this.isCollect = 1
       }
     }
+  }
 }
 </script>
 
