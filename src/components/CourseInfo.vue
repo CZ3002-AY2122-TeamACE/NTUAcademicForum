@@ -1,7 +1,6 @@
 <template>
   <div class="ui container">
-    <h1>{{$route.query.id}}</h1>
-    <button class="ui right floated button" v-on:click="load">load course</button>
+<!--    <h1>{{$route.query.id}}</h1>-->
     <div class="ui stackable grid">
       <div class="nine wide column">
         <div class="title">
@@ -32,7 +31,7 @@
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
       <div class="ui container">
-        <thread v-for="thread in threads" :key="thread.id" :thread="thread"/>
+        <thread v-for = "(value, key, index) in threads" :key="index" :thread="value" :id="key"/>
       </div>
     </div>
   </div>
@@ -50,7 +49,7 @@ export default {
   watch: {
     $route: {
       handler() {
-        store.commit('setCourseID',this.$route.query.id)
+        store.commit('setCourseID',this.$route.params.id)
         store.dispatch("getCourseInfo")
         store.dispatch('getCourseThreads', store.state.currentUser);
     }
@@ -68,12 +67,12 @@ export default {
     setTimeout(
         () => {
           if(store.state.currentUser.status == 1) {
-            store.commit('setCourseID',this.$route.query.id)
+            store.commit('setCourseID',this.$route.params.id)
             store.dispatch("getCourseInfo")
             store.dispatch('getCourseThreads', store.state.currentUser);
           }
         },
-        1500
+        1000
     )
     //console.log(this.$route.query.id)
 

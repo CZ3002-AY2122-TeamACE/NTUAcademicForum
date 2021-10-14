@@ -27,7 +27,9 @@ export default new Vuex.Store(
                 id:"",
                 name: "",
                 information:"",
-            }
+            },
+            currentThread: {},
+            key:"",
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -77,6 +79,12 @@ export default new Vuex.Store(
             },
             setCourseThread(state, data) {
                 state.courseThreads = data
+            },
+            setCurrentThread(state, data) {
+                state.currentThread = data
+            },
+            setKey(state, data) {
+                state.key = data
             }
         },
         actions: {
@@ -113,12 +121,17 @@ export default new Vuex.Store(
                     })
                 })
             },
+            getThreadInfo({commit}) {
+                main.getThreadByKey(this.state.key, function (response) {
+                        commit('setCurrentThread', response)
+                })
+            },
             getCourseThreads({commit}) {
                 main.getThreadsByCourse(this.state.course.id, function(response) {
                     if(response) {
                         commit('setCourseThread', response);
                     } else {
-                        commit('etCourseThread', []);
+                        commit('setCourseThread', []);
                     }
                 });
             }

@@ -1,6 +1,7 @@
 <template>
   <div class="item">
     <div class="ui comments">
+
       <div class="ui container">
         <div class="comment">
           <a class="avatar">
