@@ -180,6 +180,17 @@ export default {
       like = like + 1;
       // }
       return like;
+    },);
+  },
+  updateReplyDislikeCount(key)
+  {
+    var topicRef = db.ref('replies').child(key).child('dislike');
+
+    topicRef.transaction(function(dislike) {
+      // if (views) {
+      dislike = dislike + 1;
+      // }
+      return dislike;
     });
   },
   checkFavouriteCurrentThread(user_id,callback){
@@ -217,6 +228,25 @@ export default {
         }
       }
     })
+  },
+
+  getRepliesByKey(key,callback) {
+    const itemRef = db.ref('replies').child(key);
+    itemRef.once('value', function (snapshot) {
+      callback(snapshot.val())
+    });
+   },
+
+  updateReplyDisLikeCount(key) {
+    var topicRef = db.ref('replies').child(key).child('dislike');
+
+    topicRef.transaction(function (dislike) {
+      // if (views) {
+      dislike = dislike + 1;
+      // }
+      return dislike;
+    },);
   }
+
 
 }
