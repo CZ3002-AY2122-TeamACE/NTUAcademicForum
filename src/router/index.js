@@ -1,16 +1,78 @@
-import Vue from "vue";
-import VueRouter  from "vue-router";
-import App from "@/App";
-import SwapIndex from "@/components/SwapIndex";
-import AddSwapIndex from "@/components/AddSwapIndex";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Secret from '../views/Secret.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import StartNewThread from "@/components/StartNewThread";
+import ThreadReplies from "@/components/ThreadReplies";
+import About from "@/views/About";
 
+Vue.use(VueRouter)
 
-Vue.use(VueRouter);
-export default new VueRouter({
-    mode: "history",
-    routes: [
-        { path: "/view", component: SwapIndex },
-        { path: "/add", component:  AddSwapIndex},
-        { path: "*", redirect: "/"}
-    ]
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
+  },
+  {
+    path: '/secret',
+    name: 'secret',
+    component: Secret,
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/about',
+    name: 'About',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path:"/post",
+    name: 'Post',
+    component: StartNewThread,
+  },
+  {
+    path:"/thread/:id",
+    name: 'thread',
+    component: ThreadReplies,
+  },
+  {
+    path: '/course/:id',
+    name: 'Course',
+    component: About,
+  }
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
+
+router.beforeEach((to, from, next)=>{
+  const requiresAuth = to.matched.some(record=> record.meta.requiresAuth);
+  const isAuthenticated = firebase.auth().currentUser;
+  if (requiresAuth && !isAuthenticated) {
+    next("/login");
+  } else {
+    next();
+  }
+})
+
+export default router
