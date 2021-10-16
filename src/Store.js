@@ -132,6 +132,7 @@ export default new Vuex.Store(
                         main.getUserByUID(user.uid, function(key, val) {
                             if(key != null && val != null) {
                                 commit('setCurrUserId', key);
+                                commit('setCurrUserName', user.name);
                                 commit('setCurrUserEmail', user.email);
                                 commit('setCurrUserUid', user.uid);
                                 commit('setCurrUserStatus', 1);
@@ -151,6 +152,7 @@ export default new Vuex.Store(
             },
             clearUserData({commit}) {
                 commit('setCurrUserId', '');
+                commit('setCurrUserName', '');
                 commit('setCurrUserEmail', '');
                 commit('setCurrUserUid', '');
                 commit('setCurrUserStatus', 0);

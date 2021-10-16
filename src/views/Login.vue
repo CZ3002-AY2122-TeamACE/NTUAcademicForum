@@ -26,6 +26,7 @@
 // import firebase from "firebase/compat/app";
 import "firebase/auth";
 import main from "../main.js";
+import store from "../Store";
 export default {
   data() {
     return {
@@ -88,17 +89,18 @@ export default {
 
             // save these info into store
             self.$store.commit('setCurrUserId', key);
-            self.$store.commit('setCurrUserName', user.user.displayName);
             self.$store.commit('setCurrUserEmail', user.user.email);
             self.$store.commit('setCurrUserUid', user.user.uid);
             self.$store.commit('setCurrUserStatus', 1);
+            store.dispatch("getCurrentUsername")
+            store.dispatch("getSubCourses")
 
             // load user forums
             // main.userForums(user.user.uid, function(response) {
             //   self.$store.commit('setUserForums', response);
             // });
 
-            self.$router.push('/about');
+            self.$router.push('/');
           } else {
             alert("Incomplete user info! try creating account with a different email");
           }

@@ -3,13 +3,7 @@
     <nav-bar-component/>
     <side-bar-component/>
     <!--    <SwapIndex></SwapIndex>-->
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/secret">Secret</router-link> |
-      <router-link to="/register">Register</router-link>
-    </div>
+
     <router-view />
   </div>
 </template>
@@ -30,11 +24,12 @@ export default {
     setTimeout(
          () => {
            if(store.state.currentUser.status == 1) {
-             store.dispatch("getSubCourses")
              store.dispatch('getCurrentUsername');
+             store.dispatch("getSubCourses");
+             store.dispatch("getFavoriteThreads");
            }
          },
-         1000
+         1500
      )
     // if user is already login then load user forums
     // setTimeout(
