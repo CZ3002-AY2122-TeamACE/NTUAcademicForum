@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <span class="subtitle">1.2k People followed this course</span>
+    <span class="subtitle">{{course.subCount}} People followed this course</span>
 
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Course Information</div>
@@ -66,7 +66,8 @@ export default {
         store.dispatch("getCourseInfo")
         store.dispatch('getCourseThreads', store.state.currentUser);
         setTimeout(function () {
-          store.dispatch('getSubscribeStateForCurrentCourse',this.$store.state.course.id)
+          let course_id = store.state.course.id
+          store.dispatch('getSubscribeStateForCurrentCourse',course_id)
         },800)
     }
 }
@@ -122,6 +123,9 @@ export default {
       let course_id = store.state.course.id
       store.dispatch('getSubscribeStateForCurrentCourse',course_id)
     },2000)
+  },
+  destroyed() {
+    store.commit("setSubscribeCurrentCourse",false)
   },
   // data(){
   //   return {
