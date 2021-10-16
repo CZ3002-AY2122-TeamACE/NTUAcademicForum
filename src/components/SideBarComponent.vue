@@ -35,12 +35,14 @@
                 My profile</b-button>
               </b-nav-item>
 
-              <div class="col text-center">
+              <b-nav-item active>
                 <b-button block bg-variant="light" @click="hide">
-                  <router-link v-bind:to="'/favourite'"><b-icon icon='star'></b-icon>
-                    Favorites</router-link>
+                  <router-link block class="btn btn-secondary" bg-variant="light" v-bind:to="'/favourite'">
+                    <b-icon icon='star'></b-icon>
+                   Favorites</router-link>
                 </b-button>
-              </div>
+              </b-nav-item>
+
 
 
             </b-nav>
