@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="ui black segment">
+    <div class="ui segment">
       <div class="ui middle aligned divided list">
         <thread v-for = "(value, key, index) in threads" :key="index" :thread="value" :id="key"/>
       </div>
