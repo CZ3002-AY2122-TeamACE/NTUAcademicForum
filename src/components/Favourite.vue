@@ -9,16 +9,34 @@
       </div>
     </div>
 
-    <div class="ui middle aligned divided list">
-      <thread v-for = "(value, key, index) in threads" :key="index" :thread="value" :id="key"/>
+    <div class="ui black segment">
+      <div class="ui middle aligned divided list">
+        <thread v-for = "(value, key, index) in threads" :key="index" :thread="value" :id="key"/>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
+import Thread from "@/components/Thread";
+import store from "../Store";
+
 export default {
-  name: "Favourite"
+  name: "Favourite",
+  components:{
+    Thread,
+  },
+  computed:{
+    threads(){
+      return this.$store.state.favoriteThreads
+    }
+  },
+  mounted() {
+    setTimeout(function () {
+      store.dispatch('getFavoriteThreads')
+    },1000)
+  }
 }
 </script>
 
