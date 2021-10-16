@@ -29,7 +29,6 @@
 <script>
 import PostEditor from "@/components/PostEditor";
 import main from "../main.js";
-// import store from "../Store";
 export default {
   name: "StartNewThread",
   components:{

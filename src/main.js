@@ -349,6 +349,13 @@ export default {
     });
   },
 
+  getFavoriteThreads(userid, callback) {
+    const favRef = db.ref('threadFavorite').orderByChild("user_id").equalTo(userid);
+    favRef.on('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  },
+
   getSubCourses (userid, callback) {
     const subRef = db.ref('subscribes').orderByChild("user").equalTo(userid);
     subRef.on('value', function(snapshot) {

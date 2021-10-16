@@ -6,8 +6,6 @@
 
 <script>
 import CourseInfo from "@/components/CourseInfo"
-// import store from "../Store";
-// import main from "../main";
 export default {
   name:"about",
   components:{
