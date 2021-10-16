@@ -116,7 +116,7 @@ name: "Reply",
 
     adddislike: function() {
 
-      main.updateReplyDislikeCount(this.id)
+      main.updateReplyDisLikeCount(this.id)
 
     }
   },

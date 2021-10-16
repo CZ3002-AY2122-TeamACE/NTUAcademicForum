@@ -184,31 +184,13 @@ export default {
       return reply;
     },);
   },
-  updateReplyLikeCount(key)
-  {
-    var topicRef = db.ref('replies').child(key).child('like');
-
-    topicRef.transaction(function(like) {
-      // if (views) {
-      like = like + 1;
-      // }
-      return like;
-    },);
-  },
-  updateReplyDislikeCount(key)
-  {
-    var topicRef = db.ref('replies').child(key).child('dislike');
-
-    topicRef.transaction(function(dislike) {
-      // if (views) {
-      dislike = dislike + 1;
-      // }
-      return dislike;
-    });
-  },
   checkFavouriteCurrentThread(user_id,callback){
     var favouriteThreadPairRef = db.ref('threadFavourite').orderByChild('user_id').equalTo(user_id)
     favouriteThreadPairRef.on('value', callback)
+  },
+  checkLikeCurrentThread(user_id,callback){
+    var likeThreadPairRef = db.ref('threadLike').orderByChild('user_id').equalTo(user_id)
+    likeThreadPairRef.on('value', callback)
   },
   updateThreadFavouriteRelation(thread_key, user_id) {
     console.log('user ' + user_id + " thread " + thread_key)
@@ -247,6 +229,43 @@ export default {
     })
   },
 
+  updateThreadLikeRelation(thread_key, user_id) {
+    console.log('user ' + user_id + " thread " + thread_key)
+    var liked = false
+    var likeThreadPairRef = db.ref('threadLike').orderByChild('user_id').equalTo(user_id)
+    likeThreadPairRef.once('value', function (pairs) {
+      if (pairs) {
+        pairs.forEach(function (snapshot) {
+          let pair = snapshot.val()
+          console.log(pair)
+          if (pair.thread == thread_key) {
+            liked = true
+            console.log("you have liked the thread")
+          }
+        })
+        console.log("like " + liked)
+        if (!liked) {
+          console.log("executing insertion outside")
+          var threadRef = db.ref('threads').child(thread_key).child('like');
+          threadRef.transaction(function (like) {
+            like = like + 1;
+            console.log("executing insertion inside")
+            return like;
+          })
+          const likePairPush = db.ref('threadLike').push();
+          const key = likePairPush.getKey();
+          likePairPush.set({
+            thread: thread_key,
+            user_id: user_id,
+            created_at: (new Date()).toLocaleString()
+          })
+          console.log("finish insertion")
+          return key
+        }
+      }
+    })
+  },
+
   cancelThreadFavouriteRelation(thread_key, user_id){
     var threadRef = db.ref('threads').child(thread_key).child('favourite');
     threadRef.transaction(function (favourite) {
@@ -261,6 +280,27 @@ export default {
           console.log(pair)
           if (pair.thread == thread_key) {
             console.log("cancelling favourite")
+            snapshot.ref.remove()
+          }
+        })
+      }
+    })
+  },
+
+  cancelThreadLikeRelation(thread_key, user_id){
+    var threadRef = db.ref('threads').child(thread_key).child('like');
+    threadRef.transaction(function (like) {
+      like = like - 1;
+      return like
+    })
+    var likeThreadPairRef = db.ref('threadLike').orderByChild('user_id').equalTo(user_id)
+    likeThreadPairRef.once('value', function (pairs) {
+      if (pairs) {
+        pairs.forEach(function (snapshot) {
+          let pair = snapshot.val()
+          console.log(pair)
+          if (pair.thread == thread_key) {
+            console.log("cancelling like")
             snapshot.ref.remove()
           }
         })
@@ -284,7 +324,21 @@ export default {
       // }
       return dislike;
     },);
-  }
+  },
+  getCourses(callback) {
+    const courseRef = db.ref('courses');
+    courseRef.on('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  },
+  subscribeCourse(courseId, userid) {
+    const subRef = db.ref('subscribes');
+    const subPush = subRef.push();
+    subPush.set({
+      user: userid,
+      course: courseId,
+    })
+  },
 
 
 }

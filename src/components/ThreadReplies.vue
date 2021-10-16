@@ -36,10 +36,10 @@
           <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
         </svg>    Reply</b-button>
       <b-button class="m-1" v-on:click="heart">
-        <svg v-if="isHeart==0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <svg v-if="isLike==0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
         </svg>
-        <svg v-if="isHeart==1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <svg v-if="isLike==1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
         </svg>
         Like
@@ -75,7 +75,6 @@
     <div class="ui segment">
       <div class="ui middle aligned divided list">
         <reply v-for = "(value,key,index) in replies" :key="index" :reply="value" :id ="key"/>
-<!--        <reply v-for = "reply in replies" :key= :reply=reply/>-->
       </div>
     </div>
   </div>
@@ -105,6 +104,7 @@ export default {
         store.dispatch("getThreadInfo", {route: this.$route})
         store.dispatch("getThreadReplies")
         store.dispatch("getFavouriteStateForCurrentThread")
+        store.dispatch("getLikeStateForCurrentThread")
       }
     }
   },
@@ -118,6 +118,7 @@ export default {
     isCollect:{
       get: function() {
         if(this.$store.state.favouritedCurrentThread){
+          console.log("collected state: "  + this.$store.state.favouritedCurrentThread)
           return 1
         } else {
           return 0
@@ -125,6 +126,18 @@ export default {
       },
       set: function (val){
         this.isCollect = val
+      }
+    },
+    isLike:{
+      get: function() {
+        if(this.$store.state.likeCurrentThread){
+          return 1
+        } else {
+          return 0
+        }
+      },
+      set: function (val){
+        this.isLike = val
       }
     }
   },
@@ -142,7 +155,12 @@ export default {
     store.dispatch("getThreadReplies")
     setTimeout(function (){
       store.dispatch("getFavouriteStateForCurrentThread")
-    },800)
+      store.dispatch("getLikeStateForCurrentThread")
+    },2000)
+  },
+  destroyed() {
+    store.commit("setLikeStateForCurrentThread",false)
+    store.commit("setFavouriteStateForCurrentThread",false)
   },
   methods: {
 
@@ -163,10 +181,17 @@ export default {
     // },
 
     heart: function () {
-      if (this.isHeart == 0) {
-        this.isHeart = 1
+      console.log(this.isLike)
+      if (this.isLike == 1) {
+        console.log("isLike " + this.isLike + "cancelling")
+        //this.isCollect = 0
+        main.cancelThreadLikeRelation(this.$store.state.key, this.$store.state.currentUser.id)
+        store.commit("setLikeStateForCurrentThread",false)
       } else {
-        this.isHeart = 0
+        console.log("isLike " + this.isCollect + " liking")
+        //this.isCollect = 1
+        main.updateThreadLikeRelation(this.$store.state.key, this.$store.state.currentUser.id)
+        store.commit("setLikeStateForCurrentThread",true)
       }
     },
 
