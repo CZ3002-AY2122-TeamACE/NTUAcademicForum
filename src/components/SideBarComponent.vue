@@ -8,7 +8,7 @@
           <p>
           </p>
           <div class="mb-2">
-            <b-avatar badge badge-variant="success" src="https://placekitten.com/300/300" size="4em"></b-avatar>
+            <b-avatar badge badge-variant="success" src="../assets/default profile.jpeg" size="4em"></b-avatar>
           </div>
           <nav class="mb-3">
 
