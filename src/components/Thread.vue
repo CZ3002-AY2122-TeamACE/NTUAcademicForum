@@ -19,7 +19,7 @@
               </div>
               <div class="item">
                 <img :src="thread.user"  alt="" class="ui avatar image">
-                {{thread.user_id}}
+                {{thread.username}}
               </div>
             </div>
           </div>
