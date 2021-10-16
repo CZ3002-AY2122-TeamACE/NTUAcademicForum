@@ -156,7 +156,7 @@ export default {
     setTimeout(function (){
       store.dispatch("getFavouriteStateForCurrentThread")
       store.dispatch("getLikeStateForCurrentThread")
-    },2000)
+    },800)
   },
   destroyed() {
     store.commit("setLikeStateForCurrentThread",false)
