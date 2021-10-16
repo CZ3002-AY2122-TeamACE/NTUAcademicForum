@@ -184,28 +184,6 @@ export default {
       return reply;
     },);
   },
-  updateReplyLikeCount(key)
-  {
-    var topicRef = db.ref('replies').child(key).child('like');
-
-    topicRef.transaction(function(like) {
-      // if (views) {
-      like = like + 1;
-      // }
-      return like;
-    },);
-  },
-  updateReplyDislikeCount(key)
-  {
-    var topicRef = db.ref('replies').child(key).child('dislike');
-
-    topicRef.transaction(function(dislike) {
-      // if (views) {
-      dislike = dislike + 1;
-      // }
-      return dislike;
-    });
-  },
   checkFavouriteCurrentThread(user_id,callback){
     var favouriteThreadPairRef = db.ref('threadFavourite').orderByChild('user_id').equalTo(user_id)
     favouriteThreadPairRef.on('value', callback)
@@ -284,7 +262,21 @@ export default {
       // }
       return dislike;
     },);
-  }
+  },
+  getCourses(callback) {
+    const courseRef = db.ref('courses');
+    courseRef.on('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  },
+  subscribeCourse(courseId, userid) {
+    const subRef = db.ref('subscribes');
+    const subPush = subRef.push();
+    subPush.set({
+      user: userid,
+      course: courseId,
+    })
+  },
 
 
 }
