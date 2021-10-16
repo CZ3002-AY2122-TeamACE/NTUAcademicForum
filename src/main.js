@@ -360,11 +360,32 @@ export default {
     });
   },
 
-  getFavoriteThreads(userid, callback) {
-    const favRef = db.ref('threadFavorite').orderByChild("user_id").equalTo(userid);
-    favRef.on('value', function(snapshot) {
-      callback(snapshot.val());
-    });
+  getFavoriteThreads(userid,callback) {
+    console.log("user " + userid)
+    //let thread_ids = []
+    //let threads = []
+    const favRef = db.ref('threadFavourite').orderByChild("user_id").equalTo(userid);
+    // favRef.once('value', function(snapshots) {
+    //   //callback(snapshot);
+    //   if (snapshots) {
+    //     snapshots.forEach(function (snapshot) {
+    //       // console.log(snapshot.val().thread)
+    //       // let thread_id = snapshot.val().thread
+    //       // thread_ids.push(thread_id)
+    //       let id = snapshot.val().thread
+    //       this.getThreadByKey(id,function(thread){
+    //         threads.push(thread)
+    //       })
+    //     })
+    //   } else {
+    //     console.log("no record")
+    //   }
+    // })
+    //return threads
+    favRef.once('value', function(snapshots){
+      callback(snapshots)
+    })
+    // return thread_ids
   },
 
   getSubCourses (userid, callback) {

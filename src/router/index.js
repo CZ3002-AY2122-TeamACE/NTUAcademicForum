@@ -9,6 +9,7 @@ import "firebase/compat/auth";
 import StartNewThread from "@/components/StartNewThread";
 import ThreadReplies from "@/components/ThreadReplies";
 import About from "@/views/About";
+import Favourite from "@/components/Favourite";
 
 Vue.use(VueRouter)
 
@@ -56,6 +57,11 @@ const routes = [
     path: '/course/:id',
     name: 'Course',
     component: About,
+  },
+  {
+    path:'/favourite',
+    name:'favourite',
+    component: Favourite,
   }
 ]
 

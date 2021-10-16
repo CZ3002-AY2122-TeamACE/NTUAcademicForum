@@ -219,13 +219,46 @@ export default new Vuex.Store(
             },
 
             getFavoriteThreads({commit}) {
-                main.getFavoriteThreads(this.state.currentUser.id,function(response) {
-                    if(response) {
-                        commit('setFavoriteThreads', response);
+                // main.getFavoriteThreads(this.state.currentUser.id,function(response) {
+                //     if(response) {
+                //         console.log("favourite: " + response)
+                //         commit('setFavoriteThreads', response);
+                //     } else {
+                //         console.log("no favourite")
+                //         commit('setFavoriteThreads', []);
+                //     }
+                // });
+
+
+                // let thread_ids = main.getFavoriteThreads(this.state.currentUser.id)
+                // //console.log(thread_ids)
+                // let threads = []
+                // for(let id in thread_ids){
+                //     main.getThreadByKey(id, function(response) {
+                //         threads.push(response)
+                //     })
+                // }
+                // console.log(threads)
+                // commit('setFavoriteThreads',threads)
+
+                let threads = []
+                main.getFavoriteThreads(this.state.currentUser.id, function (snapshots) {
+                    if (snapshots) {
+                        snapshots.forEach(function (snapshot) {
+                            console.log(snapshot.val().thread)
+                            let id = snapshot.val().thread
+                            main.getThreadByKey(id,function(thread){
+                                threads.push(thread)
+                            })
+                        })
+                        //console.log(threads)
+                        commit('setFavoriteThreads',threads)
                     } else {
-                        commit('setFavoriteThreads', []);
+                        console.log("no record")
+                        commit('setFavoriteThreads',[])
                     }
-                });
+                })
+                //console.log(threads)
             },
 
             getFavouriteStateForCurrentThread({commit}) {
