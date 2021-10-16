@@ -30,6 +30,7 @@ export default new Vuex.Store(
             },
             currentThread: {},
             favouritedCurrentThread: false,
+            likeCurrentThread: false,
             currentThreadReplies: [],
             key:"",
             reply: "",
@@ -100,6 +101,9 @@ export default new Vuex.Store(
             setFavouriteStateForCurrentThread(state, data) {
                 state.favouritedCurrentThread = data
             },
+            setLikeStateForCurrentThread(state, data) {
+                state.likeCurrentThread = data
+            },
             setUpstreamUserName(state,data) {
                 state.sourceUsername = data
             }
@@ -142,15 +146,21 @@ export default new Vuex.Store(
             },
             getCourseInfo({commit}) {
                 main.getCourseByID(this.state.course.id, function (snapshot) {
-                    snapshot.forEach(function (course) {
-                        commit('setCourseName', course.val().name)
-                        commit('setCourseInformation', course.val().information)
-                    })
+                    if(snapshot){
+                        snapshot.forEach(function (course) {
+                            commit('setCourseName', course.val().name)
+                            commit('setCourseInformation', course.val().information)
+                        })
+                    }
                 })
             },
             getThreadInfo({commit}) {
                 main.getThreadByKey(this.state.key, function (response) {
+                    if(response){
                         commit('setCurrentThread', response)
+                    } else {
+                        commit('setCurrentThread',null)
+                    }
                 })
             },
             getCourseThreads({commit}) {
@@ -192,6 +202,30 @@ export default new Vuex.Store(
                         commit('setFavouriteStateForCurrentThread',true)
                     } else {
                         commit('setFavouriteStateForCurrentThread',false)
+                    }
+                })
+            },
+            getLikeStateForCurrentThread({commit}) {
+                let user_id = this.state.currentUser.id
+                let thread_id = this.state.key
+                let liked = false
+                console.log("thread " + this.state.key + " user " + this.state.currentUser.id)
+                main.checkLikeCurrentThread(user_id,function (pairs) {
+                    if (pairs) {
+                        pairs.forEach(function (snapshot) {
+                            if(snapshot){
+                                let pair = snapshot.val()
+                                //console.log("thread " + pair.thread + " user " + pair.user_id)
+                                if (pair.thread == thread_id) {
+                                    liked = true
+                                }
+                            }
+                        })
+                    }
+                    if(liked){
+                        commit('setLikeStateForCurrentThread',true)
+                    } else {
+                        commit('setLikeStateForCurrentThread',false)
                     }
                 })
             }
