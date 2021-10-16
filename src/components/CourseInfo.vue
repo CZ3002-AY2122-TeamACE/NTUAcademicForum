@@ -67,19 +67,32 @@ export default {
       return this.$store.state.courseThreads
     },
   },
-  created() {
-    setTimeout(
-        () => {
-          if(store.state.currentUser.status == 1) {
-            store.commit('setCourseID',this.$route.params.id)
-            store.dispatch("getCourseInfo")
-            store.dispatch('getCourseThreads', store.state.currentUser);
-          }
-        },
-        1000
-    )
-    //console.log(this.$route.query.id)
-
+  // created() {
+  //   setTimeout(
+  //       () => {
+  //         if(store.state.currentUser.status == 1) {
+  //           store.commit('setCourseID',this.$route.params.id)
+  //           store.dispatch("getCourseInfo")
+  //           store.dispatch('getCourseThreads', store.state.currentUser);
+  //         }
+  //       },
+  //       2000
+  //   )
+  // },
+  mounted() {
+    // setTimeout(
+    //     () => {
+    //       if(store.state.currentUser.status == 1) {
+    //         store.commit('setCourseID',this.$route.params.id)
+    //         store.dispatch("getCourseInfo")
+    //         store.dispatch('getCourseThreads', store.state.currentUser);
+    //       }
+    //     },
+    //     2000
+    //)
+    store.commit('setCourseID',this.$route.params.id)
+    store.dispatch("getCourseInfo")
+    store.dispatch('getCourseThreads', store.state.currentUser);
   },
   // data(){
   //   return {
