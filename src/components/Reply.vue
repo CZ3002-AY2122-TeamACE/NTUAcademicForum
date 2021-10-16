@@ -20,7 +20,7 @@
 
             <div class="markdown-body" v-html="content">{{content}}</div>
 
-            <div class="actions">
+            <div class="actions" v-if ="this.$store.state.currentUser.status == 1">
               <div style="float:left"><a type="button" v-on:click.once="addlike" ><i class="thumbs up outline icon"></i></a>{{reply.like}}</div>
               <div style="float:left"> &nbsp; </div>
               <div style="float:left"><a type="button" v-on:click.once="adddislike"><i class="thumbs down outline icon"></i></a>{{reply.dislike}}</div>
@@ -95,6 +95,9 @@ name: "Reply",
 
 
     postReply: function() {
+      if(this.$store.state.currentUser.status != 1) {
+        this.$router.push('/login');
+      }
       var replyTo = this.id;
       this.errors = [];
       if(this.$store.state.thread.content== "") {
