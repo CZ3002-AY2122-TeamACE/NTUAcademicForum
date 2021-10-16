@@ -1,8 +1,5 @@
 <template>
   <div class="ui container">
-<!--    <span>-->
-<!--          {{ this.$route.params.id }}-->
-<!--      </span>-->
     <div class="ui segment">
       <h2 class="ui header">{{thread.title}}</h2>
       <div class="ui horizontal link list">
@@ -26,11 +23,12 @@
       </ul>
     </div>
 
+
     <div class="ui horizontal left aligned link list" v-if ="this.$store.state.currentUser.status == 1">
       <!-- Using modifiers -->
 <!--      <b-button v-b-toggle.collapse-2 class="m-1">Toggle Collapse</b-button>-->
 
-      <!-- Using value -->
+
       <b-button v-b-toggle="'collapse-2'" class="m-1">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
           <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
@@ -53,17 +51,9 @@
         </svg>
         Favourite
       </b-button>
-<!--      <b-button v-on:click="favouriteThread" class="m-1">-->
-<!--        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">-->
-<!--          <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>-->
-<!--        </svg> Favourited-->
-<!--      </b-button>-->
-
-
 
       <!-- Element to collapse -->
       <b-collapse id="collapse-2">
-<!--        <b-card>I am collapsible content!</b-card>-->
         <post-editor></post-editor>
         <b-button v-b-toggle="'collapse-2'" class="m-1" v-on:click="postReply">Submit</b-button>
       </b-collapse>

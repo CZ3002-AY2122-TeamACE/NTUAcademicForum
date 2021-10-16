@@ -32,16 +32,11 @@
                 </svg></a></div>
               <div style="clear:both"></div>
               <b-collapse :id="id">
-                <!--        <b-card>I am collapsible content!</b-card>-->
                 <post-editor></post-editor>
                 <b-button v-b-toggle="id" class="m-1" v-on:click="postReply">Submit</b-button>
               </b-collapse>
             </div>
           </div>
-
-          <!--<div class="content display-reply">
-            <a>show 3 replies<i class="angle down icon"></i></a>
-          </div>-->
         </div>
     </div>
 

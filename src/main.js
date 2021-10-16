@@ -326,6 +326,17 @@ export default {
     },);
   },
 
+  updateReplyLikeCount(key) {
+    var topicRef = db.ref('replies').child(key).child('like');
+
+    topicRef.transaction(function (like) {
+      // if (views) {
+      like = like + 1;
+      // }
+      return like;
+    },);
+  },
+
   getCourses(callback) {
     const courseRef = db.ref('courses');
     courseRef.on('value', function(snapshot) {
@@ -346,6 +357,13 @@ export default {
       subCount = subCount + 1;
       // }
       return subCount;
+    });
+  },
+
+  getFavoriteThreads(userid, callback) {
+    const favRef = db.ref('threadFavorite').orderByChild("user_id").equalTo(userid);
+    favRef.on('value', function(snapshot) {
+      callback(snapshot.val());
     });
   },
 

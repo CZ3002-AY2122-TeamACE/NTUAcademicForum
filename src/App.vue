@@ -24,8 +24,9 @@ export default {
     setTimeout(
          () => {
            if(store.state.currentUser.status == 1) {
-             store.dispatch("getSubCourses")
              store.dispatch('getCurrentUsername');
+             store.dispatch("getSubCourses");
+             store.dispatch("getFavoriteThreads");
            }
          },
          1500

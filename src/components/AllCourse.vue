@@ -14,12 +14,6 @@
 
       <div class="ui middle aligned divided list">
         <course v-for = "(value, key, index) in courses" :key="index" :course="value" :id="key"/>
-<!--        <div class="button">-->
-<!--          <router-link :to="`/course/CZ2006`">CZ2006</router-link>-->
-<!--        </div>-->
-<!--        <div class="button">-->
-<!--          <router-link :to="`/course/CZ3002`">CZ3002</router-link>-->
-<!--        </div>-->
       </div>
     </div>
 
@@ -53,13 +47,6 @@ export default {
   },
   created() {
     store.dispatch("getCourses")
-    // setTimeout(
-    //     () => {
-    //       if(store.state.currentUser.status == 1) {
-    //         store.dispatch("getCourses")
-    //       }
-    //     },1000
-    // )
   },
   methods:{
     load(){

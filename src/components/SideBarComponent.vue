@@ -15,11 +15,11 @@
             <b-nav vertical>
 
               <b-nav-item active>
-                <b-button block bg-variant="light" v-b-toggle="'collapse-2'">
-                <b-icon icon='book'></b-icon>          Subscribed Courses</b-button>
+                <b-button block bg-variant="light" v-b-toggle="'collapse1'">
+                <b-icon icon='book'></b-icon>Subscribed Courses</b-button>
               </b-nav-item>
 
-              <b-collapse id="collapse-2">
+              <b-collapse id="collapse1">
                 <div class="col text-center" v-for = "(value, key, index) in subCourses" :key="index" >
                   <b-button block @click="hide" variant="dark">
                     <router-link v-bind:to="'/course/'+value.course">{{value.course}}</router-link></b-button>
