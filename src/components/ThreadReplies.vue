@@ -75,7 +75,6 @@
     <div class="ui segment">
       <div class="ui middle aligned divided list">
         <reply v-for = "(value,key,index) in replies" :key="index" :reply="value" :id ="key"/>
-<!--        <reply v-for = "reply in replies" :key= :reply=reply/>-->
       </div>
     </div>
   </div>

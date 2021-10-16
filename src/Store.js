@@ -35,6 +35,7 @@ export default new Vuex.Store(
             key:"",
             reply: "",
             sourceUsername: "",
+            courses: [],
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -106,6 +107,9 @@ export default new Vuex.Store(
             },
             setUpstreamUserName(state,data) {
                 state.sourceUsername = data
+            },
+            setCourses(state, data) {
+                state.courses = data
             }
         },
         actions: {
@@ -180,6 +184,15 @@ export default new Vuex.Store(
                         commit('setCurrentThreadReplies', []);
                     }
                 })
+            },
+            getCourses({commit}) {
+                main.getCourses(function(response) {
+                    if(response) {
+                        commit('setCourses', response);
+                    } else {
+                        commit('setCourses', []);
+                    }
+                });
             },
             getFavouriteStateForCurrentThread({commit}) {
                 let user_id = this.state.currentUser.id
