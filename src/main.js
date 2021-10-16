@@ -348,6 +348,14 @@ export default {
       return subCount;
     });
   },
+
+  getSubCourses (userid, callback) {
+    const subRef = db.ref('subscribes').orderByChild("user").equalTo(userid);
+    subRef.on('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  },
+
   unsubscribeCourse(courseId, userid) {
     var subRef = db.ref('subscribes').orderByChild('user').equalTo(userid)
     subRef.once('value', function (pairs) {
@@ -374,5 +382,6 @@ export default {
     var subscribesRef = db.ref('subscribes').orderByChild('user').equalTo(user_id)
     subscribesRef.once('value', callback)
   }
+
 
 }
