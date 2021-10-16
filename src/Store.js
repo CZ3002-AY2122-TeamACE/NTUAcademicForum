@@ -248,6 +248,7 @@ export default new Vuex.Store(
                             console.log(snapshot.val().thread)
                             let id = snapshot.val().thread
                             main.getThreadByKey(id,function(thread){
+                                thread.key = id
                                 threads.push(thread)
                             })
                         })
