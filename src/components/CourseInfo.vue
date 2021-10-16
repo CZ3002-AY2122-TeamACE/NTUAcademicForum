@@ -9,7 +9,7 @@
       </div>
       <div class="six wide column">
         <div class="horizontal right aligned link list">
-          <router-link class="ui button" to="/post">
+          <router-link class="ui button" v-bind:to="'/post/'+ this.$route.params.id">
             Post Thread
           </router-link>
           <button class="ui button">

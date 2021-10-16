@@ -43,7 +43,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path:"/post",
+    path:"/post/:id",
     name: 'Post',
     component: StartNewThread,
   },
