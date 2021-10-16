@@ -351,6 +351,13 @@ export default {
       user: userid,
       course: courseId,
     })
+    var courseRef = db.ref('courses').child(courseId).child('subCount');
+    courseRef.transaction(function (subCount) {
+      // if (views) {
+      subCount = subCount + 1;
+      // }
+      return subCount;
+    });
   },
 
   getFavoriteThreads(userid, callback) {
@@ -375,12 +382,19 @@ export default {
           let pair = snapshot.val()
           console.log(pair)
           if (pair.course == courseId) {
-            console.log("cancelling like")
+            //console.log("cancelling like")
             snapshot.ref.remove()
           }
         })
       }
     })
+    var courseRef = db.ref('courses').child(courseId).child('subCount');
+    courseRef.transaction(function (subCount) {
+      // if (views) {
+      subCount = subCount - 1;
+      // }
+      return subCount;
+    });
   },
   checkSubscribeState(course_Id, user_id, callback) {
     var subscribesRef = db.ref('subscribes').orderByChild('user').equalTo(user_id)

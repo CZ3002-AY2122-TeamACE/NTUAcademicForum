@@ -84,6 +84,9 @@ export default new Vuex.Store(
             setCourseInformation(state,data) {
                 state.course.information = data
             },
+            setCourseSubCount(state,data){
+                state.course.subCount = data
+            },
             setCourseThread(state, data) {
                 state.courseThreads = data
             },
@@ -161,6 +164,7 @@ export default new Vuex.Store(
                         snapshot.forEach(function (course) {
                             commit('setCourseName', course.val().name)
                             commit('setCourseInformation', course.val().information)
+                            commit('setCourseSubCount',course.val().subCount)
                         })
                     }
                 })
