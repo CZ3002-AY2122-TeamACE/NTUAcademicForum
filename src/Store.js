@@ -27,7 +27,9 @@ export default new Vuex.Store(
                 id:"",
                 name: "",
                 information:"",
+                subCount:""
             },
+            subscribeCurrentCourse: false,
             currentThread: {},
             favouritedCurrentThread: false,
             likeCurrentThread: false,
@@ -111,6 +113,12 @@ export default new Vuex.Store(
             },
             setCourses(state, data) {
                 state.courses = data
+            },
+            setSubscribeCurrentCourse(state, data){
+                state.subscribeCurrentCourse = data
+            },
+            setSubCourses(state, data) {
+                state.subCourses = data
             }
         },
         actions: {
@@ -197,7 +205,7 @@ export default new Vuex.Store(
             },
 
             getSubCourses({commit}) {
-                main.getSubCourses(function(response) {
+                main.getSubCourses(this.state.currentUser.id,function(response) {
                     if(response) {
                         commit('setSubCourses', response);
                     } else {
@@ -250,6 +258,30 @@ export default new Vuex.Store(
                         commit('setLikeStateForCurrentThread',true)
                     } else {
                         commit('setLikeStateForCurrentThread',false)
+                    }
+                })
+            },
+
+            getSubscribeStateForCurrentCourse({commit},course_id) {
+                let user_id = this.state.currentUser.id
+                let subscribed = false
+                console.log("course " + course_id + " user " + this.state.currentUser.id)
+                main.checkSubscribeState(course_id, user_id,function (pairs) {
+                    if (pairs) {
+                        pairs.forEach(function (snapshot) {
+                            if(snapshot){
+                                let pair = snapshot.val()
+                                //console.log("course " + pair.course + " user " + this.state.currentUser.id)
+                                if (pair.course == course_id) {
+                                    subscribed = true
+                                }
+                            }
+                        })
+                    }
+                    if(subscribed){
+                        commit('setSubscribeCurrentCourse',true)
+                    } else {
+                        commit('setSubscribeCurrentCourse',false)
                     }
                 })
             }

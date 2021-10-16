@@ -17,8 +17,10 @@
                 Courses</b-button>
               </b-nav-item>
               <b-button-group vertical>
-                <div v-for = "(value, key, index) in subCourses" :key="index" >
-                  <router-link v-bind:to="'/course/'+value.course">{{value.course}}</router-link></div>
+                <div class="col text-center" v-for = "(value, key, index) in subCourses" :key="index" >
+                  <b-button block @click="hide" variant="dark">
+                    <router-link v-bind:to="'/course/'+value.course">{{value.course}}</router-link></b-button>
+                </div>
 <!--                <div class="button">-->
 <!--                  <router-link :to="`/course/CZ2006`">CZ2006</router-link>-->
 <!--                </div>-->
@@ -47,7 +49,7 @@
 </template>
 
 <script>
-import store from "@/Store";
+// import store from "@/Store";
 
 export default {
   name: "SideBarComponent",
@@ -57,7 +59,6 @@ export default {
     },
   },
   mounted: function() {
-    store.dispatch("getSubCourses")
   }
 }
 </script>
