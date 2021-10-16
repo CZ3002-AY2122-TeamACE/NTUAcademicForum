@@ -156,6 +156,7 @@ export default {
         return false;
       }
       main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo, this.$store.state.currentUser.name);
+
     },
     // favouriteThread: function () {
     //   main.updateThreadFavouriteRelation(this.$store.state.key, this.$store.state.currentUser.id)
