@@ -23,7 +23,11 @@
       </ul>
     </div>
 
-    <div class="ui horizontal left aligned link list">
+
+    <div class="ui horizontal left aligned link list" v-if ="this.$store.state.currentUser.status == 1">
+      <!-- Using modifiers -->
+<!--      <b-button v-b-toggle.collapse-2 class="m-1">Toggle Collapse</b-button>-->
+
 
       <b-button v-b-toggle="'collapse-2'" class="m-1">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
@@ -53,6 +57,11 @@
         <post-editor></post-editor>
         <b-button v-b-toggle="'collapse-2'" class="m-1" v-on:click="postReply">Submit</b-button>
       </b-collapse>
+    </div>
+    <div class="alert alert-danger" v-else>
+      <ul>
+        To Reply/Like/Favourite, you must log in first!
+      </ul>
     </div>
     <h4 class="ui horizontal divider header">
       <i class="tag icon"></i>
@@ -151,6 +160,9 @@ export default {
   methods: {
 
     postReply: function () {
+      if(this.$store.state.currentUser.status != 1) {
+        this.$router.push('/login');
+      }
       var replyTo = null;
       this.errors = [];
       if (this.$store.state.thread.content == "") {
@@ -195,7 +207,7 @@ export default {
         store.commit("setFavouriteStateForCurrentThread",true)
       }
     }
-  }
+  },
 }
 </script>
 

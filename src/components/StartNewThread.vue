@@ -49,6 +49,11 @@ export default {
       }
     }
   },
+  created() {
+  if(this.$store.state.currentUser.status != 1) {
+    this.$router.push('/login');
+  }
+  },
   methods: {
 
     savingContent: function() {
@@ -66,7 +71,9 @@ export default {
       }
 
 
-    }},
+
+    }
+  },
 }
 </script>
 
