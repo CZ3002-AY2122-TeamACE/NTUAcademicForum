@@ -115,11 +115,16 @@ export default {
     replies(){
       return this.$store.state.currentThreadReplies
     },
-    isCollect(){
-      if(this.$store.state.favouritedCurrentThread){
-        return 1
-      } else {
-        return 0
+    isCollect:{
+      get: function() {
+        if(this.$store.state.favouritedCurrentThread){
+          return 1
+        } else {
+          return 0
+        }
+      },
+      set: function (val){
+        this.isCollect = val
       }
     }
   },
@@ -135,7 +140,9 @@ export default {
     store.commit('setKey',this.$route.params.id)
     this.$store.dispatch("getThreadInfo"),{route: this.$route}
     store.dispatch("getThreadReplies")
-    store.dispatch("getFavouriteStateForCurrentThread")
+    setTimeout(function (){
+      store.dispatch("getFavouriteStateForCurrentThread")
+    },800)
   },
   methods: {
 
@@ -151,9 +158,9 @@ export default {
       main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo, this.$store.state.currentUser.name);
 
     },
-    favouriteThread: function () {
-      main.updateThreadFavouriteRelation(this.$store.state.key, this.$store.state.currentUser.id)
-    },
+    // favouriteThread: function () {
+    //   main.updateThreadFavouriteRelation(this.$store.state.key, this.$store.state.currentUser.id)
+    // },
 
     heart: function () {
       if (this.isHeart == 0) {
@@ -164,11 +171,17 @@ export default {
     },
 
     collect: function () {
-      console.log(this.enableFavourite)
-      if (!this.enableFavourite) {
-        this.isCollect = 0
+      console.log(this.isCollect)
+      if (this.isCollect == 1) {
+        console.log("isCollect " + this.isCollect + "cancelling")
+        //this.isCollect = 0
+        main.cancelThreadFavouriteRelation(this.$store.state.key, this.$store.state.currentUser.id)
+        store.commit("setFavouriteStateForCurrentThread",false)
       } else {
-        this.isCollect = 1
+        console.log("isCollect " + this.isCollect + " favouriting")
+        //this.isCollect = 1
+        main.updateThreadFavouriteRelation(this.$store.state.key, this.$store.state.currentUser.id)
+        store.commit("setFavouriteStateForCurrentThread",true)
       }
     }
   }
