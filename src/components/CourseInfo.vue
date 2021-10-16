@@ -92,29 +92,7 @@ export default {
       }
     }
   },
-  // created() {
-  //   setTimeout(
-  //       () => {
-  //         if(store.state.currentUser.status == 1) {
-  //           store.commit('setCourseID',this.$route.params.id)
-  //           store.dispatch("getCourseInfo")
-  //           store.dispatch('getCourseThreads', store.state.currentUser);
-  //         }
-  //       },
-  //       2000
-  //   )
-  // },
   mounted() {
-    // setTimeout(
-    //     () => {
-    //       if(store.state.currentUser.status == 1) {
-    //         store.commit('setCourseID',this.$route.params.id)
-    //         store.dispatch("getCourseInfo")
-    //         store.dispatch('getCourseThreads', store.state.currentUser);
-    //       }
-    //     },
-    //     2000
-    //)
     store.commit('setCourseID',this.$route.params.id)
     store.dispatch("getCourseInfo")
     store.dispatch('getCourseThreads', store.state.currentUser);
@@ -124,41 +102,9 @@ export default {
       store.dispatch('getSubscribeStateForCurrentCourse',course_id)
     },2000)
   },
-  // data(){
-  //   return {
-  //     'threads':[{
-  //       'title': 'cz3002',
-  //       'replyCount':20,
-  //       'like':20,
-  //       'favourite':10,
-  //       'content':'hello',
-  //       'user': require('../assets/default profile.jpeg') ,
-  //     },{
-  //       'title': 'cz3003',
-  //       'replyCount':20,
-  //       'like':20,
-  //       'favourite':10,
-  //       'user': require('../assets/default profile.jpeg') ,
-  //     },
-  //       {
-  //         'title': 'cz3004',
-  //         'replyCount':20,
-  //         'like':20,
-  //         'favourite':10,
-  //         'user': require('../assets/default profile.jpeg') ,
-  //       }, {
-  //         'title': 'cz3006',
-  //         'replyCount':20,
-  //         'like':20,
-  //         'favourite':10,
-  //         'user': require('../assets/spec profile.jpeg') ,
-  //       }]
-  //   }
-  // },
+
   methods:{
     load(){
-      // this.$store.commit('setCourseID',"CZ2006")
-      // this.$store.dispatch("getCourseInfo")
     },
     subscribe: function () {
       if(this.subscribed){

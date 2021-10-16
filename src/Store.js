@@ -39,6 +39,7 @@ export default new Vuex.Store(
             sourceUsername: "",
             courses: [],
             subCourses: [],
+            favoriteThreads: [],
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -65,9 +66,6 @@ export default new Vuex.Store(
             setCurrUserStatus(state, data) {
                 state.currentUser.status = data
             },
-            // setForumTitle(state, data) {
-            //     state.forum.title = data
-            // },
             setThreadContent(state, data) {
                 state.thread.content = data
             },
@@ -119,6 +117,9 @@ export default new Vuex.Store(
             },
             setSubCourses(state, data) {
                 state.subCourses = data
+            },
+            setFavoriteThreads(state, data) {
+                state.favoriteThreads = data
             }
         },
         actions: {
@@ -128,7 +129,6 @@ export default new Vuex.Store(
                         main.getUserByUID(user.uid, function(key, val) {
                             if(key != null && val != null) {
                                 commit('setCurrUserId', key);
-                                // commit('setCurrUserName', user.displayName);
                                 commit('setCurrUserEmail', user.email);
                                 commit('setCurrUserUid', user.uid);
                                 commit('setCurrUserStatus', 1);
@@ -140,7 +140,6 @@ export default new Vuex.Store(
             getCurrentUsername({commit}){
                 main.getUserByID(this.state.currentUser.id,function (user){
                     if(user){
-                        //console.log(user.val().name)
                         commit('setCurrUserName',user.val().name)
                     } else {
                         console.log("user not exist")
@@ -149,7 +148,6 @@ export default new Vuex.Store(
             },
             clearUserData({commit}) {
                 commit('setCurrUserId', '');
-                // commit('setCurrUserName', '');
                 commit('setCurrUserEmail', '');
                 commit('setCurrUserUid', '');
                 commit('setCurrUserStatus', 0);
@@ -213,6 +211,17 @@ export default new Vuex.Store(
                     }
                 });
             },
+
+            getFavoriteThreads({commit}) {
+                main.getFavoriteThreads(this.state.currentUser.id,function(response) {
+                    if(response) {
+                        commit('setFavoriteThreads', response);
+                    } else {
+                        commit('setFavoriteThreads', []);
+                    }
+                });
+            },
+
             getFavouriteStateForCurrentThread({commit}) {
                 let user_id = this.state.currentUser.id
                 let thread_id = this.state.key
