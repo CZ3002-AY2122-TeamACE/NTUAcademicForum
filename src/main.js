@@ -341,9 +341,24 @@ export default {
       course: courseId,
     })
   },
+  unsubscribeCourse(courseId, userid) {
+    var subRef = db.ref('subscribes').orderByChild('user').equalTo(userid)
+    subRef.once('value', function (pairs) {
+      if (pairs) {
+        pairs.forEach(function (snapshot) {
+          let pair = snapshot.val()
+          console.log(pair)
+          if (pair.course == courseId) {
+            console.log("cancelling like")
+            snapshot.ref.remove()
+          }
+        })
+      }
+    })
+  },
   checkSubscribeState(course_Id, user_id, callback) {
-    var subscribesRef = db.ref('subscribes').orderByChild('user_id').equalTo(user_id)
-    subscribesRef.on('value', callback)
+    var subscribesRef = db.ref('subscribes').orderByChild('user').equalTo(user_id)
+    subscribesRef.once('value', callback)
   }
 
 }

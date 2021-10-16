@@ -27,6 +27,7 @@ export default new Vuex.Store(
                 id:"",
                 name: "",
                 information:"",
+                subCount:""
             },
             subscribeCurrentCourse: false,
             currentThread: {},
@@ -247,16 +248,16 @@ export default new Vuex.Store(
                 })
             },
 
-            getSubscribeStateForCurrentCourse(course_id, {commit}) {
+            getSubscribeStateForCurrentCourse({commit},course_id) {
                 let user_id = this.state.currentUser.id
                 let subscribed = false
-                //console.log("thread " + this.state.key + " user " + this.state.currentUser.id)
+                console.log("course " + course_id + " user " + this.state.currentUser.id)
                 main.checkSubscribeState(course_id, user_id,function (pairs) {
                     if (pairs) {
                         pairs.forEach(function (snapshot) {
                             if(snapshot){
                                 let pair = snapshot.val()
-                                //console.log("thread " + pair.thread + " user " + pair.user_id)
+                                //console.log("course " + pair.course + " user " + this.state.currentUser.id)
                                 if (pair.course == course_id) {
                                     subscribed = true
                                 }

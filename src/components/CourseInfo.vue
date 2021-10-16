@@ -19,7 +19,16 @@
           <button class="ui button">
             Find Teammate
           </button>
-          <b-button class="m-1" v-on:click="subscribe">Subscribe</b-button>
+          <b-button class="m-1" v-on:click="subscribe">
+            <svg v-if="subscribed==0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+            </svg>
+            <svg v-if="subscribed==1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="blue" class="bi bi-heart-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+
+          Subscribe
+          </b-button>
         </div>
       </div>
     </div>
@@ -56,7 +65,9 @@ export default {
         store.commit('setCourseID',this.$route.params.id)
         store.dispatch("getCourseInfo")
         store.dispatch('getCourseThreads', store.state.currentUser);
-        store.dispatch('getSubscribeStateForCurrentCourse',this.$store.state.course.id)
+        setTimeout(function () {
+          store.dispatch('getSubscribeStateForCurrentCourse',this.$store.state.course.id)
+        },800)
     }
 }
   },
@@ -69,7 +80,11 @@ export default {
     },
     subscribed: {
       get: function (){
-        return this.$store.state.subscribeCurrentCourse
+        if(this.$store.state.subscribeCurrentCourse){
+          return 1
+        } else {
+          return 0
+        }
       },
       set: function (val){
         this.subscribe = val
@@ -102,7 +117,11 @@ export default {
     store.commit('setCourseID',this.$route.params.id)
     store.dispatch("getCourseInfo")
     store.dispatch('getCourseThreads', store.state.currentUser);
-    store.dispatch('getSubscribeStateForCurrentCourse',this.$store.state.course.id)
+    //store.dispatch('getSubscribeStateForCurrentCourse',this.$store.state.course.id)
+    setTimeout(function () {
+      let course_id = store.state.course.id
+      store.dispatch('getSubscribeStateForCurrentCourse',course_id)
+    },2000)
   },
   // data(){
   //   return {
@@ -141,8 +160,13 @@ export default {
       // this.$store.dispatch("getCourseInfo")
     },
     subscribe: function () {
-      main.subscribeCourse(this.$route.params.id,this.$store.state.currentUser.id)
-      this.$store.commit('setSubscribeCurrentCourse',true)
+      if(this.subscribed){
+        main.unsubscribeCourse(this.$route.params.id,this.$store.state.currentUser.id)
+        this.$store.commit('setSubscribeCurrentCourse',false)
+      } else {
+        main.subscribeCourse(this.$route.params.id,this.$store.state.currentUser.id)
+        this.$store.commit('setSubscribeCurrentCourse',true)
+      }
     }
   }
 }
