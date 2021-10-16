@@ -30,10 +30,11 @@ export default {
     setTimeout(
          () => {
            if(store.state.currentUser.status == 1) {
+             store.dispatch("getSubCourses")
              store.dispatch('getCurrentUsername');
            }
          },
-         3000
+         1000
      )
     // if user is already login then load user forums
     // setTimeout(

@@ -14,7 +14,12 @@
           <div class="content">
             <a class="author">{{reply.username}}</a>
             <i class="calendar icon"></i>{{reply.created_at}}
+            <div class="markdown-body" v-if="upstream != null"> Replying
+              <a class="markdown-body" v-html="upstream" v-if="upstream != null"></a>
+            </div>
+
             <div class="markdown-body" v-html="content">{{content}}</div>
+
             <div class="actions">
               <div style="float:left"><a type="button" v-on:click.once="addlike" ><i class="thumbs up outline icon"></i></a>{{reply.like}}</div>
               <div style="float:left"> &nbsp; </div>
@@ -58,27 +63,36 @@ name: "Reply",
     return{
       showReply:false,
       errors: [],
+      upstream: null
+
     }
   },
   computed: {
     content() {
-      if(this.reply.reply_to == null)
-      {return this.reply.content}
-      main.getRepliesByKey(this.reply.reply_to, function (response) {
-        if(response){
-          store.commit('setUpstreamUserName',response.username)
-        }
-      })
-      var upstream = "Replying @" +this.$store.state.sourceUsername
-      // console.log(upstream)
-      return upstream + this.reply.content
+      return this.reply.content
     },
-
-
+  },
+  mounted: function(){
+    let reply
+    if(this.reply.reply_to == null)
+    {reply = null}
+    else{
+    main.getRepliesByKey(this.reply.reply_to, function (response) {
+      if(response){
+        if(response.username)
+        store.commit('setUpstreamUserName',response.username)
+      }
+    })
+    reply = "@" +this.$store.state.sourceUsername}
+    // console.log(upstream)
+    this.upstream = reply
   },
 
 
+
+
   methods: {
+
 
     postReply: function() {
       var replyTo = this.id;
