@@ -9,10 +9,10 @@
           </a>
         </div>
         <div class="item">
-          <div class="content"><a href="#" class="header">Tom</a></div>
+          <div class="content"><a href="#" class="header">{{thread.username}}</a></div>
         </div>
         <div class="item">
-          <i class="calendar icon"></i>2021-2-20
+          <i class="calendar icon"></i>{{thread.created_at}}
         </div>
       </div>
       <div class="markdown-body" v-html="thread.content">{{ thread.content }}</div>
