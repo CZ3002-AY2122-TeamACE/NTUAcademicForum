@@ -7,7 +7,8 @@
           <span>{{course.name}}</span>
         </div>
       </div>
-      <div class="six wide column">
+
+      <div class="eight wide column">
         <div class="horizontal right aligned link list">
           <router-link class="ui button" v-bind:to="'/post/'+ this.$route.params.id">
             Post Thread
@@ -18,6 +19,7 @@
           <button class="ui button">
             Find Teammate
           </button>
+          <b-button class="m-1" v-on:click="subscribe">Subscribe</b-button>
         </div>
       </div>
     </div>
@@ -30,9 +32,10 @@
 
     <div class="ui black segment">
       <div class="ui black top attached label" style="font-size: large">Discussion</div>
-      <div class="ui container">
-        <thread v-for = "(value, key, index) in threads" :key="index" :thread="value" :id="key"/>
-      </div>
+        <div class="ui middle aligned divided list">
+          <thread v-for = "(value, key, index) in threads" :key="index" :thread="value" :id="key"/>
+        </div>
+
     </div>
   </div>
 </template>
@@ -40,7 +43,8 @@
 <script>
 import Thread from "@/components/Thread";
 import store from "../Store";
-// import main from "../main.js";
+import main from '../main.js';
+
 export default {
   name: "CourseInfo",
   components:{
@@ -125,6 +129,9 @@ export default {
     load(){
       // this.$store.commit('setCourseID',"CZ2006")
       // this.$store.dispatch("getCourseInfo")
+    },
+    subscribe: function () {
+      main.subscribeCourse(this.$route.params.id,this.$store.state.currentUser.id)
     }
   }
 }
