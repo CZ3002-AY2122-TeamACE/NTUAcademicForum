@@ -175,14 +175,15 @@ export default new Vuex.Store(
                 let user_id = this.state.currentUser.id
                 let thread_id = this.state.key
                 let favourited = false
+                console.log("thread " + this.state.key + " user " + this.state.currentUser.id)
                 main.checkFavouriteCurrentThread(user_id,function (pairs) {
                     if (pairs) {
                         pairs.forEach(function (snapshot) {
                             if(snapshot){
                                 let pair = snapshot.val()
+                                //console.log("thread " + pair.thread + " user " + pair.user_id)
                                 if (pair.thread == thread_id) {
                                     favourited = true
-                                    console.log("you have favourited the thread")
                                 }
                             }
                         })
@@ -193,14 +194,6 @@ export default new Vuex.Store(
                         commit('setFavouriteStateForCurrentThread',false)
                     }
                 })
-                /*
-                console.log(favourited)
-                if(favourited){
-                    console.log("setting status...")
-                    commit('setFavouriteStateForCurrentThread',true)
-                }
-
-                 */
             }
         },
     }

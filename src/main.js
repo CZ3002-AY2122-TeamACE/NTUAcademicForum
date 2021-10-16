@@ -201,7 +201,7 @@ export default {
     console.log('user ' + user_id + " thread " + thread_key)
     var favourited = false
     var favouriteThreadPairRef = db.ref('threadFavourite').orderByChild('user_id').equalTo(user_id)
-    favouriteThreadPairRef.on('value', function (pairs) {
+    favouriteThreadPairRef.once('value', function (pairs) {
       if (pairs) {
         pairs.forEach(function (snapshot) {
           let pair = snapshot.val()
@@ -213,19 +213,44 @@ export default {
         })
         console.log("favourite " + favourited)
         if (!favourited) {
+          console.log("executing insertion outside")
           var threadRef = db.ref('threads').child(thread_key).child('favourite');
           threadRef.transaction(function (favourite) {
             favourite = favourite + 1;
-            const favouritePairPush = db.ref('threadFavourite').push();
-            const key = favouritePairPush.getKey();
-            favouritePairPush.set({
-              thread: thread_key,
-              user_id: user_id,
-              created_at: (new Date()).toLocaleString()
-            })
-            return key,favourite;
-          });
+            console.log("executing insertion inside")
+            return favourite;
+          })
+          const favouritePairPush = db.ref('threadFavourite').push();
+          const key = favouritePairPush.getKey();
+          favouritePairPush.set({
+            thread: thread_key,
+            user_id: user_id,
+            created_at: (new Date()).toLocaleString()
+          })
+          console.log("finish insertion")
+          return key
         }
+      }
+    })
+  },
+
+  cancelThreadFavouriteRelation(thread_key, user_id){
+    var threadRef = db.ref('threads').child(thread_key).child('favourite');
+    threadRef.transaction(function (favourite) {
+      favourite = favourite - 1;
+      return favourite
+    })
+    var favouriteThreadPairRef = db.ref('threadFavourite').orderByChild('user_id').equalTo(user_id)
+    favouriteThreadPairRef.once('value', function (pairs) {
+      if (pairs) {
+        pairs.forEach(function (snapshot) {
+          let pair = snapshot.val()
+          console.log(pair)
+          if (pair.thread == thread_key) {
+            console.log("cancelling favourite")
+            snapshot.ref.remove()
+          }
+        })
       }
     })
   },
