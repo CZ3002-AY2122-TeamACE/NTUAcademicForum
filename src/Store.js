@@ -36,6 +36,7 @@ export default new Vuex.Store(
             reply: "",
             sourceUsername: "",
             courses: [],
+            subCourses: [],
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -191,6 +192,16 @@ export default new Vuex.Store(
                         commit('setCourses', response);
                     } else {
                         commit('setCourses', []);
+                    }
+                });
+            },
+
+            getSubCourses({commit}) {
+                main.getSubCourses(function(response) {
+                    if(response) {
+                        commit('setSubCourses', response);
+                    } else {
+                        commit('setSubCourses', []);
                     }
                 });
             },

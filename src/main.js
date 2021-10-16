@@ -339,6 +339,12 @@ export default {
       course: courseId,
     })
   },
+  getSubCourses (userid, callback) {
+    const subRef = db.ref('subscribes').orderByChild("user").equalTo(userid);
+    subRef.on('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  }
 
 
 }
