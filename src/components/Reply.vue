@@ -102,7 +102,7 @@ name: "Reply",
 
     adddislike: function() {
 
-      main.updateReplyDisLikeCount(this.id)
+      main.updateReplyDislikeCount(this.id)
 
     }
   },

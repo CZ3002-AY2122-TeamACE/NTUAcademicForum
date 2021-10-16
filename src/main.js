@@ -159,6 +159,7 @@ export default {
     const replyRef = db.ref('replies');
     const replyPush = replyRef.push();
     const key = replyPush.getKey();
+    this.updateReplyCount(thread)
     replyPush.set({
       thread: thread,
       content: content,
@@ -169,7 +170,19 @@ export default {
       dislike: 0,
       created_at: (new Date()).toLocaleString()
     })
+    // this.updateReplyCount(thread)
     return key;
+  },
+  updateReplyCount(key)
+  {
+    var ThreadRef = db.ref('threads').child(key).child('replyCount');
+
+    ThreadRef.transaction(function(reply) {
+      // if (views) {
+      reply = reply + 1;
+      // }
+      return reply;
+    },);
   },
   updateReplyLikeCount(key)
   {

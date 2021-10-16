@@ -2,6 +2,11 @@
   <div>
     <div class="m-container-small">
       <div class="ui container">
+        <div class="alert alert-danger" v-if="this.errors.length > 0">
+          <ul>
+            <li v-for="(error, index) in this.errors" :key="index">{{ error }}</li>
+          </ul>
+        </div>
         <form class="ui form">
           <div class="required field">
             <div class="ui left labeled input">
@@ -12,7 +17,7 @@
           </div>
           <post-editor></post-editor>
           <div>
-            <button class="ui right floated button" v-on:click="savingContent">submit</button>
+            <b-button class="ui right floated button" v-on:click="savingContent">submit</b-button>
           </div>
         </form>
 
@@ -31,7 +36,9 @@ export default {
     PostEditor,
   },
   data(){
-    return {};
+    return {
+      errors: [],
+    };
   },
   computed: {
     title: {
@@ -46,9 +53,19 @@ export default {
   methods: {
 
     savingContent: function() {
-      main.addThread(this.$store.state.course.id, this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id, this.$store.state.currentUser.name);
-      const courseId = this.$store.state.course.id
-      this.$router.push({ name: 'Course', params: { id: courseId} });
+      this.errors = [];
+      if(this.$store.state.thread.title== "") {
+        this.errors.push('Your title is empty!');
+      }
+      if(this.$store.state.thread.content== "") {
+        this.errors.push('Your content is empty!');
+      }
+      if(this.errors.length == 0) {
+        main.addThread(this.$route.params.id, this.$store.state.thread.title, this.$store.state.thread.content, this.$store.state.currentUser.id, this.$store.state.currentUser.name);
+        const courseId = this.$route.params.id
+        this.$router.push({ name: 'Course', params: { id: courseId} });
+      }
+
 
     }},
 }
