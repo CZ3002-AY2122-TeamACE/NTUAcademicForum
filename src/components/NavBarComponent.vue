@@ -1,16 +1,22 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#"> <b-button size="sm" v-b-toggle.sidebar-no-header><b-icon icon = 'list'></b-icon></b-button></b-navbar-brand>
+      <b-navbar-brand href="#">
+        <b-button size="sm" v-b-toggle.sidebar-no-header v-if ="this.$store.state.currentUser.status == 1">
+          <b-icon icon = 'list'></b-icon>
+        </b-button>
+<!--        <router-link size="sm" class="ui button secondary" to="/login" v-else>Login</router-link>-->
+      </b-navbar-brand>
+
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <router-link size="sm" class="ui button secondary" to="/">Home</router-link> |
-          <router-link size="sm" class="ui button secondary" to="/login">Login</router-link> |
-          <router-link size="sm" class="ui button" to="/secret">Secret</router-link> |
-          <router-link size="sm" class="ui button" to="/register">Register</router-link>
+          <router-link size="sm" class="btn btn-secondary" to="/">Home</router-link> |
+          <router-link size="sm" class="btn btn-secondary" to="/login">Login</router-link> |
+          <router-link size="sm" class="btn btn-secondary" to="/secret">Secret</router-link> |
+          <router-link size="sm" class="btn btn-secondary" to="/register">Register</router-link>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -38,6 +44,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
+
   </div>
 </template>
 
