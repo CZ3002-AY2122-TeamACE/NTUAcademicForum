@@ -56,6 +56,7 @@ export default {
         store.commit('setCourseID',this.$route.params.id)
         store.dispatch("getCourseInfo")
         store.dispatch('getCourseThreads', store.state.currentUser);
+        store.dispatch('getSubscribeStateForCurrentCourse',this.$store.state.course.id)
     }
 }
   },
@@ -66,6 +67,14 @@ export default {
     threads() {
       return this.$store.state.courseThreads
     },
+    subscribed: {
+      get: function (){
+        return this.$store.state.subscribeCurrentCourse
+      },
+      set: function (val){
+        this.subscribe = val
+      }
+    }
   },
   // created() {
   //   setTimeout(
@@ -93,6 +102,7 @@ export default {
     store.commit('setCourseID',this.$route.params.id)
     store.dispatch("getCourseInfo")
     store.dispatch('getCourseThreads', store.state.currentUser);
+    store.dispatch('getSubscribeStateForCurrentCourse',this.$store.state.course.id)
   },
   // data(){
   //   return {
@@ -132,6 +142,7 @@ export default {
     },
     subscribe: function () {
       main.subscribeCourse(this.$route.params.id,this.$store.state.currentUser.id)
+      this.$store.commit('setSubscribeCurrentCourse',true)
     }
   }
 }

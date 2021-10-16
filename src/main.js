@@ -325,12 +325,14 @@ export default {
       return dislike;
     },);
   },
+
   getCourses(callback) {
     const courseRef = db.ref('courses');
     courseRef.on('value', function(snapshot) {
       callback(snapshot.val());
     });
   },
+
   subscribeCourse(courseId, userid) {
     const subRef = db.ref('subscribes');
     const subPush = subRef.push();
@@ -339,6 +341,9 @@ export default {
       course: courseId,
     })
   },
-
+  checkSubscribeState(course_Id, user_id, callback) {
+    var subscribesRef = db.ref('subscribes').orderByChild('user_id').equalTo(user_id)
+    subscribesRef.on('value', callback)
+  }
 
 }

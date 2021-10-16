@@ -28,6 +28,7 @@ export default new Vuex.Store(
                 name: "",
                 information:"",
             },
+            subscribeCurrentCourse: false,
             currentThread: {},
             favouritedCurrentThread: false,
             likeCurrentThread: false,
@@ -110,6 +111,9 @@ export default new Vuex.Store(
             },
             setCourses(state, data) {
                 state.courses = data
+            },
+            setSubscribeCurrentCourse(state, data){
+                state.subscribeCurrentCourse = data
             }
         },
         actions: {
@@ -239,6 +243,30 @@ export default new Vuex.Store(
                         commit('setLikeStateForCurrentThread',true)
                     } else {
                         commit('setLikeStateForCurrentThread',false)
+                    }
+                })
+            },
+
+            getSubscribeStateForCurrentCourse(course_id, {commit}) {
+                let user_id = this.state.currentUser.id
+                let subscribed = false
+                //console.log("thread " + this.state.key + " user " + this.state.currentUser.id)
+                main.checkSubscribeState(course_id, user_id,function (pairs) {
+                    if (pairs) {
+                        pairs.forEach(function (snapshot) {
+                            if(snapshot){
+                                let pair = snapshot.val()
+                                //console.log("thread " + pair.thread + " user " + pair.user_id)
+                                if (pair.course == course_id) {
+                                    subscribed = true
+                                }
+                            }
+                        })
+                    }
+                    if(subscribed){
+                        commit('setSubscribeCurrentCourse',true)
+                    } else {
+                        commit('setSubscribeCurrentCourse',false)
                     }
                 })
             }
