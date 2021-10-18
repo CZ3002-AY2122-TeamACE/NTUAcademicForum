@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import router from './router'
 import store from './Store'
+import FirebaseAPI from "./firebase_api/FirebaseAPI";
 // import {initializeApp} from "firebase/firebase-app";
 
 // Your web app's Firebase configuration
@@ -30,9 +31,11 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+
 //Vue.use(SuiVue);
 
 Vue.config.productionTip = false
+Vue.prototype.$firebaseApi = new FirebaseAPI()
 
 let app;
 // let app = initializeApp(firebaseConfig);
