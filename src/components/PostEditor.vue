@@ -1,10 +1,4 @@
 <template>
-  <!--
-  <div class="home">
-    <h3>wangEditor with vue</h3>
-    <div id="demo1"></div>
-  </div>
-  -->
   <div>
     <div>
       <div id="app">
@@ -13,14 +7,10 @@
       </div>
     </div>
     <br>
-<!--    <div>-->
-<!--      <button class="ui right floated button" v-on:click="savingContent">submit</button>-->
-<!--    </div>-->
   </div>
 </template>
 
 <script>
-//import wangEditor from 'wangeditor'
 
 import { VueEditor } from "vue2-editor";
 
@@ -32,7 +22,6 @@ export default {
   },
   data() {
     return {
-      // content: "write your post here."
 
     };
   },

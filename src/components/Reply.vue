@@ -14,8 +14,13 @@
           <div class="content">
             <a class="author">{{reply.username}}</a>
             <i class="calendar icon"></i>{{reply.created_at}}
+            <div class="markdown-body" v-if="upstream != null"> Replying
+              <a class="markdown-body" v-html="upstream" v-if="upstream != null"></a>
+            </div>
+
             <div class="markdown-body" v-html="content">{{content}}</div>
-            <div class="actions">
+
+            <div class="actions" v-if ="this.$store.state.currentUser.status == 1">
               <div style="float:left"><a type="button" v-on:click.once="addlike" ><i class="thumbs up outline icon"></i></a>{{reply.like}}</div>
               <div style="float:left"> &nbsp; </div>
               <div style="float:left"><a type="button" v-on:click.once="adddislike"><i class="thumbs down outline icon"></i></a>{{reply.dislike}}</div>
@@ -27,16 +32,11 @@
                 </svg></a></div>
               <div style="clear:both"></div>
               <b-collapse :id="id">
-                <!--        <b-card>I am collapsible content!</b-card>-->
                 <post-editor></post-editor>
                 <b-button v-b-toggle="id" class="m-1" v-on:click="postReply">Submit</b-button>
               </b-collapse>
             </div>
           </div>
-
-          <!--<div class="content display-reply">
-            <a>show 3 replies<i class="angle down icon"></i></a>
-          </div>-->
         </div>
     </div>
 
@@ -58,29 +58,41 @@ name: "Reply",
     return{
       showReply:false,
       errors: [],
+      upstream: null
+
     }
   },
   computed: {
     content() {
-      if(this.reply.reply_to == null)
-      {return this.reply.content}
-      main.getRepliesByKey(this.reply.reply_to, function (response) {
-        if(response){
-          store.commit('setUpstreamUserName',response.username)
-        }
-      })
-      var upstream = "Replying @" +this.$store.state.sourceUsername
-      // console.log(upstream)
-      return upstream + this.reply.content
+      return this.reply.content
     },
-
-
   },
+  mounted: function(){
+    let reply
+    if(this.reply.reply_to == null)
+    {reply = null}
+    else{
+    main.getRepliesByKey(this.reply.reply_to, function (response) {
+      if(response){
+        if(response.username)
+        store.commit('setUpstreamUserName',response.username)
+      }
+    })
+    reply = "@" +this.$store.state.sourceUsername}
+    // console.log(upstream)
+    this.upstream = reply
+  },
+
+
 
 
   methods: {
 
+
     postReply: function() {
+      if(this.$store.state.currentUser.status != 1) {
+        this.$router.push('/login');
+      }
       var replyTo = this.id;
       this.errors = [];
       if(this.$store.state.thread.content== "") {

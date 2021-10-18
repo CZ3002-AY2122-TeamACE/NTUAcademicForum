@@ -1,14 +1,11 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
     <course-info/>
   </div>
 </template>
 
 <script>
 import CourseInfo from "@/components/CourseInfo"
-// import store from "../Store";
-// import main from "../main";
 export default {
   name:"about",
   components:{

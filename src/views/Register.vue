@@ -1,25 +1,41 @@
 <template>
   <div>
-<!--    <div v-if="error" class="error">{{error.message}}</div>-->
-    <form @submit.prevent="pressed">
-      Register
-      <div class="alert alert-danger" v-if="this.errors.length > 0">
-        <ul>
-          <li v-for="(error, index) in this.errors" :key="index">{{ error }}</li>
-        </ul>
-      </div>
-      <div class="email">
-        <input type="email" v-model="email" placeholder="email">
-      </div>
-      <div class="password">
-        <input type="password" v-model="password" placeholder="password">
-      </div>
-      <button type="submit">Register</button>
-    </form>
-    <div v-if="errors.length > 0">
-      <div v-for="e in errors"
-           :key="e"> e </div>
+    <div class="alert alert-danger" v-if="this.errors.length > 0">
+      <ul>
+        <li v-for="(error, index) in this.errors" :key="index">{{ error }}</li>
+      </ul>
     </div>
+
+    <b-row align-h="center">
+
+      <div class="col-md-5">
+
+    <b-input-group size="lg" prepend="Email" class="mt-5">
+      <b-form-input type="email" aria-describedby="input-live-feedback" v-model="email" placeholder="email"></b-form-input>
+    </b-input-group>
+        <b-input-group size="lg" prepend="Username" class="mt-5">
+          <b-form-input class="form-control" v-model="username" placeholder="user name"></b-form-input>
+        </b-input-group>
+
+        <b-input-group size="lg" prepend="Password" class="mt-5">
+          <b-form-input type="password" :state="passwordLength" aria-describedby="input-live-feedback" v-model="password" placeholder="password(at least 6 characters)"></b-form-input>
+          <b-form-invalid-feedback id="input-live-feedback">
+            Enter at least six characters
+          </b-form-invalid-feedback>
+        </b-input-group>
+        <b-input-group size="lg" prepend="Confirm Password" class="mt-5">
+          <b-form-input type="password" :state="passwordState" aria-describedby="input-live-feedback" class="form-control" v-model="confirmPassword" placeholder="retype your password">
+          </b-form-input>
+          <b-form-invalid-feedback id="input-live-feedback">
+            confirm your password
+          </b-form-invalid-feedback>
+        </b-input-group>
+
+        <div class="mt-5">
+          <b-button size="lg" block variant="dark" type="submit" v-on:click="register">Register</b-button>
+        </div>
+      </div>
+  </b-row>
   </div>
 </template>
 <script>
@@ -31,6 +47,8 @@ export default {
       return {
         isLoading: false,
         errors: [],
+        password: "",
+        confirmPassword: "",
       }
     },
     computed: {
@@ -42,17 +60,37 @@ export default {
           this.$store.commit('setAuthEmail', value)
         }
       },
-      password: {
+      username: {
         get() {
-          return this.$store.state.auth.password
+          return this.$store.state.auth.name
         },
         set(value) {
-          this.$store.commit('setAuthPassword', value)
+          this.$store.commit('setAuthName', value)
         }
+      },
+      // password: {
+      //   get() {
+      //     return this.$store.state.auth.password
+      //   },
+      //   set(value) {
+      //     this.$store.commit('setAuthPassword', value)
+      //   }
+
+      // },
+      passwordLength() {
+        return  this.password.length>5 ? true : false
+      },
+      passwordState() {
+        this.$store.commit('setAuthPassword', null)
+        if(this.password == this.confirmPassword && this.password.length>5) {
+          this.$store.commit('setAuthPassword', this.password)
+        }
+        return this.password == this.confirmPassword && this.password.length>5 ? true : false
       }
     },
+
     methods: {
-      async pressed()
+      register: function()
 {
   var self = this;
   this.errors = [];
@@ -61,6 +99,9 @@ export default {
         }
         if(this.$store.state.auth.password == "") {
           this.errors.push('Password required');
+        }
+        if(this.$store.state.auth.name == "") {
+          this.errors.push('User Name required');
         }
         // if(this.$store.state.auth.name == "") {
         //   this.errors.push('Display name required');
@@ -99,48 +140,26 @@ export default {
           alert(error.message)
         })
       },
-      // validateEmail(email) {
-      //   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      //   return re.test(String(email).toLowerCase());
-      // }
+
     }
 
-  // methods: {
-  //   async pressed() {
-  //     try{
-  //       const user = firebase.auth().createUserWithEmailAndPassword(this.email,this.password)
-  //       console.log(user)
-  //       this.$router.replace({name: "secret"});
-  //     }catch (err) {
-  //       console.log(err)
-  //     }
-  //
-  //   }
-  // },
-  // data() {
-  //   return {
-  //     email: "",
-  //     password: '',
-  //     error: ''
-  //   }
-  // }
 }
 </script>
 
-<style lang="scss" scoped>
-.error {
-  color: #ff0000;
-  font-size: 18px;
-}
-input {
-  width: 400px;
-  padding: 30px;
-  margin: 20px;
-  font-size: 21px;
-}
-button {
-  width: 400px;
-  height: 75px;
-  font-size: 100%;
-}
-</style>
+<!--<style lang="scss" scoped>-->
+<!--//.error {-->
+<!--//  color: #ff0000;-->
+<!--//  font-size: 18px;-->
+<!--//}-->
+<!--//input {-->
+<!--//  width: 400px;-->
+<!--//  padding: 30px;-->
+<!--//  margin: 20px;-->
+<!--//  font-size: 21px;-->
+<!--//}-->
+<!--//button {-->
+<!--//  width: 400px;-->
+<!--//  height: 75px;-->
+<!--//  font-size: 100%;-->
+<!--//}-->
+<!--</style>-->
