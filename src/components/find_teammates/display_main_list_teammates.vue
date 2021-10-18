@@ -78,6 +78,11 @@ export default {
       return this.$store.state.isHavePost;
     },
   },
+  created() {
+    if(this.$store.state.currentUser.status != 1) {
+      this.$router.push('/login');
+    }
+  },
 
   mounted() {
     this.$store.commit('setCourseViewing', this.$route.params.id)
