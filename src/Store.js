@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import main from './main.js'
+
 Vue.use(Vuex);
 export default new Vuex.Store(
     {
@@ -40,6 +41,12 @@ export default new Vuex.Store(
             courses: [],
             subCourses: [],
             favoriteThreads: [],
+
+            // for swap index and find teammates
+            courseViewing: "",
+            isHavePost: false,
+            requests: [],
+            postRequestUnderCourse: null,
         },
         mutations: {
             setAuthEmail(state, data) {
@@ -123,6 +130,21 @@ export default new Vuex.Store(
             },
             setFavoriteThreads(state, data) {
                 state.favoriteThreads = data
+            },
+            updateRequest(currentState, records) {
+                this.state.requests = records
+            },
+
+            setHavePost(currentState, b) {
+                this.state.isHavePost = b;
+            },
+
+            setPostRequestUnderCourse(currentState, record) {
+                this.state.postRequestUnderCourse = record
+            },
+
+            setCourseViewing(currentState, courseId) {
+                this.state.courseViewing = courseId
             }
         },
         actions: {

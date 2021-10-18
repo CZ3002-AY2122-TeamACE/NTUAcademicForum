@@ -10,6 +10,10 @@ import StartNewThread from "@/components/StartNewThread";
 import ThreadReplies from "@/components/ThreadReplies";
 import About from "@/views/About";
 import Favourite from "@/components/Favourite";
+import post_request from "@/components/swap_index/post_request";
+import display_main_list from "@/components/swap_index/display_main_list";
+import display_main_list_teammates from "../components/find_teammates/display_main_list_teammates";
+import post_request_teammates from "../components/find_teammates/post_request_teammates";
 
 Vue.use(VueRouter)
 
@@ -62,6 +66,25 @@ const routes = [
     path:'/favourite',
     name:'favourite',
     component: Favourite,
+  },
+  { path: "/display_main_list/:id",
+    name:'display_main_list',
+    component: display_main_list
+  },
+  {
+    path: "/swap_index_edit/:id",
+    name:'swap_index_edit',
+    component: post_request
+  },
+  {
+    path: "/teammates_main_list/:id",
+    name:'teammates_main_list',
+    component: display_main_list_teammates
+  },
+  {
+    path: "/teammates_main_edit/:id",
+    name:'teammates_main_edit',
+    component: post_request_teammates
   }
 ]
 

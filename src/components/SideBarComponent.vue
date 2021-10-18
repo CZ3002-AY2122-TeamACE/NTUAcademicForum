@@ -19,17 +19,17 @@
                 <b-icon icon='book'></b-icon>Subscribed Courses</b-button>
               </b-nav-item>
 
-              <b-collapse id="collapse1">
+              <b-collapse visible id="collapse1">
                 <div class="col text-center" v-for = "(value, key, index) in subCourses" :key="index" >
                   <b-button block @click="hide" variant="dark">
                     <router-link v-bind:to="'/course/'+value.course">{{value.course}}</router-link></b-button>
                 </div>
               </b-collapse>
 
-              <b-button-group vertical>
-                <b-button variant="dark" size = sm>21S1-CZ3002-10358</b-button>
-                <b-button variant="dark" size = sm>21S1-CZ3002-10358</b-button>
-              </b-button-group>
+<!--              <b-button-group vertical>-->
+<!--                <b-button variant="dark" size = sm>21S1-CZ3002-10358</b-button>-->
+<!--                <b-button variant="dark" size = sm>21S1-CZ3002-10358</b-button>-->
+<!--              </b-button-group>-->
 
               <b-nav-item active @click="hide"><b-button bg-variant="light" block @click="hide"><b-icon icon='envelope'></b-icon>
                 My profile</b-button>
