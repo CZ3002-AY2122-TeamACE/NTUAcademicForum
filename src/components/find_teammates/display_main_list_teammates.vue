@@ -33,10 +33,13 @@ TODO:
                   <div class=h-100 d-inline-block style="background-color: #eee;">Current {{t.currentMemberNum}} members</div>
                 </div>
                 <div class="col">
-                  <div class=h-100 d-inline-block style="background-color: #eee;">{{t.memberNumNeeded}} members needed<b-avatar variant="secondary" size="sm"></b-avatar></div>
+                  <div class=h-100 d-inline-block style="background-color: #eee;">{{t.memberNumNeeded}} members needed</div>
                 </div>
                 <div class="col">
                   <div class=h-100 d-inline-block style="background-color: #eee;"> {{t.interestedUsersNum}} Interests Received</div>
+                </div>
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;"> <b-avatar variant="secondary" size="sm"></b-avatar> {{t.userName}}</div>
                 </div>
                 <div class="col">
                   <div v-if="checkApplyEligibility(t)" class="col">
@@ -106,7 +109,7 @@ export default {
      */
     checkApplyEligibility(record) {
       let currentUser = this.$store.state.currentUser.name
-      let isSameUser = record.user === currentUser;
+      let isSameUser = record.userName === currentUser;
 
       let isShowedInterests = this.checkIfUserInJsonValue(record.interestedUsers, currentUser)
       if (isShowedInterests || isSameUser) {
@@ -118,13 +121,13 @@ export default {
 
     checkIsSameUser(record) {
       let currentUser = this.$store.state.currentUser.name
-      let isSameUser = record.user === currentUser;
+      let isSameUser = record.userName === currentUser;
       return isSameUser
     },
 
     checkIfUserInJsonValue(jsonObject, currentUser) {
-      for (var key in jsonObject) {
-        var user = jsonObject[key]
+      for (let key in jsonObject) {
+        let user = jsonObject[key]
         if (user === currentUser) {
           return true
         }

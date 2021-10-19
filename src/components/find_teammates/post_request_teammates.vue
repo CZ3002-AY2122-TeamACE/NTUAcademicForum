@@ -223,6 +223,7 @@ export default {
           interestedUsers: [],
           interestedUsersNum: 0,
           additionalInfo: this.form.additionalInfo,
+          courseId: this.$store.state.courseViewing
       }
       alert("Form submitted" + JSON.stringify(record))
       this.showSuccessAlert()
@@ -238,7 +239,7 @@ export default {
      * Call firebase api to delete the user's post
      */
     onClickDelete() {
-      this.$firebaseApi.deletePostSwapIndexRequest(this.$store.state.courseViewing, this.$store.state.currentUser.name)
+      this.$firebaseApi.deleteSearchTeammateRequest(this.$store.state.courseViewing, this.$store.state.currentUser.name)
       alert("The record is deleted!")
       this.$router.replace({ name: 'teammates_main_list', params: { id: this.$route.params.id} })
     },
