@@ -26,6 +26,7 @@ export default {
          () => {
            if(store.state.currentUser.status == 1) {
              store.dispatch('getCurrentUsername');
+             store.dispatch('getCurrentProfile');
              store.dispatch("getSubCourses");
              store.dispatch("getFavoriteThreads");
            }

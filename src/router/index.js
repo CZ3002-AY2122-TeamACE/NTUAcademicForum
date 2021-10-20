@@ -14,6 +14,7 @@ import post_request from "@/components/swap_index/post_request";
 import display_main_list from "@/components/swap_index/display_main_list";
 import display_main_list_teammates from "../components/find_teammates/display_main_list_teammates";
 import post_request_teammates from "../components/find_teammates/post_request_teammates";
+import profilePage from "../components/ProfilePage"
 
 Vue.use(VueRouter)
 
@@ -85,7 +86,13 @@ const routes = [
     path: "/teammates_main_edit/:id",
     name:'teammates_main_edit',
     component: post_request_teammates
+  },
+  {
+    path: "/profilePage",
+    name:'profilePage',
+    component: profilePage
   }
+
 ]
 
 const router = new VueRouter({

@@ -117,6 +117,9 @@ export default {
     load(){
     },
     subscribe: function () {
+      if(this.$store.state.currentUser.status != 1) {
+        this.$router.push('/login');
+      }
       if(this.subscribed){
         main.unsubscribeCourse(this.$route.params.id,this.$store.state.currentUser.id)
         this.$store.commit('setSubscribeCurrentCourse',false)

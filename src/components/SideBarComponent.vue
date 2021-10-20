@@ -31,8 +31,15 @@
 <!--                <b-button variant="dark" size = sm>21S1-CZ3002-10358</b-button>-->
 <!--              </b-button-group>-->
 
-              <b-nav-item active @click="hide"><b-button bg-variant="light" block @click="hide"><b-icon icon='envelope'></b-icon>
-                My profile</b-button>
+<!--              <b-nav-item active @click="hide"><b-button bg-variant="light" block @click="hide"><b-icon icon='envelope'></b-icon>-->
+<!--                My profile</b-button>-->
+<!--              </b-nav-item>-->
+              <b-nav-item active>
+                <b-button block bg-variant="light" @click="hide">
+                  <router-link block class="btn btn-secondary" bg-variant="light" v-bind:to="'/profilePage'">
+                    <b-icon icon='envelope'></b-icon>
+                    My profile</router-link>
+                </b-button>
               </b-nav-item>
 
               <b-nav-item active>
