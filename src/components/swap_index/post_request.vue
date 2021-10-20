@@ -221,9 +221,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.btn-space {
-  margin-right: 5px
-}
-</style>
