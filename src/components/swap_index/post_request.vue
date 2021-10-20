@@ -189,6 +189,7 @@ export default {
       /*alert("Form submitted" + JSON.stringify(record));*/
       this.showSuccessAlert()
       this.$firebaseApi.createSwapIndexRecord(record, this.$store.state.courseViewing)
+      this.$notify("The request is post successfully")
       this.$router.replace({ name: 'display_main_list', params: { id: this.$route.params.id} })
     },
 
