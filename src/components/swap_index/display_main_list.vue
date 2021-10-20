@@ -40,7 +40,7 @@ TODO:
                 </div>
                 <div class="col">
                   <div v-if="checkApplyEligibility(t)" class="col">
-                    <b-button variant="outline-primary" v-on:click="onClickInterestButton(t)">I'm interests</b-button>
+                    <b-button variant="outline-primary" v-on:click="onClickInterestButton(t)">I'm interested</b-button>
                   </div>
                   <div v-else-if="checkIsSameUser(t)" class="col">
                     <b-button disabled varient="outline-secondary">Disabled</b-button>
