@@ -8,7 +8,7 @@ TODO:
     <div>
       <b-jumbotron bg-variant="secondary" text-variant="light">
         <template #header><p class="text-center font-weight-bolder"> Search for Teammates</p> </template>
-        <p class="text-center text-light bg-dark">Course {{this.$route.params.id}}</p>
+        <p class="text-center text-light bg-secondary">Course {{this.$route.params.id}}</p>
       </b-jumbotron>
     </div>
 
@@ -25,7 +25,7 @@ TODO:
           <b-tab title="All Request" active>
             <b-card-text class="text-center">
               <hr>
-              <div class="row" v-for="t in requests" v-bind:key="t.user">
+              <div class="row tb-buffer" v-for="t in requests" v-bind:key="t.user">
                 <div class="col">
                   <div class=h-100 d-inline-block style="background-color: #eee;">{{t.index}}</div>
                 </div>
@@ -43,13 +43,13 @@ TODO:
                 </div>
                 <div class="col">
                   <div v-if="checkApplyEligibility(t)" class="col">
-                    <b-button variant="outline-primary" v-on:click="onClickInterestButton(t)">I'm interests</b-button>
+                    <b-button size="sm" variant="outline-primary" v-on:click="onClickInterestButton(t)" class="col-5">I'm interests</b-button>
                   </div>
                   <div v-else-if="checkIsSameUser(t)" class="col">
-                    <b-button disabled varient="outline-secondary">Disabled</b-button>
+                    <b-button disabled size="sm" varient="outline-secondary" class="col-5">Disabled</b-button>
                   </div>
-                  <div v-else>
-                    <b-button disabled size="sm" variant="outline-warning" class="col-4">Pending</b-button>
+                  <div v-else class="col">
+                    <b-button disabled size="sm" variant="outline-warning" class="col-5">Pending</b-button>
                   </div>
                 </div>
               </div>
@@ -151,5 +151,9 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.tb-buffer {
+  margin-top:20px;
+  margin-bottom: 20px;
 }
 </style>
