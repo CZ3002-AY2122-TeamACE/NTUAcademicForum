@@ -15,8 +15,14 @@ export default new Vuex.Store(
                 id: "",       // this id is the database key for this record
                 name: "",
                 email: "",
+                AY: "NA",
+                bio: "This user has no bio",
+                phone: "NA",
+                tele: "NA",
+                major:"NA",
                 uid: "",      // this is is the user authenticated object
-                status: 0   // 0=logout 1=login
+                status: 0 ,  // 0=logout 1=login
+
             },
             thread: {         // this object will be used when adding and editing forum
                 title: "",
@@ -66,6 +72,21 @@ export default new Vuex.Store(
             },
             setCurrUserEmail(state, data) {
                 state.currentUser.email = data
+            },
+            setCurrUserAY(state, data){
+                state.currentUser.AY = data
+            },
+            setCurrUserBio(state, data){
+                state.currentUser.bio = data
+            },
+            setCurrUserPhone(state, data){
+                state.currentUser.phone = data
+            },
+            setCurrUserTele(state, data){
+                state.currentUser.tele = data
+            },
+            setCurrUserMajor(state, data){
+                state.currentUser.major = data
             },
             setCurrUserUid(state, data) {
                 state.currentUser.uid = data
@@ -158,11 +179,32 @@ export default new Vuex.Store(
                                 commit('setCurrUserEmail', user.email);
                                 commit('setCurrUserUid', user.uid);
                                 commit('setCurrUserStatus', 1);
+
                             }
                         })
                     }
                 });
             },
+            getCurrentProfile({commit}){
+                main.getUserByID(this.state.currentUser.id,function (user){
+                    if(user){
+                        if(user.val().AY != null ) {commit('setCurrUserAY',user.val().AY)}
+                        else {commit('setCurrUserAY',"NA")}
+                        if(user.val().major != null) {commit('setCurrUserMajor',user.val().major)}
+                        else {commit('setCurrUserMajor',"NA")}
+                        if(user.val().bio != null) {commit('setCurrUserBio',user.val().bio)}
+                        else {commit('setCurrUserBio',"This user has no bio")}
+                        if(user.val().phone != null) {commit('setCurrUserPhone',user.val().phone)}
+                        else {commit('setCurrUserPhone',"NA")}
+                        if(user.val().tele != null) {commit('setCurrUserTele',user.val().tele)}
+                        else {commit('setCurrUserTele',"NA")}
+                        // commit('setCurrUserName',user.val().name)
+                    } else {
+                        console.log("user not exist")
+                    }
+                })
+            },
+
             getCurrentUsername({commit}){
                 main.getUserByID(this.state.currentUser.id,function (user){
                     if(user){
@@ -181,6 +223,11 @@ export default new Vuex.Store(
                 commit('setAuthEmail', '');
                 commit('setAuthPassword', '');
                 commit('setAuthName', '');
+                commit('setCurrUserAY', "NA");
+                commit('setCurrUserMajor', "NA");
+                commit('setCurrUserBio', "This user has no bio");
+                commit('setCurrUserTele', "NA");
+                commit('setCurrUserPhone', "NA");
             },
             getCourseInfo({commit}) {
                 main.getCourseByID(this.state.course.id, function (snapshot) {
