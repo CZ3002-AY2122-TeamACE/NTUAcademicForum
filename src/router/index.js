@@ -15,14 +15,13 @@ import display_main_list from "@/components/swap_index/display_main_list";
 import display_main_list_teammates from "../components/find_teammates/display_main_list_teammates";
 import post_request_teammates from "../components/find_teammates/post_request_teammates";
 import profilePage from "../components/ProfilePage"
-import FeedbackSubmit from "@/components/admin_panel/FeedbackSubmit";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home|StudyHub@NTU',
+    name: 'Home',
     component: Home
   },
   {
@@ -66,37 +65,32 @@ const routes = [
   },
   {
     path:'/favourite',
-    name:'Favorites',
+    name:'favourite',
     component: Favourite,
   },
   { path: "/display_main_list/:id",
-    name:'Search for Index Swap',
+    name:'display_main_list',
     component: display_main_list
   },
   {
     path: "/swap_index_edit/:id",
-    name:'Edit Request for Index Swapping',
+    name:'swap_index_edit',
     component: post_request
   },
   {
     path: "/teammates_main_list/:id",
-    name:'Search for Teammates',
+    name:'teammates_main_list',
     component: display_main_list_teammates
   },
   {
     path: "/teammates_main_edit/:id",
-    name:'Edit Request for Teammates',
+    name:'teammates_main_edit',
     component: post_request_teammates
   },
   {
     path: "/profilePage",
-    name:'Profile Page',
+    name:'profilePage',
     component: profilePage
-  },
-  {
-    path: "/submit_feedback",
-    name: 'Feedback',
-    component: FeedbackSubmit
   }
 
 ]
@@ -110,7 +104,6 @@ const router = new VueRouter({
 router.beforeEach((to, from, next)=>{
   const requiresAuth = to.matched.some(record=> record.meta.requiresAuth);
   const isAuthenticated = firebase.auth().currentUser;
-  document.title = to.name; // change the tab name
   if (requiresAuth && !isAuthenticated) {
     next("/login");
   } else {
