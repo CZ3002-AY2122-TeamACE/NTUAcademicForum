@@ -128,11 +128,10 @@ export default class FirebaseAPI {
      * fixme: conflicting
      */
     indicateInterests(record, user) {
-        this.swapIndexReqeustsRef.child(record.courseId).child(record.user).child("interestedUsers").push(user)
+        this.swapIndexReqeustsRef.child(record.courseId).child(record.user).child("interestedUsers").push(user);
         this.swapIndexReqeustsRef.child(record.courseId).child(record.user).child("interestedUserNum")
             .set(record.interestedUserNum + 1).then(r => {
                 console.log("The interest num incremented" + r);
-
         })
     }
 

@@ -22,7 +22,7 @@
           <router-link class="ui button" v-bind:to="'/teammates_main_list/'+ this.$route.params.id">
             Find Teammate
           </router-link>
-          <router-link class="ui button" v-bind:to="'/submit_feedback'">
+          <router-link class="ui button" v-bind:to="'/feedback'">
             Feedback
           </router-link>
 
