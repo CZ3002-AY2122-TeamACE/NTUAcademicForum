@@ -8,7 +8,7 @@ TODO:
     <div>
       <b-jumbotron bg-variant="secondary" text-variant="light">
         <template #header><p class="text-center font-weight-bolder"> Swap Index</p> </template>
-        <p class="text-center text-light">Course {{this.$route.params.id}}</p>
+        <p class="text-center text-light bg-secondary">Course {{this.$route.params.id}}</p>
       </b-jumbotron>
     </div>
 
@@ -40,13 +40,13 @@ TODO:
                 </div>
                 <div class="col">
                   <div v-if="checkApplyEligibility(t)" class="col">
-                    <b-button variant="outline-primary" v-on:click="onClickInterestButton(t)">I'm interested</b-button>
+                    <b-button size="sm" variant="outline-primary" v-on:click="onClickInterestButton(t)" class="col-5">I'm interested</b-button>
                   </div>
                   <div v-else-if="checkIsSameUser(t)" class="col">
-                    <b-button disabled varient="outline-secondary">Disabled</b-button>
+                    <b-button disabled size="sm" variant="outline-secondary" class="col-5">My Request</b-button>
                   </div>
-                  <div v-else>
-                    <b-button disabled size="sm" variant="outline-warning" class="col-4">Pending</b-button>
+                  <div v-else class="col">
+                    <b-button disabled size="sm" variant="outline-warning" class="col-5">Pending</b-button>
                   </div>
                 </div>
               </div>

@@ -85,9 +85,24 @@ export default {
       name: name,
       email: email,
       uid: uid,
-      created_at: (new Date()).toLocaleString()
+      created_at: (new Date()).toLocaleString(),
+      AY: "NA",
+      bio: "NA",
+      phone: "NA",
+      tele: "NA",
+      major: "NA",
     });
     return key;
+  },
+  updateProfile(key,AY,bio,phone,tele,major) {
+    const userRef = db.ref("users/"+key);
+    userRef.update({
+      AY: AY,
+      bio: bio,
+      phone: phone,
+      tele: tele,
+      major: major
+    });
   },
   getUserByUID(UID, callback) {
     const userRef = db.ref('users').orderByChild("uid").equalTo(UID);

@@ -15,7 +15,8 @@
         <b-navbar-nav>
           <router-link size="sm" class="btn btn-secondary" to="/">Home</router-link> |
           <router-link size="sm" class="btn btn-secondary" to="/login">Login</router-link> |
-<!--          <router-link size="sm" class="btn btn-secondary" to="/secret">Secret</router-link> |-->
+
+          <router-link size="sm" class="btn btn-secondary" to="/profilePage">Profile</router-link> |
           <router-link size="sm" class="btn btn-secondary" to="/register">Register</router-link>
         </b-navbar-nav>
 

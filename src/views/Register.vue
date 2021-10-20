@@ -42,6 +42,7 @@
 // import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import main from "../main.js";
+import store from "../Store";
 export default {
     data() {
       return {
@@ -132,6 +133,9 @@ export default {
                 self.$store.commit('setCurrUserEmail', user.user.email);
                 self.$store.commit('setCurrUserUid', user.user.uid);
                 self.$store.commit('setCurrUserStatus', 1);
+                store.dispatch('getCurrentProfile');
+                store.dispatch("getCurrentUsername")
+                store.dispatch("getSubCourses")
                 self.$router.push('/');
               },
               1500
