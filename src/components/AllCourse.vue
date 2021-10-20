@@ -1,24 +1,28 @@
 <template>
-  <div class="ui container">
+  <div>
+    <b-jumbotron bg-variant="secondary" text-variant="light">
+      <template #header><p class="text-center font-weight-bolder"> All Courses Available</p> </template>
+    </b-jumbotron>
+    <div class="ui container">
 
-    <div class="ui stackable grid">
-      <div class="nine wide column">
-        <div class="title">
-          <span>All Courses Available</span>
+      <!--    <div class="ui stackable grid">-->
+      <!--      <div class="nine wide column">-->
+      <!--        <div class="title">-->
+      <!--          <span>All Courses Available</span>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--    </div>-->
+
+      <div class="ui black segment">
+        <div class="ui black top attached label" style="font-size: large">Courses</div>
+
+        <div class="ui middle aligned divided list">
+          <course v-for = "(value, key, index) in courses" :key="index" :course="value" :id="key"/>
         </div>
       </div>
+
+
     </div>
-
-    <div class="ui black segment">
-      <div class="ui black top attached label" style="font-size: large">Courses</div>
-
-      <div class="ui middle aligned divided list">
-        <course v-for = "(value, key, index) in courses" :key="index" :course="value" :id="key"/>
-      </div>
-    </div>
-
-
-
   </div>
 </template>
 

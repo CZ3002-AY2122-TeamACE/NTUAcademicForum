@@ -1,12 +1,15 @@
 <template>
   <div>
+    <b-jumbotron bg-variant="secondary" text-variant="light">
+      <template #header><p class="text-center font-weight-bolder">{{course.id + ": " + course.name}} </p> </template>
+    </b-jumbotron>
   <div class="ui container">
     <div class="ui stackable grid">
-      <div class="nine wide column">
-        <div class="title">
-          <span>{{course.name}}</span>
-        </div>
-      </div>
+<!--      <div class="nine wide column">-->
+<!--        <div class="title">-->
+<!--          <span>{{course.name}}</span>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <div class="eight wide column">
         <div class="horizontal right aligned link list">
