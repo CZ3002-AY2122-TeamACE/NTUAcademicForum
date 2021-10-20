@@ -140,7 +140,7 @@ export default class FirebaseAPI {
     indicateInterestsTeam(record, user) {
         this.searchTeammatesRef.child(record.courseId).child(record.userName).child("interestedUsers").push(user)
         this.searchTeammatesRef.child(record.courseId).child(record.userName).child("interestedUsersNum")
-            .set(record.interestedUserNum + 1).then(r => {
+            .set(record.interestedUsersNum + 1).then(r => {
             console.log("The interest num incremented" + r);
         })
     }

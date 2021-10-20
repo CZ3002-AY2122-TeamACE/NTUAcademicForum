@@ -104,8 +104,7 @@ export default {
 
     onClickInterestButton(record) {
       this.$firebaseApi.indicateInterestsTeam(record, this.$store.state.currentUser.name);
-      this.$notify("You have indicated your interests")
-      this.$forceUpdate()
+      location.reload()
     },
 
     /**
