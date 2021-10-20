@@ -62,6 +62,7 @@ export default {
   methods: {
     login: function () {
       var self = this;
+      this.errors = []
       if(this.$store.state.auth.email == "") {
         this.errors.push('Email address required');
       }
