@@ -8,7 +8,7 @@ TODO:
     <div>
       <b-jumbotron bg-variant="secondary" text-variant="light">
         <template #header><p class="text-center font-weight-bolder"> Search for Teammates</p> </template>
-        <p class="text-center text-light bg-dark">Course {{this.$route.params.id}}</p>
+        <p class="text-center text-light">Course {{this.$route.params.id}}</p>
       </b-jumbotron>
     </div>
 

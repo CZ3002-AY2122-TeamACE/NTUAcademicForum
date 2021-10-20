@@ -8,7 +8,7 @@ TODO:
     <div>
       <b-jumbotron bg-variant="secondary" text-variant="light">
         <template #header><p class="text-center font-weight-bolder"> Swap Index</p> </template>
-        <p class="text-center bg-dark text-light">Course {{this.$route.params.id}}</p>
+        <p class="text-center text-light">Course {{this.$route.params.id}}</p>
       </b-jumbotron>
     </div>
 
