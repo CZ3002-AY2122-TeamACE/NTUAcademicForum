@@ -9,11 +9,11 @@
           </p>
           <div class="mb-2">
             <b-avatar badge badge-variant="success" src="../assets/default profile.jpeg" size="4em"></b-avatar>
+            {{username}}
           </div>
+
           <nav class="mb-3">
-
             <b-nav vertical>
-
               <b-nav-item active>
                 <b-button block bg-variant="light" v-b-toggle="'collapse1'">
                 <b-icon icon='book'></b-icon>Subscribed Courses</b-button>
@@ -69,6 +69,9 @@ export default {
     subCourses() {
       return this.$store.state.subCourses
     },
+    username() {
+      return this.$store.state.currentUser.name
+    }
   },
   mounted: function() {
   }

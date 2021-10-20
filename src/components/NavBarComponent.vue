@@ -14,10 +14,9 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <router-link size="sm" class="btn btn-secondary" to="/">Home</router-link> |
-          <router-link size="sm" class="btn btn-secondary" to="/login">Login</router-link> |
-
-          <router-link size="sm" class="btn btn-secondary" to="/profilePage">Profile</router-link> |
-          <router-link size="sm" class="btn btn-secondary" to="/register">Register</router-link>
+          <router-link size="sm" class="btn btn-secondary" to="/login" v-if="this.$store.state.currentUser.name === ''">Login</router-link> |
+          <router-link size="sm" class="btn btn-secondary" to="/profilePage" v-if="this.$store.state.currentUser.name !== ''">Profile</router-link> |
+          <router-link size="sm" class="btn btn-secondary" to="/register" v-if="this.$store.state.currentUser.name === ''">Register</router-link>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
