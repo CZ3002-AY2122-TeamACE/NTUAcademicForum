@@ -82,9 +82,14 @@ export default {
     },
   },
   created() {
-    if(this.$store.state.currentUser.status != 1) {
-      this.$router.push('/login');
-    }
+    setTimeout(
+        () => {
+          if(this.$store.state.currentUser.status != 1) {
+            this.$router.push('/login');
+          }
+        },
+        1500
+    )
   },
 
   mounted() {
