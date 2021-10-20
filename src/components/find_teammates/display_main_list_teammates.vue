@@ -59,7 +59,24 @@ TODO:
 
           <b-tab title="My Request">
             <b-card-text class="text-center">
-              Tab contents 2
+              <hr>
+              <div class="row tb-buffer" v-for="(id, userName) in self_post.interestedUsers" v-bind:key="userName">
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;"> User {{id}} </div>
+                </div>
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;"> indicates his/her interests on joining your team</div>
+                </div>
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;">for course {{currentCourseViewing}} </div>
+                </div>
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;">in Index {{self_post.index}} </div>
+                </div>
+                <div class="col">
+                  <b-button  size="sm" variant="outline-primary" class="col-5">Confirm Swapping</b-button>
+                </div>
+              </div>
             </b-card-text>
           </b-tab>
         </b-tabs>
@@ -80,6 +97,18 @@ export default {
     isHavePost() {
       return this.$store.state.isHavePost;
     },
+
+    self_post() {
+      return this.$store.state.postRequestUnderCourse
+    },
+
+    notificationNum() {
+      return this.$store.state.postRequestUnderCourse.interestedUsers.length
+    },
+
+    currentCourseViewing() {
+      return this.$store.state.courseViewing
+    }
   },
   created() {
     setTimeout(
