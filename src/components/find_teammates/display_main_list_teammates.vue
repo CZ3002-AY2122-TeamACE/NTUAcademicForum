@@ -25,7 +25,7 @@ TODO:
           <b-tab title="All Request" active>
             <b-card-text class="text-center">
               <hr>
-              <div class="row" v-for="t in requests" v-bind:key="t.user">
+              <div class="row tb-buffer" v-for="t in requests" v-bind:key="t.user">
                 <div class="col">
                   <div class=h-100 d-inline-block style="background-color: #eee;">{{t.index}}</div>
                 </div>
@@ -151,5 +151,9 @@ body {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.tb-buffer {
+  margin-top:20px;
+  margin-bottom: 20px;
 }
 </style>
