@@ -27,10 +27,10 @@ TODO:
               <hr>
               <div class="row tb-buffer" v-for="t in requests" v-bind:key="t.user">
                 <div class="col">
-                  <div class=h-100 d-inline-block style="background-color: #eee;">From {{t.sourceIndex}}</div>
+                  <div class=h-100 d-inline-block style="background-color: #eee;">From: {{t.sourceIndex}}</div>
                 </div>
                 <div class="col">
-                  <div class=h-100 d-inline-block style="background-color: #eee;">To {{t.targetIndexes}}</div>
+                  <div class=h-100 d-inline-block style="background-color: #eee;">To: {{t.targetIndexes.join(", ")}}</div>
                 </div>
                 <div class="col">
                   <div class=h-100 d-inline-block style="background-color: #eee;">{{t.user}}  <b-avatar variant="secondary" size="sm"></b-avatar></div>
@@ -77,6 +77,7 @@ export default {
     isHavePost() {
       return this.$store.state.isHavePost;
     },
+
   },
   created() {
     setTimeout(

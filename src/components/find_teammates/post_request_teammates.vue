@@ -20,7 +20,7 @@
 
     <b-jumbotron bg-variant="secondary" text-variant="light">
       <template #header><p class="text-center">Post Request</p></template>
-      <p class="text-center text-light bg-dark">Course {{this.$store.state.courseViewing}}</p>
+      <p class="text-center text-light">Course {{this.$store.state.courseViewing}}</p>
     </b-jumbotron>
 
     <div>
@@ -93,11 +93,11 @@
             <div class="text-center">
               <hr>
               <b-button-group>
-                <b-button type="submit" variant="primary" v-if="isHavePost">Edit</b-button>
-                <b-button type="submit" variant="primary" v-if="!isHavePost">Submit</b-button>
-                <b-button variant="danger" v-if="isHavePost" v-on:click="onClickDelete">Delete</b-button>
-                <b-button class="ml-2" @click="resetForm()">Reset</b-button>
-                <b-button v-on:click="onClickBack">Back</b-button>
+                <b-button class="mr-1" type="submit" variant="primary" v-if="isHavePost">Edit</b-button>
+                <b-button class="mr-1" type="submit" variant="primary" v-if="!isHavePost">Submit</b-button>
+                <b-button class="mr-1" variant="danger" v-if="isHavePost" v-on:click="onClickDelete">Delete</b-button>
+                <b-button class="mr-1" @click="resetForm()">Reset</b-button>
+                <b-button class="mr-1" v-on:click="onClickBack">Back</b-button>
               </b-button-group>
             </div>
           </b-form>

@@ -20,7 +20,7 @@
 
     <b-jumbotron bg-variant="secondary" text-variant="light">
       <template #header><p class="text-center">Post Index Swapping Request</p></template>
-      <p class="text-center text-light bg-dark">Course {{this.$store.state.courseViewing}}</p>
+      <p class="text-center text-light">Course {{this.$store.state.courseViewing}}</p>
     </b-jumbotron>
 
     <div>
@@ -48,7 +48,7 @@
               >This is a required field and must be at least 3 characters.</b-form-invalid-feedback>
             </b-form-group>
 
-            <b-form-group id="example-input-group-2" label="Target Indexes" label-for="targetIndexes">
+            <b-form-group id="example-input-group-2" label="Target Indexes (Separate multiple target indexes by empty space)" label-for="targetIndexes">
               <b-form-input
                   id="targetIndexes"
                   name="targetIndexes"
@@ -64,13 +64,20 @@
 
             <div class="text-center">
               <hr>
-              <b-button-group>
-                <b-button type="submit" variant="primary" v-if="isHavePost">Edit</b-button>
-                <b-button type="submit" variant="primary" v-if="!isHavePost">Submit</b-button>
-                <b-button variant="danger" v-if="isHavePost" v-on:click="onClickDelete">Delete</b-button>
-                <b-button class="ml-2" @click="resetForm()">Reset</b-button>
-                <b-button v-on:click="onClickBack">Back</b-button>
-              </b-button-group>
+<!--              <b-button-group>-->
+<!--                <b-button type="submit" variant="primary" v-if="isHavePost">Edit</b-button>-->
+<!--                <b-button type="submit" variant="primary" v-if="!isHavePost">Submit</b-button>-->
+<!--                <b-button variant="danger" v-if="isHavePost" v-on:click="onClickDelete">Delete</b-button>-->
+<!--                <b-button class="ml-2" @click="resetForm()">Reset</b-button>-->
+<!--                <b-button v-on:click="onClickBack">Back</b-button>-->
+<!--              </b-button-group>-->
+              <b-btn-toolbar>
+                <b-button class="mr-1" type="submit" variant="primary" v-if="isHavePost">Edit</b-button>
+                <b-button class="mr-1" type="submit" variant="primary" v-if="!isHavePost">Submit</b-button>
+                <b-button class="mr-1" variant="danger" v-if="isHavePost" v-on:click="onClickDelete">Delete</b-button>
+                <b-button class="mr-1" @click="resetForm()">Reset</b-button>
+                <b-button  class="mr-1" v-on:click="onClickBack">Back</b-button>
+              </b-btn-toolbar>
             </div>
           </b-form>
         </b-form-group>
@@ -189,7 +196,7 @@ export default {
       /*alert("Form submitted" + JSON.stringify(record));*/
       this.showSuccessAlert()
       this.$firebaseApi.createSwapIndexRecord(record, this.$store.state.courseViewing)
-      this.$notify("The request is post successfully")
+      //this.$notify("The request is post successfully")
       this.$router.replace({ name: 'display_main_list', params: { id: this.$route.params.id} })
     },
 
@@ -214,3 +221,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.btn-space {
+  margin-right: 5px
+}
+</style>
