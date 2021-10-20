@@ -90,6 +90,7 @@ name: "Reply",
 
 
     postReply: function() {
+      this.$emit('clear-error-list')
       if(this.$store.state.currentUser.status != 1) {
         this.$router.push('/login');
       }
@@ -102,7 +103,6 @@ name: "Reply",
         return false;
       }
       main.addReply(this.$store.state.key, this.$store.state.thread.content, this.$store.state.currentUser.id, replyTo, this.$store.state.currentUser.name);
-
     },
 
     addlike: function() {
