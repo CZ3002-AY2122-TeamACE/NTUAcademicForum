@@ -19,7 +19,6 @@
               </div>
               <div class="item">
                   <img src="../assets/default profile.jpeg" class="ui avatar image">
-
                 {{thread.username}}
               </div>
             </div>
