@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import SideBarComponent from './components/SideBarComponent.vue';
+import Notifications from 'vue-notification'
+Vue.use(Notifications)
 Vue.component('side-bar-component', SideBarComponent);
 //import SuiVue from 'semantic-ui-vue';
 import firebase from "firebase/compat/app";

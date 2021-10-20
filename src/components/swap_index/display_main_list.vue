@@ -33,7 +33,7 @@ TODO:
                   <div class=h-100 d-inline-block style="background-color: #eee;">To {{t.targetIndexes}}</div>
                 </div>
                 <div class="col">
-                  <div class=h-100 d-inline-block style="background-color: #eee;">{{t.user}}<b-avatar variant="dark" size="sm"></b-avatar></div>
+                  <div class=h-100 d-inline-block style="background-color: #eee;">{{t.user}}  <b-avatar variant="secondary" size="sm"></b-avatar></div>
                 </div>
                 <div class="col">
                   <div class=h-100 d-inline-block style="background-color: #eee;"> {{t.interestedUserNum}} Interests Received</div>
@@ -43,7 +43,7 @@ TODO:
                     <b-button variant="outline-primary" v-on:click="onClickInterestButton(t)">I'm interests</b-button>
                   </div>
                   <div v-else-if="checkIsSameUser(t)" class="col">
-                    <button type="button" class="btn btn-outline-light">Disable</button>
+                    <b-button disabled varient="outline-secondary">Disabled</b-button>
                   </div>
                   <div v-else>
                     <b-button disabled size="sm" variant="outline-warning" class="col-4">Pending</b-button>

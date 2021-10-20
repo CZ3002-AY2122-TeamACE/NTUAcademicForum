@@ -100,11 +100,12 @@ export default class FirebaseAPI {
                     index: record.index,
                     interestedUsers: interestedUsers,
                     interestedUsersNum: record.interestedUsersNum,
-                    additionalInfo: record.additionalInfo
+                    additionalInfo: record.additionalInfo,
+                    courseId: record.courseId
                 };
                 records.push(recordFormatted)
 
-                if (record.user == currentUser) {
+                if (record.userName == currentUser) {
                     isHavePost = true
                     selfPostRequest = recordFormatted
                 }
@@ -137,9 +138,9 @@ export default class FirebaseAPI {
      * fixme: conflicting
      */
     indicateInterestsTeam(record, user) {
-        this.searchTeammatesRef.child(record.courseId).child(record.user).child("interestedUsers").push(user)
-        this.searchTeammatesRef.child(record.courseId).child(record.user).child("interestedUserNum")
-            .set(record.interestedUserNum + 1).then(r => {
+        this.searchTeammatesRef.child(record.courseId).child(record.userName).child("interestedUsers").push(user)
+        this.searchTeammatesRef.child(record.courseId).child(record.userName).child("interestedUsersNum")
+            .set(record.interestedUsersNum + 1).then(r => {
             console.log("The interest num incremented" + r);
         })
     }
@@ -154,6 +155,12 @@ export default class FirebaseAPI {
         this.swapIndexReqeustsRef.child(course).child(user).remove().then(r => {
             console.log("Record is removed" + r);
             this.getSwapIndexRecord(course, user);
+        })
+    }
+
+    deleteSearchTeammateRequest(course, user) {
+        this.searchTeammatesRef.child(course).child(user).remove().then(r => {
+            console.log("Record is removed" + r);
         })
     }
 }
