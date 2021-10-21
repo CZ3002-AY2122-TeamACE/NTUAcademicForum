@@ -69,7 +69,7 @@
     </h4>
     <div class="ui segment">
       <div class="ui middle aligned divided list">
-        <reply v-for = "(value,key,index) in replies" :key="index" :reply="value" :id ="key"/>
+        <reply @clear-error-list="clearErrorList" v-for = "(value,key,index) in replies" :key="index" :reply="value" :id ="key"/>
       </div>
     </div>
   </div>
@@ -123,15 +123,15 @@ export default {
         this.isCollect = val
       }
     },
-    isLike:{
-      get: function() {
-        if(this.$store.state.likeCurrentThread){
+    isLike: {
+      get: function () {
+        if (this.$store.state.likeCurrentThread) {
           return 1
         } else {
           return 0
         }
       },
-      set: function (val){
+      set: function (val) {
         this.isLike = val
       }
     }
@@ -180,6 +180,7 @@ export default {
 
     heart: function () {
       console.log(this.isLike)
+      this.errors = [];
       if (this.isLike == 1) {
         console.log("isLike " + this.isLike + "cancelling")
         //this.isCollect = 0
@@ -195,6 +196,7 @@ export default {
 
     collect: function () {
       console.log(this.isCollect)
+      this.errors = [];
       if (this.isCollect == 1) {
         console.log("isCollect " + this.isCollect + "cancelling")
         //this.isCollect = 0
@@ -206,6 +208,9 @@ export default {
         main.updateThreadFavouriteRelation(this.$store.state.key, this.$store.state.currentUser.id)
         store.commit("setFavouriteStateForCurrentThread",true)
       }
+    },
+    clearErrorList () {
+      this.errors = []
     }
   },
 }

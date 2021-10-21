@@ -2,13 +2,19 @@
 <template>
   <div>
     <div>
+<!--      <b-alert-->
+<!--          :show="dismissCountDown"-->
+<!--          dismissible-->
+<!--          fade-->
+<!--          variant="success"-->
+<!--          @dismiss-count-down="countDownChanged"-->
+<!--      >-->
       <b-alert
-          :show="dismissCountDown"
-          dismissible
-          fade
-          variant="success"
-          @dismiss-count-down="countDownChanged"
-      >
+            v-model="showMessage"
+            dismissible
+            fade
+            variant="success"
+        >
         <h4 class="alert-heading">Success!</h4>
         <hr>
         <p>
@@ -103,7 +109,8 @@ export default {
 
   data() {
     return {
-      dismissSecs: 5,
+      //dismissSecs: 5,
+      showMessage: false,
       dismissCountDown: 0,
       form: {
         // it can handle the null case better than calling a method defined in the component
@@ -198,7 +205,9 @@ export default {
       this.$firebaseApi.createSwapIndexRecord(record, this.$store.state.courseViewing)
       this.$firebaseApi.getSwapIndexRecord(this.$store.state.courseViewing, this.$store.state.currentUser.name)
       //this.$notify("The request is post successfully")
-      this.$router.replace({ name: 'display_main_list', params: { id: this.$route.params.id} })
+      setTimeout(() => {
+        this.$router.replace({ name: 'display_main_list', params: { id: this.$route.params.id} })
+      },1500)
     },
 
     onClickBack() {
@@ -217,7 +226,12 @@ export default {
       this.dismissCountDown = dismissCountDown
     },
     showSuccessAlert(){
-      this.dismissCountDown = this.dismissSecs
+      this.showMessage = true
+      console.log("display")
+      setTimeout(function (){
+        this.showMessage = false
+        console.log("dismiss")
+      },2000)
     }
   }
 };
