@@ -43,10 +43,10 @@ TODO:
                 </div>
                 <div class="col">
                   <div v-if="checkApplyEligibility(t)" class="col">
-                    <b-button size="sm" variant="outline-primary" v-on:click="onClickInterestButton(t)" class="col-5">I'm interests</b-button>
+                    <b-button size="sm" variant="outline-primary" v-on:click="onClickInterestButton(t)" class="col-5">I'm interested</b-button>
                   </div>
                   <div v-else-if="checkIsSameUser(t)" class="col">
-                    <b-button disabled size="sm" varient="outline-secondary" class="col-5">Disabled</b-button>
+                    <b-button disabled size="sm" variant="outline-secondary" class="col-5">My Request</b-button>
                   </div>
                   <div v-else class="col">
                     <b-button disabled size="sm" variant="outline-warning" class="col-5">Pending</b-button>
@@ -59,7 +59,24 @@ TODO:
 
           <b-tab title="My Request">
             <b-card-text class="text-center">
-              Tab contents 2
+              <hr>
+              <div class="row tb-buffer" v-for="(id, userName) in self_post.interestedUsers" v-bind:key="userName">
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;"> User {{id}} </div>
+                </div>
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;"> indicates his/her interests on joining your team</div>
+                </div>
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;">for course {{currentCourseViewing}} </div>
+                </div>
+                <div class="col">
+                  <div class=h-100 d-inline-block style="background-color: #eee;">in Index {{self_post.index}} </div>
+                </div>
+                <div class="col">
+                  <b-button  size="sm" variant="outline-primary" class="col-5">Confirm Swapping</b-button>
+                </div>
+              </div>
             </b-card-text>
           </b-tab>
         </b-tabs>
@@ -80,6 +97,18 @@ export default {
     isHavePost() {
       return this.$store.state.isHavePost;
     },
+
+    self_post() {
+      return this.$store.state.postRequestUnderCourse
+    },
+
+    notificationNum() {
+      return this.$store.state.postRequestUnderCourse.interestedUsers.length
+    },
+
+    currentCourseViewing() {
+      return this.$store.state.courseViewing
+    }
   },
   created() {
     setTimeout(
@@ -104,6 +133,7 @@ export default {
 
     onClickInterestButton(record) {
       this.$firebaseApi.indicateInterestsTeam(record, this.$store.state.currentUser.name);
+      this.$firebaseApi.getSwapIndexRecord(this.$store.state.courseViewing, this.$store.state.currentUser.name)
       location.reload()
     },
 

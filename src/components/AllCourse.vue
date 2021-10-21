@@ -1,7 +1,9 @@
 <template>
   <div>
     <b-jumbotron bg-variant="secondary" text-variant="light">
-      <template #header><p class="text-center font-weight-bolder"> All Courses Available</p> </template>
+      <template #header><p class="text-center font-weight-bolder"> StudyHub@NTU</p> </template>
+      <h1><p class="text-center font-weight-bolder">All Courses</p></h1>
+
     </b-jumbotron>
     <div class="ui container">
 

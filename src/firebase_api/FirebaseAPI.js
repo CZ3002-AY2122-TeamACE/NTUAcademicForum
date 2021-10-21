@@ -28,6 +28,7 @@ export default class FirebaseAPI {
         this.database = firebase.database();
         this.swapIndexReqeustsRef = this.database.ref("/swap_requests/");
         this.searchTeammatesRef = this.database.ref("/search_teammates/");
+        this.feedbackRef = this.database.ref("/feedbacks/");
     }
 
     createSwapIndexRecord(record, course) {
@@ -39,6 +40,10 @@ export default class FirebaseAPI {
         this.searchTeammatesRef.child(course).child(record.userName).update(record).then(r => {
             console.log("Create new swap id to firebase_api" + r)
         })
+    }
+
+    postFeedback(record) {
+        this.feedbackRef.push(record)
     }
 
     /**
@@ -123,11 +128,10 @@ export default class FirebaseAPI {
      * fixme: conflicting
      */
     indicateInterests(record, user) {
-        this.swapIndexReqeustsRef.child(record.courseId).child(record.user).child("interestedUsers").push(user)
+        this.swapIndexReqeustsRef.child(record.courseId).child(record.user).child("interestedUsers").push(user);
         this.swapIndexReqeustsRef.child(record.courseId).child(record.user).child("interestedUserNum")
             .set(record.interestedUserNum + 1).then(r => {
                 console.log("The interest num incremented" + r);
-
         })
     }
 

@@ -2,7 +2,6 @@
   <div id="app">
     <nav-bar-component/>
     <side-bar-component/>
-    <notifications></notifications>
     <!--    <SwapIndex></SwapIndex>-->
     <router-view />
   </div>

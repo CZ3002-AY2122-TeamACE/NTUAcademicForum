@@ -201,8 +201,9 @@ export default {
         interestedUserNum: 0
       }
       /*alert("Form submitted" + JSON.stringify(record));*/
-      this.showSuccessAlert()
+      // this.showSuccessAlert()
       this.$firebaseApi.createSwapIndexRecord(record, this.$store.state.courseViewing)
+      this.$firebaseApi.getSwapIndexRecord(this.$store.state.courseViewing, this.$store.state.currentUser.name)
       //this.$notify("The request is post successfully")
       setTimeout(() => {
         this.$router.replace({ name: 'display_main_list', params: { id: this.$route.params.id} })

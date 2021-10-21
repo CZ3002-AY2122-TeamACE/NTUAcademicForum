@@ -232,8 +232,6 @@ export default {
           additionalInfo: this.form.additionalInfo,
           courseId: this.$store.state.courseViewing
       }
-      //alert("Form submitted" + JSON.stringify(record))
-      this.showSuccessAlert()
       this.$firebaseApi.createSearchTeammatesRecord(record, this.$store.state.courseViewing)
       //this.$router.replace({ name: 'teammates_main_list', params: { id: this.$route.params.id} })
       setTimeout(() => {

@@ -15,6 +15,7 @@ import display_main_list from "@/components/swap_index/display_main_list";
 import display_main_list_teammates from "../components/find_teammates/display_main_list_teammates";
 import post_request_teammates from "../components/find_teammates/post_request_teammates";
 import profilePage from "../components/ProfilePage"
+import FeedbackSubmit from "@/components/admin_panel/FeedbackSubmit";
 
 Vue.use(VueRouter)
 
@@ -91,8 +92,12 @@ const routes = [
     path: "/profilePage",
     name:'profilePage',
     component: profilePage
+  },
+  {
+    path: "/feedback",
+    name: 'feedback',
+    component: FeedbackSubmit
   }
-
 ]
 
 const router = new VueRouter({
